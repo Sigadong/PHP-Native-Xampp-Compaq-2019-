@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <script>
+    var pola = /\w/;
+    console.log ( pola.test("aaa") );       // true
+    console.log ( pola.test("123") );       // true
+    console.log ( pola.test("ad43") );      // true
+    console.log ( pola.test("AAA!") );      // true
+    console.log ( pola.test("@aku") );      // true
+    console.log ( pola.test("zzzzzzz.") );  // true
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1 id="judul">Belajar JavaScript</h1>
+  <p>
+    Sedang belajar <em id="emTag">JavaScript</em><b> dari Duniailkom</b>
+  </p>
+  <script>
+    var emNode = document.getElementById("emTag");
+    
+    console.log(emNode.nodeName);      // EM
+    console.log(emNode.nodeType);      // 1
+    console.log(emNode.childNodes);    // NodeList [ #text "JavaScript" ]
+    console.log(emNode.textContent);   // JavaScript
+    
+    emNode.textContent = "Document Object";
+  </script>
+</body>
+</html>

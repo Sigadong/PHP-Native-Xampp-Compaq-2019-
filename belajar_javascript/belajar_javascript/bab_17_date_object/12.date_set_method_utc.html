@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = new Date(0);
+    console.log( foo.toUTCString() );  // Thu, 01 Jan 1970 00:00:00 GMT
+    
+    foo.setUTCFullYear(2017);
+    console.log( foo.toUTCString() );  // Sun, 01 Jan 2017 00:00:00 GMT
+
+    foo.setUTCMonth(10);
+    console.log( foo.toUTCString() );  // Wed, 01 Nov 2017 00:00:00 GMT
+    
+    foo.setUTCDate(20);
+    console.log( foo.toUTCString() );  // Mon, 20 Nov 2017 00:00:00 GMT
+    
+    foo.setUTCHours(10);
+    console.log( foo.toUTCString() );  // Mon, 20 Nov 2017 10:00:00 GMT
+    
+    foo.setUTCMinutes(30);
+    console.log( foo.toUTCString() );  // Mon, 20 Nov 2017 10:30:00 GMT
+    
+    foo.setUTCSeconds(45);
+    console.log( foo.toUTCString() );  // Mon, 20 Nov 2017 10:30:45 GMT
+    
+    foo.setUTCMilliseconds(125);
+    console.log( foo.toISOString() );  // 2017-11-20T10:30:45.125Z
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+  var foo = 7;
+  console.log("nilai foo = "+ foo);
+
+  if (typeof foo === "number") {
+    console.log("foo bertipe number");
+    if (foo >= 10) {
+       console.log("nilai foo besar dari 10");
+    }
+    else {
+       console.log("nilai foo kecil dari 10");
+    }
+  }
+  else if (typeof foo === "string") {
+    console.log("foo bertipe string");
+  }
+  else {
+    console.log("foo bukan bertipe number maupun string");
+  }
+  </script>
+</body>
+</html>

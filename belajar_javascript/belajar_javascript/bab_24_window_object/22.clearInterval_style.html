@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Pesan sekarang juga, senin harga naik!!</h1>
+  <button id="stop">Stop Animasi</button>
+  <script>
+    h1Node = document.querySelector("h1");
+    stopNode = document.getElementById("stop");
+  
+    function buatEfek(){
+      if (h1Node.style.color === "red"){
+        h1Node.style.color = "blue";
+      }
+      else {
+        h1Node.style.color = "red";
+      }
+    }
+    
+    var setIntervalID = setInterval(buatEfek,200);
+    
+    stopNode.addEventListener("click",function(){
+      clearInterval(setIntervalID);
+    });
+  </script>
+</body>
+</html>

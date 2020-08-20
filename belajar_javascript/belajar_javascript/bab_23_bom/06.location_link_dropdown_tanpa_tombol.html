@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Pilih Website:
+  <select id="daftarWebsite">
+    <option value="google">Google</option>
+    <option value="facebook">FaceBook</option>
+    <option value="twitter">Twitter</option>
+    <option value="duniailkom">Duniailkom</option>
+  </select>
+  </p>
+  <script>
+    var daftarWebsiteNode = document.getElementById("daftarWebsite");
+
+    function pilihWebsite(){
+       var namaWebsite = daftarWebsiteNode.value;
+       switch (namaWebsite) {
+        case ("google") :
+          window.location = "http://www.google.com";     break;
+        case ("facebook") :
+          window.location = "http://www.facebook.com";   break;
+        case ("twitter") :
+          window.location = "http://www.twitter.com";    break;
+        case ("duniailkom") :
+          window.location = "http://www.duniailkom.com"; break;
+       }
+    }
+    
+    daftarWebsiteNode.addEventListener("change",pilihWebsite);
+  </script>
+</body>
+</html>

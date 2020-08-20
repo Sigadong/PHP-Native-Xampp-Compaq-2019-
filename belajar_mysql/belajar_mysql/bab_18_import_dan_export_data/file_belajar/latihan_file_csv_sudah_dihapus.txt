@@ -1,0 +1,35 @@
+Pulau 	Provinsi 	Singkatan ISO 	Ibukota 	Diresmikan sebagai Provinsi 	Populasi(Proyeksi BPS 2014) 	Luas Total (km2) 	Kepadatan penduduk (Populasi / Luas; jiwa / km2) 	APBD 2014 (miliar rupiah) 	PDRB 2014 (triliun rupiah) 	PDRB per kapita 2014 (juta rupiah) 	IPM 2014
+Jawa 	 Yogyakarta 	YO 	Yogyakarta 	4 Maret 1950 	3.553.100 	3.133 	1.134 	3.662,33 	93,45 	26,30 	76,81
+Kalimantan 	 Kalimantan Utara 	KU 	Tanjungselor 	25 Oktober 2012 	618.384 	71.177 	9 	2.299,60 	59,08 	95,54 	68,64
+Sumatera 	 Kepulauan Riau 	KR 	Tanjung Pinang 	25 Oktober 2002 	1.917.415 	8.084 	237 	3.944,69 	182,92 	95,40 	73,40
+Jawa 	 Jawa Timur 	JI 	Surabaya 	4 Juli 1950 	38.610.202 	47.921 	806 	18.786,51 	1.540,70 	39,90 	68,14
+Kepulauan Maluku 	 Maluku Utara 	MU 	Sofifi 	4 Oktober 1999 	1.138.667 	42.960 	27 	1.599,66 	24,05 	21,12 	65,18
+Jawa 	 Banten 	BT 	Serang 	4 Oktober 2000 	11.704.877 	9.019 	1.298 	8.398,20 	432,76 	36,97 	69,89
+Jawa 	 Jawa Tengah 	JT 	Semarang 	4 Juli 1950 	33.522.663 	33.987 	986 	14.336,87 	925,66 	27,61 	68,78
+Kalimantan 	 Kalimantan Timur 	KI 	Samarinda 	2 Juli 1958 	3.351.432 	194.849 	17 	15.731,10 	519,93 	155,14 	73,82
+Kalimantan 	 Kalimantan Barat 	KB 	Pontianak 	7 Desember 1956 	4.716.093 	115.114 	41 	3.929,94 	131,93 	27,98 	64,89
+Sumatera 	 Riau 	RI 	Pekanbaru 	9 Agustus 1957 	6.188.442 	94.560 	66 	9.425,83 	679,69 	109,83 	70,33
+Sumatera 	 Kepulauan Bangka Belitung 	BB 	Pangkalpinang 	21 November 2000 	1.343.900 	16.424 	82 	2.276,18 	56,39 	41,96 	68,27
+Sulawesi 	 Sulawesi Tengah 	ST 	Palu 	23 September 1964 	2.831.283 	68.090 	42 	2.514,84 	90,26 	31,88 	66,43
+Sumatera 	 Sumatera Selatan 	SS 	Palembang 	14 Agustus 1950 	7.941.500 	85.679 	93 	7.697,99 	308,41 	38,84 	66,75
+Kalimantan 	 Kalimantan Tengah 	KT 	Palangkaraya 	2 Juli 1958 	2.439.858 	153.564 	16 	3.510,91 	89,87 	36,84 	67,77
+Sumatera 	 Sumatera Barat 	SB 	Padang 	9 Agustus 1957 	5.131.900 	42.297 	121 	3.887,84 	167,04 	32,55 	69,36
+Sumatera 	 Sumatera Utara 	SU 	Medan 	29 November 1956 	13.766.851 	72.981 	189 	8.565,53 	523,77 	38,05 	68,87
+Kepulauan Nusa Tenggara 	 Nusa Tenggara Barat 	NB 	Mataram 	14 Agustus 1958 	4.773.795 	19.950 	239 	2.884,89 	82,25 	17,23 	64,31
+Papua 	 Papua Barat 	PB 	Manokwari 	4 Oktober 1999 	849.809 	114.566 	7 	6.570,74 	58,29 	68,59 	61,28
+Sulawesi 	 Sulawesi Utara 	SA 	Manado 	13 Desember 1960 	2.386.604 	13.931 	171 	2.625,93 	80,62 	33,78 	69,96
+Sulawesi 	 Sulawesi Barat 	SR 	Mamuju 	5 Oktober 2004 	1.258.090 	16.787 	75 	1.388,27 	29,39 	23,36 	62,24
+Sulawesi 	 Sulawesi Selatan 	SN 	Makassar 	13 Desember 1960 	8.432.163 	46.116 	183 	6.186,39 	300,12 	35,59 	68,49
+Kepulauan Nusa Tenggara 	 Nusa Tenggara Timur 	NT 	Kupang 	14 Agustus 1958 	5.036.897 	47.676 	106 	2.916,88 	68,60 	13,62 	62,26
+Sulawesi 	 Sulawesi Tenggara 	SG 	Kendari 	23 September 1964 	2.448.081 	36.757 	67 	2.416,99 	78,62 	32,12 	68,07
+Papua 	 Papua 	PA 	Jayapura 	10 September 1969 	3.091.047 	309.934 	10 	12.141,30 	123,18 	39,85 	56,75
+Sumatera 	 Jambi 	JA 	Jambi 	9 Agustus 1957 	3.344.400 	53.509 	63 	3.548,66 	153,86 	46,00 	68,24
+Jawa 	 Jakarta 	JK 	Jakarta 	28 Agustus 1961 	10.012.271 	740 	13.530 	79.285,13 	1.761,41 	175,93 	78,39
+Sulawesi 	 Gorontalo 	GO 	Gorontalo 	22 Desember 2000 	1.115.633 	11.968 	93 	1.406,32 	25,2 	22,59 	65,17
+Kepulauan Nusa Tenggara 	 Bali 	BA 	Denpasar 	14 Agustus 1958 	4.104.900 	5.561 	738 	5.461,18 	156,45 	38,11 	72,48
+Sumatera 	 Bengkulu 	BE 	Bengkulu 	18 November 1968 	1.844.800 	19.789 	93 	2.012,91 	45,24 	24,52 	68,06
+Kalimantan 	 Kalimantan Selatan 	KS 	Banjarmasin 	7 Desember 1956 	3.922.790 	36.805 	107 	6.010,91 	131,59 	33,55 	67,63
+Jawa 	 Jawa Barat 	JB 	Bandung 	4 Juli 1950 	46.029.668 	35.245 	1.306 	23.067,20 	1.385,96 	30,11 	68,80
+Sumatera 	 Lampung 	LA 	Bandar Lampung 	18 Maret 1964 	8.026.191 	35.376 	227 	4.350,25 	231,01 	28,78 	66,42
+Sumatera 	 Aceh 	AC 	Banda Aceh 	7 Desember 1959 	4.906.835 	57.365 	86 	15.572,50 	130,45 	26,59 	68,81
+Kepulauan Maluku 	 Maluku 	MA 	Ambon 	17 Juni 1958 	1.657.409 	49.350 	34 	2.013,83 	31,73 	19,15 	66,74

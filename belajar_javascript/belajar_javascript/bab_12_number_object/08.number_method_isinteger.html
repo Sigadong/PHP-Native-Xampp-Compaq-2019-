@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo;
+    
+    foo = 6 ;
+    console.log( Number.isInteger(foo) );      // true
+    console.log( Number.isSafeInteger(foo) );  // true    
+    
+    foo = 3.21456 ;
+    console.log( Number.isInteger(foo) );      // false
+    console.log( Number.isSafeInteger(foo) );  // false
+        
+    foo = 1/0 ;
+    console.log( Number.isInteger(foo) );      // false
+    console.log( Number.isSafeInteger(foo) );  // false
+    
+    foo = 9007199254740992 ;
+    console.log( Number.isInteger(foo) );      // true
+    console.log( Number.isSafeInteger(foo) );  // false
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Ketik disini: <input type="text" id="ketik"></p>
+  <p>Hasil keydown: <span id="hasilKeydown"></span></p>
+  <p>Hasil keypress: <span id="hasilKeyPress"></span></p>
+  <p>Hasil keyup: <span id="hasilKeyUp"></span></p>
+  <script>
+    var ketikNode = document.getElementById("ketik");
+    var hasilKeydownNode = document.getElementById("hasilKeydown");
+    var hasilKeyPressNode = document.getElementById("hasilKeyPress");
+    var hasilKeyUpNode = document.getElementById("hasilKeyUp");
+    
+    function diKeydown(){
+      hasilKeydownNode.innerHTML = ketikNode.value;
+    }
+    function diKeypress(){
+      hasilKeyPressNode.innerHTML = ketikNode.value;
+    }
+    function diKeyup(){
+      hasilKeyUpNode.innerHTML = ketikNode.value;
+    }
+    
+    ketikNode.addEventListener("keydown",diKeydown);
+    ketikNode.addEventListener("keypress",diKeypress);
+    ketikNode.addEventListener("keyup",diKeyup);
+  </script>
+</body>
+</html>

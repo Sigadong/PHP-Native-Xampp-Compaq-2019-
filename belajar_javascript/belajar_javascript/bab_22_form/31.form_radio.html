@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Belajar:
+    <input type="radio" name="belajar" id="belajarHTML" value="HTML">
+    HTML
+    <input type="radio" name="belajar" id="belajarCSS" value="CSS">
+    CSS
+    <input type="radio" name="belajar" id="belajarJS" value="JavaScript">
+    JavaScript
+  </p>
+  <p><button id="periksa">Periksa</button></p>
+  <p>Hasil: <span id="hasil"></span></p>
+  <script>
+    var belajarHTMLNode = document.getElementById("belajarHTML");
+    var belajarCSSNode = document.getElementById("belajarCSS");
+    var belajarJSNode = document.getElementById("belajarJS");
+    var periksaNode = document.getElementById("periksa");
+    var hasilNode = document.getElementById("hasil");
+    
+    function diPeriksa(){
+      hasilNode.innerHTML = "";
+      
+      if(belajarHTMLNode.checked) {
+        hasilNode.innerHTML = belajarHTMLNode.value + " ";
+      }
+      if(belajarCSSNode.checked) {
+        hasilNode.innerHTML = belajarCSSNode.value + " ";
+      }
+      if(belajarJSNode.checked) {
+        hasilNode.innerHTML = belajarJSNode.value + " ";
+      }      
+    }
+    
+    periksaNode.addEventListener("click",diPeriksa);
+  </script>
+</body>
+</html>

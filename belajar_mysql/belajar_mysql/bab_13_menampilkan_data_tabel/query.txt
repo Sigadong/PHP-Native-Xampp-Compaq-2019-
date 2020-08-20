@@ -1,0 +1,1380 @@
+##======================================================================##
+13. Menampilkan Data Tabel
+##======================================================================##
+
+
+SELECT * FROM populasi WHERE luas < 300 ORDER BY kec DESC LIMIT 3;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.1 SELECT … select_expression
+##======================================================================##
+
+
+SELECT 2;
+
+SELECT 10 + 5;
+
+SELECT 'Duniailkom';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT SQRT(49);
+
+SELECT UPPER('Duniailkom');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT LOWER('DuNiAILkom'), POW(3,2), 'Belajar MySQL';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 'Duniailkom' FROM DUAL;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+ Membuat tabel populasi
+##======================================================================##
+
+
+CREATE TABLE IF NOT EXISTS populasi (
+  kota VARCHAR(50),
+  kec TINYINT UNSIGNED,
+  kel SMALLINT UNSIGNED,
+  luas DECIMAL(6,2),
+  penduduk INTEGER UNSIGNED
+);
+
+INSERT INTO populasi VALUES
+  ('Jakarta', 44, 267, 664.01, 9988495),
+  ('Surabaya', 31, 154, 350.54, 2805906),
+  ('Medan', 21, 151, 265.00, 2465469),
+  ('Bekasi', 12, 56, 206.61, 2381053),
+  ('Bandung', 30, 151, 167.67, 2339463),
+  ('Makassar', 14, 143, 199.26, 1651146),
+  ('Depok', 11, 63, 200.29, 1631951),
+  ('Semarang', 16, 177, 373.78, 1621384),
+  ('Tangerang', 13, 104, 153.93, 1566190),
+  ('Palembang', 14, 107, 369.22, 1548064)
+;
+
+SELECT * FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.2 SELECT … FROM
+##======================================================================##
+
+
+
+SELECT kota FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT penduduk, kel, kec FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota, kec, kota, penduduk, kota FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.3 SELECT … AS
+##======================================================================##
+
+
+SELECT kota AS nama_kota FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota AS 'Nama Kota' FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  kota AS 'Nama Kota',
+  kec AS 'Jumlah Kecamatan',
+  penduduk AS 'Jumlah Penduduk'
+FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT UPPER(kota), kec + kel FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  UPPER(kota) AS 'Nama Kota',
+  kec + kel AS 'Total Kecamatan dan Kelurahan'
+FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.4 SELECT … ORDER BY
+##======================================================================##
+
+
+SELECT * FROM populasi ORDER BY penduduk ASC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi ORDER BY kota;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota, luas FROM populasi ORDER BY kec DESC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota AS 'Nama Kota', penduduk FROM populasi ORDER BY `Nama Kota` DESC;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_select_1 (
+  a INT ,
+  b VARCHAR(10),
+  c TIME
+);
+
+INSERT contoh_select_1 VALUES
+  (1, 'merah', 085010), (1, 'biru', 123030), (2, 'putih',181045),
+  (2, 'kuning', 003059), (1, 'jingga', 203030), (2, 'hitam', 194530),
+  (1, 'merah', 033510), (1, 'merah', 231530), (2, 'hitam',101515)
+;
+
+SELECT * FROM contoh_select_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_select_1 ORDER BY a ASC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_select_1 ORDER BY a ASC, b ASC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_select_1 ORDER BY a ASC, b ASC, c ASC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT b,c,a FROM contoh_select_1 ORDER BY b ASC, c ASC, a ASC;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.5 SELECT … LIMIT
+##======================================================================##
+
+
+SELECT * FROM populasi ORDER BY kel DESC LIMIT 5;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi ORDER BY kel DESC LIMIT 5, 3;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi ORDER BY luas DESC LIMIT 4, 2;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi ORDER BY luas DESC;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+ Upgrade tabel populasi
+##======================================================================##
+
+
+CREATE TABLE populasi_sementara LIKE populasi;
+
+DESC populasi_sementara;
+
+INSERT INTO populasi_sementara SELECT * FROM populasi;
+
+SELECT * FROM populasi_sementara;
+
+ALTER TABLE populasi_sementara
+ADD id_kota SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT FIRST;
+
+SELECT * FROM populasi_sementara;
+
+DROP TABLE populasi;
+
+RENAME TABLE populasi_sementara TO populasi;
+
+SELECT * FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.6 SELECT … WHERE
+##======================================================================##
+
+
+SELECT * FROM populasi WHERE id_kota = 5;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota = "Jakarta";
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE luas < 300;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kec > 30;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kec >= 30;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE id_kota != 1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_select_2 (
+  a INT ,
+  b VARCHAR(10)
+);
+
+INSERT contoh_select_2 VALUES
+  (1, 'merah'),
+  (NULL, 'biru'),
+  (NULL, 'putih'),
+  (20, NULL)
+;
+
+SELECT * FROM contoh_select_2;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_select_2 WHERE a = NULL;
+
+SELECT * FROM contoh_select_2 WHERE a <> NULL;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_select_2 WHERE a <=> NULL;
+
+SELECT * FROM contoh_select_2 WHERE a IS NULL;
+
+SELECT * FROM contoh_select_2 WHERE a IS NOT NULL;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kec = 16 AND kel = 177;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE id_kota = 6 OR id_kota = 9;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota = 'Medan' OR kota = 'Jakarta';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kec > 20 AND luas < 300;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kec > 20 OR luas < 300;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE penduduk > 1000000 AND penduduk < 2000000;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE (kec > 20 OR luas < 300) AND penduduk < 2000000;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kec > 20 OR luas < 300 AND penduduk < 2000000;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kec > 20 OR (luas < 300 AND penduduk < 2000000);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+ Membuat tabel daftar_provinsi
+##======================================================================##
+
+
+CREATE TABLE daftar_provinsi (
+  prov VARCHAR(50),
+  ibukota VARCHAR(50),
+  luas INT,
+  tanggal_diresmikan DATE
+);
+
+INSERT INTO daftar_provinsi VALUES
+  ('Sumatera Utara', 'Medan', 72981, '1956-11-29'),
+  ('Sumatera Barat', 'Padang', 42297, '1957-08-09'),
+  ('Jawa Barat', 'Bandung', 35245, '1950-07-04'),
+  ('Jawa Tengah', 'Semarang', 33987, '1950-07-04'),
+  ('Sulawesi Selatan', 'Makassar', 46116, '1960-12-13'),
+  ('Bali', 'Denpasar', 5561, '1958-08-14'),
+  ('Sumatera Selatan', 'Palembang', 85679, '1950-08-14'),
+  ('Papua Barat', 'Manokwari', 114566, '1999-10-04')
+;
+
+SELECT * FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.7 SELECT … WHERE table1 = table2
+##======================================================================##
+
+
+SELECT * FROM populasi;
+
+SELECT * FROM daftar_provinsi;
+
+--------------------------------------------------------------------------
+
+
+SELECT populasi.kota, populasi.penduduk FROM populasi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT daftar_provinsi.prov, daftar_provinsi.ibukota FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  daftar_provinsi.prov, populasi.kota, populasi.penduduk
+FROM
+  daftar_provinsi, populasi
+WHERE
+  daftar_provinsi.ibukota = populasi.kota;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  prov, kota, penduduk
+FROM
+  daftar_provinsi, populasi
+WHERE
+  ibukota = kota;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  prov, kota, penduduk
+FROM
+  populasi, daftar_provinsi
+WHERE
+  kota = ibukota;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE daftar_provinsi CHANGE ibukota kota VARCHAR(10);
+
+SELECT * FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  prov, kota, penduduk
+FROM
+  daftar_provinsi, populasi
+WHERE
+  kota = kota;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  prov, populasi.kota, penduduk
+FROM
+  daftar_provinsi, populasi
+WHERE
+  daftar_provinsi.kota = populasi.kota;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE daftar_provinsi CHANGE kota ibukota VARCHAR(10);
+
+SELECT * FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  prov, tanggal_diresmikan, kota, penduduk, kec, kel
+FROM
+  populasi, daftar_provinsi
+WHERE
+  kota = ibukota;
+
+
+--------------------------------------------------------------------------
+
+SELECT
+  daftar_provinsi.prov AS 'Nama Provinsi',
+  daftar_provinsi.tanggal_diresmikan AS 'Tanggal Diresmikan',
+  populasi.kota AS 'Ibukota',
+  populasi.penduduk AS 'Jumlah penduduk',
+  populasi.kec AS 'Jumlah Kecamatan',
+  populasi.kel AS 'Jumlah Kelurahan'
+FROM
+  populasi, daftar_provinsi
+WHERE
+  kota = ibukota
+ORDER BY
+  prov ASC
+;
+
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.8 SELECT … WHERE … IN
+##======================================================================##
+
+
+SELECT * FROM populasi WHERE kota IN ('Jakarta', 'Bandung', 'Medan');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE
+kota = 'Jakarta' OR kota = 'Bandung' OR kota = 'Medan';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota NOT IN ('Jakarta', 'Bandung', 'Medan');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT ibukota FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota IN (SELECT ibukota FROM daftar_provinsi);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota IN ('Medan', 'Padang', 'Bandung',
+'Semarang', 'Makassar', 'Denpasar', 'Palembang', 'Manokwari');
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.4 CREATE TABLE … LIKE
+##======================================================================##
+
+
+SELECT * FROM populasi WHERE kota IN (SELECT ibukota FROM daftar_provinsi);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota = ANY (SELECT ibukota FROM daftar_provinsi);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT ibukota FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota = SOME(SELECT ibukota FROM daftar_provinsi);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota != ALL(SELECT ibukota FROM daftar_provinsi);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kel <= ALL (SELECT kel FROM populasi);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE penduduk >= ALL (SELECT penduduk FROM populasi);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi ORDER BY penduduk DESC LIMIT 1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.10 SELECT … EXISTS
+##======================================================================##
+
+
+SELECT EXISTS (SELECT * FROM populasi WHERE kota = 'Jakarta');
+
+SELECT EXISTS (SELECT * FROM populasi WHERE kota = 'Lampung');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE
+EXISTS (SELECT ibukota FROM daftar_provinsi WHERE ibukota = "Lampung");
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE
+EXISTS (SELECT ibukota FROM daftar_provinsi WHERE ibukota = "Medan");
+
+
+--------------------------------------------------------------------------
+
+
+SELECT NOT EXISTS (SELECT * FROM populasi WHERE kota = 'Jakarta');
+
+SELECT NOT EXISTS (SELECT * FROM populasi WHERE kota = 'Lampung');
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.11 SELECT … WHERE … BETWEEN
+##======================================================================##
+
+
+SELECT * FROM populasi WHERE kec BETWEEN 20 AND 30;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE penduduk BETWEEN 1000000 AND 2000000;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE penduduk NOT BETWEEN 1000000 AND 2000000;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota BETWEEN 'Bekasi' AND 'Medan';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota BETWEEN 'Bekasi' AND 'Medan'
+ORDER BY kota ASC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM daftar_provinsi WHERE tanggal_diresmikan
+BETWEEN '1957-08-09' AND '2017-01-01';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM
+  daftar_provinsi
+WHERE
+  (tanggal_diresmikan BETWEEN '1957-08-09' AND '2017-01-01')
+AND
+  ibukota NOT IN ('Denpasar','Jakarta','Medan');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM
+  daftar_provinsi
+WHERE
+  (tanggal_diresmikan BETWEEN '1957-08-09' AND '2017-01-01')
+AND ibukota NOT IN (SELECT kota from populasi);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.11 SELECT … WHERE … BETWEEN
+##======================================================================##
+
+
+SELECT * FROM populasi WHERE kota LIKE 'B%';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota LIKE 'b%';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM daftar_provinsi WHERE prov LIKE 'Sumatera%';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM daftar_provinsi WHERE prov LIKE '%at%';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota LIKE '_akart_';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 'Saaaa' LIKE 'S%';
+
+SELECT 'Belajar' LIKE 'S%';
+
+SELECT 'kemudian' LIKE '%dia%';
+
+SELECT 'Bandung' LIKE '%du%';
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.13 SELECT … WHERE … REGEXP
+##======================================================================##
+
+
+SELECT * FROM populasi WHERE kota REGEXP 'Ba';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM daftar_provinsi WHERE prov REGEXP 'sumatera';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota REGEXP '^B';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM daftar_provinsi WHERE ibukota REGEXP 'g$';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kel REGEXP '^..$';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota REGEXP 's[aiueo]';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota REGEXP 's[a-e]';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota REGEXP 's[^aiueo]';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 'Jakarta' REGEXP '^J[abcd]';
+
+SELECT 'Mojokerto' REGEXP 'J[^abcd]';
+
+SELECT 'Jambi' REGEXP 'J[^abcd]';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota REGEXP 'ta|ya|ma';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM daftar_provinsi WHERE prov REGEXP 'ara|esi';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM populasi WHERE kota REGEXP 's{2}';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 'aaa99' REGEXP 'a{3}9{2}';
+
+SELECT 'aa123zz' REGEXP '.{3}z{2}';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 'andikaa' REGEXP 'a{2,4}';
+
+SELECT 'andika' REGEXP 'a{2,}';
+
+SELECT 'andikaa' REGEXP 'a{2,}';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 'abbc' REGEXP 'ab*c';
+
+SELECT 'ac' REGEXP 'ab*c';
+
+SELECT 'abbc' REGEXP 'ab+c';
+
+SELECT 'ac' REGEXP 'ab+c';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 'a 9' REGEXP '[[:alpha:]][[:space:]][[:digit:]]';
+
+SELECT 'belajar 9' REGEXP '[[:alpha:]][[:space:]][[:digit:]]';
+
+SELECT 'belajar9' REGEXP '[[:alpha:]][[:space:]][[:digit:]]';
+
+SELECT 'belajar 9' REGEXP '^[[:alpha:]][[:space:]][[:digit:]]';
+
+SELECT 'B 9120' REGEXP '^[[:alpha:]][[:space:]][[:digit:]]';
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.14 SELECT … UNION
+##======================================================================##
+
+
+SELECT kota FROM populasi
+UNION
+SELECT ibukota FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota AS 'Nama Kota' FROM populasi
+UNION
+SELECT ibukota FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota FROM populasi
+UNION ALL
+SELECT ibukota FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota FROM populasi
+UNION DISTINCT
+SELECT ibukota FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota FROM populasi
+UNION
+SELECT ibukota FROM daftar_provinsi
+ORDER BY kota ASC;
+
+
+--------------------------------------------------------------------------
+
+
+(SELECT kota FROM populasi ORDER BY kota ASC LIMIT 5)
+UNION
+(SELECT ibukota FROM daftar_provinsi WHERE ibukota LIKE 'P%')
+ORDER BY kota ASC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota, luas FROM populasi
+UNION
+SELECT prov, luas FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota, luas FROM populasi
+UNION
+SELECT luas, tanggal_diresmikan FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT kota, luas, kec, penduduk FROM populasi
+UNION
+SELECT * FROM daftar_provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.15 SELECT DISTINCT
+##======================================================================##
+
+
+##======================================================================##
+  Membuat tabel mahasiswa
+##======================================================================##
+
+
+CREATE TABLE mahasiswa (
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  kel ENUM('L','P'),
+  tinggi TINYINT UNSIGNED,
+  jurusan VARCHAR (20),
+  nilai_uan DEC(5,2)
+);
+
+INSERT INTO mahasiswa VALUES
+  ('Riana Putria', 'Padang', 'P', 155, 'Kimia', 339.20),
+  ('Rudi Permana', 'Bandung', 'L', 163, 'Ilmu Komputer', 290.44),
+  ('Sari Citra Lestari', 'Jakarta', 'P',161, 'Manajemen', 310.60),
+  ('Rina Kumala Sari', 'Jakarta', 'P',158, 'Akuntansi', 337.99),
+  ('James Situmorang', 'Medan', 'L',168, 'Kedokteran Gigi', 341.10),
+  ('Sandri Fatmala', 'Bandung', 'P',165, 'Ilmu Komputer', 322.91),
+  ('Husli Khairan', 'Jakarta','L',170, 'Akuntansi', 288.55),
+  ('Christine Wijaya','Medan', 'P',157, 'Manajemen',321.74),
+  ('Ikhsan Prayoga', 'Jakarta', 'L',172, 'Ilmu Komputer', 300.16),
+  ('Bobby Permana', 'Medan', 'L',161, 'Ilmu Komputer', 280.82);
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT asal FROM mahasiswa ORDER BY asal;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT DISTINCT asal FROM mahasiswa ORDER BY asal;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT DISTINCT jurusan FROM mahasiswa ORDER BY jurusan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT DISTINCT asal, jurusan FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.16 SELECT COUNT(), MAX(), MIN(), AVG() dan SUM()
+##======================================================================##
+
+
+SELECT COUNT(*) FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(asal) FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(*) FROM mahasiswa WHERE asal = 'Jakarta';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa WHERE asal = 'Jakarta';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(kel) FROM mahasiswa WHERE kel = 'P';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT MIN(nilai_uan), MAX(nilai_uan) FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT AVG(nilai_uan), SUM(nilai_uan) FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT MAX(nilai_uan) FROM mahasiswa;
+
+SELECT nama FROM mahasiswa WHERE nilai_uan = 341.10;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT nama FROM mahasiswa WHERE nilai_uan =
+(SELECT MAX(nilai_uan) FROM mahasiswa);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT nama FROM mahasiswa WHERE nilai_uan >=
+(SELECT AVG(nilai_uan) FROM mahasiswa);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(DISTINCT jurusan) FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.17 SELECT … GROUP BY
+##======================================================================##
+
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(asal) FROM mahasiswa WHERE asal = 'Bandung';
+
+SELECT COUNT(asal) FROM mahasiswa WHERE asal = 'Jakarta';
+
+SELECT COUNT(asal) FROM mahasiswa WHERE asal = 'Medan';
+
+SELECT COUNT(asal) FROM mahasiswa WHERE asal = 'Padang';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT asal, COUNT(asal) FROM mahasiswa GROUP BY asal;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT asal, COUNT(asal) FROM mahasiswa GROUP BY asal
+ORDER BY COUNT(asal) DESC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT asal, COUNT(asal) AS jumlah FROM mahasiswa GROUP BY asal
+ORDER BY jumlah DESC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT jurusan, COUNT(jurusan) AS jumlah FROM mahasiswa
+GROUP BY jurusan ORDER BY jumlah DESC LIMIT 1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT jurusan, COUNT(jurusan) AS jumlah FROM mahasiswa GROUP BY jurusan
+ORDER BY jumlah DESC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT jurusan, COUNT(jurusan) AS jumlah FROM mahasiswa GROUP BY jurusan
+WHERE jumlah > 1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT jurusan, COUNT(jurusan) AS jumlah FROM mahasiswa GROUP BY jurusan
+HAVING jumlah > 1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT asal, MIN(tinggi), MAX(tinggi), AVG(tinggi) FROM mahasiswa
+WHERE asal = 'Jakarta';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT asal, MIN(tinggi), MAX(tinggi), AVG(tinggi) FROM mahasiswa
+GROUP BY asal;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT jurusan, MIN(nilai_uan), MAX(nilai_uan), AVG(nilai_uan)
+FROM mahasiswa GROUP BY jurusan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT jurusan, MIN(nilai_uan), MAX(nilai_uan), AVG(nilai_uan)
+FROM mahasiswa GROUP BY jurusan WITH ROLLUP;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+13.18 SELECT … JOIN
+##======================================================================##
+
+
+##======================================================================##
+  Membuat tabel universitas
+##======================================================================##
+
+
+CREATE TABLE universitas (
+  jurusan VARCHAR(20),
+  tgl_berdiri DATE,
+  nama_dekan VARCHAR(50),
+  jum_mhs SMALLINT UNSIGNED,
+  akr ENUM('A', 'B', 'C', 'N/A')
+);
+
+INSERT INTO universitas VALUES
+  ('Kimia', '1987-07-12', 'Prof. Mulyono, M.Sc.', 662, 'B'),
+  ('Ilmu Komputer', '2003-02-23', 'Dr. Syahrial, M.Kom.', 412, 'A'),
+  ('Akuntansi', '1985-03-19', 'Maya Fitrianti, M.M.', 895, 'B'),
+  ('Farmasi', '1997-05-30', 'Prof. Silvia Nst, M.Farm.', 312, 'C'),
+  ('Fisika', '1989-12-10', 'Dr. Umar Agustinus, M.Sc.', 275, 'A'),
+  ('Hukum', '1983-08-08', 'Prof. Gunarto, M.H.', 754, 'B');
+  
+SELECT * FROM universitas;
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa, universitas
+WHERE mahasiswa.jurusan = universitas.jurusan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa INNER JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa JOIN universitas
+USING (jurusan);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa LEFT JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa RIGHT JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa LEFT JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan WHERE universitas.jurusan IS NULL;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa RIGHT JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan WHERE mahasiswa.jurusan IS NULL;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa LEFT JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan
+UNION
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa RIGHT JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT prov, ibukota, kec, kel
+FROM daftar_provinsi LEFT JOIN populasi
+ON ibukota = kota;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  daftar_provinsi.prov,
+  daftar_provinsi.ibukota,
+  populasi.kec,
+  populasi.kel
+FROM daftar_provinsi LEFT JOIN populasi
+ON daftar_provinsi.ibukota = populasi.kota;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT
+  daftar_provinsi.prov,
+  daftar_provinsi.ibukota,
+  populasi.kec,
+  populasi.kel
+FROM populasi RIGHT JOIN daftar_provinsi
+ON daftar_provinsi.ibukota = populasi.kota;
+
+
+--------------------------------------------------------------------------
+

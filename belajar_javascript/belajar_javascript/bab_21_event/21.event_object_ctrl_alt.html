@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    h1 { border: 2px solid black;
+         width: 280px;
+         padding: 10px;
+         text-align: center;
+         color: red;
+         background-color: pink; }
+  </style>
+</head>
+<body>
+  <h1 id="judul">Belajar JavaScript</h1>
+  <p></p>
+  <script>
+    var h1Node = document.getElementById("judul");
+    var pNode = document.querySelector("p");
+    
+    h1Node.addEventListener("click",function (event) {
+      if (event.ctrlKey === true){
+        pNode.innerHTML = "Tombol CTRL terdeteksi";
+      }
+      else if (event.altKey === true){
+        pNode.innerHTML = "Tombol ALT terdeteksi";
+      }
+      else {
+        pNode.innerHTML = "Judul di click";
+      }
+    });
+  </script>
+</body>
+</html>

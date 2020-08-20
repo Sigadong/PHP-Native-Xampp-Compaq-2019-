@@ -1,0 +1,5 @@
+"Kalimantan Barat","KB","Pontianak","4716093","115114","3929.94"
+"Kalimantan Selatan","KS","Banjarmasin","3922790","36805","6010.91"
+"Kalimantan Tengah","KT","Palangkaraya","2439858","153564","3510.91"
+"Kalimantan Timur","KI","Samarinda","3351432","194849","15731.10"
+"Kalimantan Utara","KU","Tanjungselor","618384","71177","2299.60"

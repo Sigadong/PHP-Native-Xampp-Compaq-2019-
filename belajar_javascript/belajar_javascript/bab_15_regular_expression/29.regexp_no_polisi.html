@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var pola = /^[A-Za-z]{1,2}\s*\d{1,4}\s*[A-Za-z]{1,3}$/;
+    
+    console.log ( pola.test("B 1 RI") );         // true
+    console.log ( pola.test("B1RI") );           // true
+    console.log ( pola.test("DA 9999 XYZ ") );   // false
+    console.log ( pola.test("DA 9999 XYZ") );    // true
+    console.log ( pola.test("bk9he") );          // true
+    console.log ( pola.test("zz      9YES") );   // true
+    console.log ( pola.test("_zz9YES") );        // false
+  </script>
+</body>
+</html>

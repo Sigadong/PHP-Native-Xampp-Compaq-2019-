@@ -1,0 +1,367 @@
+##======================================================================##
+15. Index dan FullText Search
+##======================================================================##
+
+
+##======================================================================##
+15.1 Pengertian Index
+##======================================================================##
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  kel ENUM('L','P'),
+  tinggi TINYINT UNSIGNED,
+  jurusan VARCHAR (20),
+  nilai_uan DEC(5,2)
+);
+
+INSERT INTO mahasiswa VALUES
+  ('Riana Putria', 'Padang', 'P', 155, 'Kimia', 339.20),
+  ('Rudi Permana', 'Bandung', 'L', 163, 'Ilmu Komputer', 290.44),
+  ('Sari Citra Lestari', 'Jakarta', 'P',161, 'Manajemen', 310.60),
+  ('Rina Kumala Sari', 'Jakarta', 'P',158, 'Akuntansi', 337.99),
+  ('James Situmorang', 'Medan', 'L',168, 'Kedokteran Gigi', 341.10),
+  ('Sandri Fatmala', 'Bandung', 'P',165, 'Ilmu Komputer', 322.91),
+  ('Husli Khairan', 'Jakarta','L',170, 'Akuntansi', 288.55),
+  ('Christine Wijaya','Medan', 'P',157, 'Manajemen',321.74),
+  ('Ikhsan Prayoga', 'Jakarta', 'L',172, 'Ilmu Komputer', 300.16),
+  ('Bobby Permana', 'Medan', 'L',161, 'Ilmu Komputer', 280.82);
+  
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa WHERE nama = 'Sandri Fatmala';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT nama, kel, tinggi FROM mahasiswa WHERE asal = 'Bandung';
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+15.2 Cara Pembuatan Index
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+CREATE INDEX nama ON mahasiswa (nama);
+
+
+--------------------------------------------------------------------------
+
+
+SHOW INDEX FROM mahasiswa \G
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(DISTINCT nama) FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(DISTINCT asal) FROM mahasiswa;
+
+SELECT COUNT(DISTINCT jurusan) FROM mahasiswa;
+
+SELECT COUNT(DISTINCT kel) FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE mahasiswa ADD INDEX asal (asal);
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE mahasiswa ADD INDEX (jurusan);
+
+
+--------------------------------------------------------------------------
+
+
+SHOW INDEX FROM mahasiswa \G
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE mahasiswa (
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  kel ENUM('L','P'),
+  tinggi TINYINT UNSIGNED,
+  jurusan VARCHAR (20),
+  nilai_uan DEC(5,2),
+  INDEX tinggi (tinggi)
+);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+15.3 Cara Menghapus Index
+##======================================================================##
+
+
+DROP INDEX nama ON mahasiswa;
+DROP INDEX asal ON mahasiswa;
+DROP INDEX jurusan ON mahasiswa;
+SHOW INDEX FROM mahasiswa \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+15.4 Jenis-jenis Index
+##======================================================================##
+
+
+CREATE UNIQUE INDEX nama ON mahasiswa (nama);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES
+('Riana Putria', 'Padang', 'P', 155, 'Kimia', 339.20);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_table_memory (
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  INDEX nama (nama)
+) ENGINE = MEMORY;
+
+SHOW INDEX FROM contoh_table_memory \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+15.5 Index Prefix
+##======================================================================##
+
+
+SELECT SUBSTRING(nama, 1, 3) FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+DROP INDEX nama ON mahasiswa;
+CREATE INDEX nama ON mahasiswa (nama(3));
+
+
+##======================================================================##
+15.7 Query EXPLAIN
+##======================================================================##
+
+
+EXPLAIN SELECT * FROM mahasiswa WHERE nama = 'Sandri Fatmala' \G
+  
+
+--------------------------------------------------------------------------
+
+
+CREATE INDEX nama ON mahasiswa (nama);
+
+EXPLAIN SELECT * FROM mahasiswa WHERE nama = 'Sandri Fatmala' \G
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa INNER JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan
+AND universitas.nama_dekan = 'Maya Fitrianti, M.M.';
+
+
+--------------------------------------------------------------------------
+
+
+EXPLAIN SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa INNER JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan
+AND universitas.nama_dekan = 'Maya Fitrianti, M.M.' \G
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE mahasiswa ADD INDEX jurusan (jurusan);
+
+EXPLAIN SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa INNER JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan
+AND universitas.nama_dekan = 'Maya Fitrianti, M.M.' \G
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE universitas ADD INDEX jurusan (jurusan);
+
+ALTER TABLE universitas ADD INDEX nama_dekan (nama_dekan);
+
+EXPLAIN SELECT mahasiswa.nama, mahasiswa.jurusan, universitas.nama_dekan
+FROM mahasiswa INNER JOIN universitas
+ON mahasiswa.jurusan = universitas.jurusan
+AND universitas.nama_dekan = 'Maya Fitrianti, M.M.' \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+15.8 FULLTEXT Index
+##======================================================================##
+
+
+CREATE TABLE artikel (
+  id_article TINYINT PRIMARY KEY AUTO_INCREMENT,
+  judul VARCHAR(200)
+);
+
+INSERT INTO artikel (judul) VALUES
+  ('Pengertian dan Fungsi PHP dalam Pemrograman Web'),
+  ('Sejarah PHP dan Perkembangan Versi PHP dari masa ke masa'),
+  ('Cara Menginstall dan Mendownload PHP dengan XAMPP'),
+  ('Cara Menjalankan Web Server Apache dengan XAMPP'),
+  ('Cara Menjalankan File PHP dengan XAMPP'),
+  ('Cara Kerja Web Server Apache'),
+  ('Cara Memasukkan kode PHP ke dalam HTML'),
+  ('Aturan Dasar Penulisan Kode PHP'),
+  ('Mengenal Tipe Data Integer dalam Bahasa Pemrograman PHP'),
+  ('Mengenal Tipe Data Float dalam Bahasa Pemrograman PHP');
+  
+SELECT * FROM artikel;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE judul LIKE '%PHP%';
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE artikel ADD FULLTEXT judul (judul);
+
+SHOW WARNINGS;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE MATCH(judul) AGAINST ('PHP');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE MATCH(judul) AGAINST ('PHP XAMPP');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE MATCH(judul) AGAINST ('Tipe data PHP');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE MATCH(judul)
+AGAINST ('Tipe data PHP' IN NATURAL LANGUAGE MODE);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE MATCH(judul)
+AGAINST ('PHP -XAMPP' IN BOOLEAN MODE);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE MATCH(judul)
+AGAINST ('+PHP -XAMPP' IN BOOLEAN MODE);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE MATCH(judul)
+AGAINST ('menja* -PHP' IN BOOLEAN MODE);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel WHERE MATCH(judul)
+AGAINST ('Integer' WITH QUERY EXPANSION);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE artikel2 (
+  no TINYINT PRIMARY KEY AUTO_INCREMENT,
+  judul VARCHAR(200),
+  isi TEXT,
+  FULLTEXT KEY judul_dan_isi (judul,isi)
+);
+
+INSERT INTO artikel2 (judul, isi) VALUES
+  ('Pengertian PHP', 'PHP adalah bahasa pemrograman server-side...'),
+  ('Sejarah PHP', 'Sejarah PHP bermula pada tahun 1994 ketika...'),
+  ('Menginstall XAMPP','Kode PHP harus dijalankan dari web server...'),
+  ('Web Server Apache', 'Untuk menjalankan web server Apache, pertama...'),
+  ('Menjalankan XAMPP', 'Agar dapat mengakses halaman PHP dari web...'),
+  ('Menjalankan PHP', 'Untuk menjalankan kode PHP, XAMPP harus...');
+  
+SELECT * FROM artikel2;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel2 WHERE MATCH(judul,isi) AGAINST ('XAMPP');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM artikel2 WHERE MATCH(judul,isi)
+AGAINST ('XAMPP' WITH QUERY EXPANSION);
+
+
+--------------------------------------------------------------------------
+

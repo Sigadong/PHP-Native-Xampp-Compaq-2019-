@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Username: <input type="text" id="username"></p>
+  <p>Email: <input type="text" id="email"></p>
+  <script>
+    var usernameNode = document.getElementById("username");
+    var emailNode = document.getElementById("email");
+    
+    function diFocus(e){
+      e.target.style.border = "2px solid aqua";
+    }
+    
+    usernameNode.addEventListener("focus",diFocus);
+    emailNode.addEventListener("focus",diFocus);
+  </script>
+</body>
+</html>

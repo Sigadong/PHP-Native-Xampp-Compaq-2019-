@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var tanggalAwal = new Date("01/26/1987");
+    var tanggalAkhir = new Date();  // 07 Desember 2016
+    
+    var selisihTanggal = Math.abs(tanggalAkhir - tanggalAwal);
+    
+    var satuHari = 1000*60*60*24;
+    var satuBulan = 1000*60*60*24*30;
+    var satuTahun = 1000*60*60*24*365;
+    
+    var selisihTahun = Math.floor(selisihTanggal / satuTahun);
+    var selisihBulan = Math.floor((selisihTanggal - (selisihTahun * satuTahun)) /
+                                  satuBulan);
+    var selisihHari = Math.floor((selisihTanggal - (selisihTahun * satuTahun) -
+                                 (selisihBulan * satuBulan)) /satuHari);
+    
+    var hasil = selisihTahun+" Tahun "+selisihBulan+" Bulan "+
+                selisihHari+" Hari";
+    
+    console.log( hasil );  // 71 Tahun 4 Bulan 10 Hari
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Belajar:
+    <input type="radio" name="belajar" id="belajarHTML" value="HTML">
+    HTML
+    <input type="radio" name="belajar" id="belajarCSS" value="CSS">
+    CSS
+    <input type="radio" name="belajar" id="belajarJS" value="JavaScript">
+    JavaScript
+    <input type="radio" name="belajar" id="belajarPHP" value="PHP">
+    PHP
+    <input type="radio" name="belajar" id="belajarMYSQL" value="MySQL">
+    MySQL
+  </p>
+  <p>Hasil: <span id="hasil"></span></p>
+  <script>
+    var belajarNode = document.querySelectorAll("input");
+    var periksaNode = document.querySelector("p");
+    var hasilNode = document.getElementById("hasil");
+    
+    function diPeriksa(){
+      // console.log(belajarNode);
+      var jumlahRadio = belajarNode.length;
+      for (var i = 0; i<jumlahRadio; i++){
+        if (belajarNode[i].checked === true){
+          hasilNode.innerHTML = belajarNode[i].value;
+        }
+      }
+    }
+    
+    periksaNode.addEventListener("click",diPeriksa);
+  </script>
+</body>
+</html>

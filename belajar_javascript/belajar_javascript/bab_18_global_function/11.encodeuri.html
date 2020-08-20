@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = "http://www.duniailkom.com/Belajar #JavaScript";
+    var bar = encodeURI(foo);
+		var baz = encodeURIComponent(foo);
+		
+		console.log(bar);
+		// "http://www.duniailkom.com/Belajar%20#JavaScript"
+		console.log(baz);
+		// http%3A%2F%2Fwww.duniailkom.com%2FBelajar%20%23JavaScript
+  </script>
+</body>
+</html>

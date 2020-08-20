@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    var bodyNode = document.childNodes[1].childNodes[2];
+    var h1Node = bodyNode.childNodes[1];
+    var pNode = bodyNode.childNodes[3];
+    var emNode = pNode.childNodes[1];
+    var bNode = pNode.childNodes[2];
+      
+    var newSpanNode = document.createElement("span");
+    var newTextNode = document.createTextNode(" dan JavaScript Uncover");
+    newSpanNode.appendChild(newTextNode);
+    
+    pNode.appendChild(newSpanNode);
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <button id="tombol">Cek web browser</button>
+  <p>Web browser anda: <span id="hasil"></span></p>
+  <script>
+    var tombolNode = document.getElementById("tombol");
+    var hasilNode = document.getElementById("hasil");
+
+    function periksaWebBrowser() { 
+     if((navigator.userAgent.indexOf("Opera") != -1) ||
+        (navigator.userAgent.indexOf("OPR") != -1 ))  {
+        hasilNode.innerHTML = "Opera";
+     }
+     else if(navigator.userAgent.indexOf("Edge") != -1 ) {
+        hasilNode.innerHTML = "Microsoft Edge"; 
+     } 
+     else if(navigator.userAgent.indexOf("Chrome") != -1 )  {
+        hasilNode.innerHTML = "Google Chrome";
+     }
+     else if(navigator.userAgent.indexOf("Safari") != -1)  {
+        hasilNode.innerHTML = "Apple Safari";
+     }
+     else if(navigator.userAgent.indexOf("Firefox") != -1 ) {
+        hasilNode.innerHTML = "Mozilla Firefox";
+     }
+     else if((navigator.userAgent.indexOf("MSIE") != -1 ) ||
+             (!!document.documentMode === true )) //IF IE > 10
+     {
+        hasilNode.innerHTML = "Microsoft Internet Explorer"; 
+     }
+     else {
+        hasilNode.innerHTML = "Tidak diketahui";
+     }
+    }
+    
+    tombolNode.addEventListener("click",periksaWebBrowser);
+  </script>
+</body>
+</html>

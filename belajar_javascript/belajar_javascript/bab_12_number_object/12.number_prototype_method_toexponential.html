@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+   var foo = 5000.123456789;
+
+   console.log( foo.toExponential() );     // 5.000123456789e+3
+   console.log( foo.toExponential(1) );    // 5.0e+3
+   console.log( foo.toExponential(5) );    // 5.00012e+3
+   console.log( foo.toExponential(10) );   // 5.0001234568e+3
+   console.log( foo.toExponential(20) );   // 5.00012345678899964696e+3
+   
+   console.log( 4.32345.toExponential(2) );     // 4.32e+0
+   console.log( (4.32345).toExponential(2) );   // 4.32e+0
+  </script>
+</body>
+</html>

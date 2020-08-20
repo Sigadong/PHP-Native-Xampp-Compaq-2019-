@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <ol>
+    <li>Belajar HTML</li>
+    <li>Belajar CSS</li>
+    <li>Belajar JavaScript</li>
+  </ol>
+  <ol>
+    <li>Belajar PHP</li>
+    <li>Belajar MySQL</li>
+  </ol>
+  <script>
+    var liTagNode = document.getElementsByTagName("li");
+    console.log(liTagNode);
+    // HTMLCollection [ <li>, <li>, <li>, <li>, <li> ]
+    
+    console.log(liTagNode.length);       // 5
+    
+    var liNode;
+    for (liNode of liTagNode){
+      console.log(liNode.textContent);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <form id="formKu" name="formKu" method="get" action="proses.php">
+    <p>Username: <input type="text" name="username" id="username"></p>
+    <p><input type="submit" name="submit" id="submit" value="Submit Form">
+    <input type="reset" name="reset" id="reset" value="Reset Form"></p>
+  </form>
+  <script>    
+    function diStop(e){
+      console.log(e.type);
+      e.preventDefault();
+      console.log(e.defaultPrevented);
+    }
+    var formNode = document.getElementById("formKu");
+    formNode.addEventListener("submit",diStop);
+    formNode.addEventListener("reset",diStop);
+  </script>
+</body>
+</html>

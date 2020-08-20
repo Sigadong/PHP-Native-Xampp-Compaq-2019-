@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Belajar:
+    <select name="belajar" id="belajar">
+      <option value="HTML" id="belajarHTML">Belajar HTML</option>
+      <option value="CSS" id="belajarCSS">Belajar CSS</option>
+      <option value="JavaScript" id="belajarJS">Belajar JavaScript</option>
+    </select>
+  </p>
+  <p><button id="periksa">Periksa</button></p>
+  <script>
+    var periksaNode = document.getElementById("periksa");
+    var belajarNode = document.getElementById("belajar");
+    
+    function diPeriksa(){
+      console.log (belajarNode);
+      // <select name="belajar" id="belajar">
+      console.log (belajarNode.name);             // belajar
+      console.log (belajarNode.length);           // 3
+      console.log (belajarNode.value);            // JavaScript
+      console.log (belajarNode.selectedIndex);    // 2
+      console.log (belajarNode.options);
+      // HTMLOptionsCollection { length: 3, selectedIndex: 2, 6 more… } 
+      console.log (belajarNode.selectedOptions);
+      // HTMLCollection [ <option#belajarJS> ]
+      console.log (belajarNode[0]);
+      // <option value="HTML" id="belajarHTML">
+      console.log (belajarNode[1]);
+      // <option value="CSS" id="belajarCSS">
+      console.log (belajarNode[2]);
+      // <option value="JavaScript" id="belajarJS">
+    }
+    
+    periksaNode.addEventListener("click",diPeriksa);
+  </script>
+</body>
+</html>

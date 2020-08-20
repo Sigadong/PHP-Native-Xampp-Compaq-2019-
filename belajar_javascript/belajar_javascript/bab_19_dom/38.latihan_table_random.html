@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    // Siapkan beberapa variabel shortcut untuk Node
+    var bodyNode = document.childNodes[1].childNodes[2];
+    var h1Node = bodyNode.childNodes[1];
+    var pNode = bodyNode.childNodes[3];
+    var emNode = pNode.childNodes[1];
+    var bNode = pNode.childNodes[2];
+    
+    // Buat tag <table>
+    var tableNode = document.createElement("table");
+    
+    // siapkan beberapa variabel untuk looping
+    var i, trNode, tdNode1, tdNode2, textNo, randomNumber, textRandom;
+    for (i = 1; i <= 10; i++){
+      // buat 1 tag <tr> dan 2 tag <td>
+      trNode = document.createElement("tr");
+      tdNode1 = document.createElement("td");
+      tdNode2 = document.createElement("td");
+      
+      // buat text node untuk nomor urut
+      textNo = document.createTextNode(i+".");
+      
+      // buat text node untuk angka acak
+      randomNumber = Math.floor(Math.random() * (90)) + 10;
+      textRandom = document.createTextNode(randomNumber);
+      
+      // rangkai text node dengan element node <td>
+      tdNode1.appendChild(textNo);
+      tdNode2.appendChild(textRandom);
+      
+      // input 2 tag <td> ke dalam tag <tr>
+      trNode.appendChild(tdNode1);
+      trNode.appendChild(tdNode2);
+      
+      // input tag <tr> kedalam table
+      tableNode.appendChild(trNode);
+    }
+    
+    // masukkan tag <table> kedalam DOM tree, sebelum tag <p>
+    bodyNode.insertBefore(tableNode,pNode);
+  </script>
+</body>
+</html>

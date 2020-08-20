@@ -1,0 +1,301 @@
+##======================================================================##
+12.1 INSERT … VALUE
+##======================================================================##
+
+
+CREATE TABLE contoh_insert_1 (
+  a INT,
+  b VARCHAR(10),
+  c DATE
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT contoh_insert_1 VALUES (10, 'merah', 20180101);
+
+SELECT * FROM contoh_insert_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_1 VALUES (11, 'biru', 20190101);
+
+SELECT * FROM contoh_insert_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_1 VALUES
+  (20, 'putih', 19900817),
+  (300, 'hitam', 20001201),
+  (-17, 'kuning', 20210101)
+;
+
+SELECT * FROM contoh_insert_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_1 (a) VALUES (10);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_insert_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_1 (b, c) VALUES ('cokelat', 20180101);
+
+SELECT * FROM contoh_insert_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_insert_2 (
+  a INT DEFAULT 100,
+  b VARCHAR(10) DEFAULT 'hijau',
+  c DATE DEFAULT 20171231
+);
+
+DESC contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_2 (a) VALUES (10);
+
+SELECT * FROM contoh_insert_2;
+
+INSERT INTO contoh_insert_2 (b, c) VALUES ('cokelat',20180101);
+
+SELECT * FROM contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_2 VALUES (DEFAULT,'jingga',20190201);
+
+SELECT * FROM contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_2 VALUES (NULL,'jingga',20190201);
+INSERT INTO contoh_insert_2 VALUES (0,'jingga',20190201);
+
+SELECT * FROM contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+12.2 INSERT … SET
+##======================================================================##
+
+
+SELECT * FROM contoh_insert_2;
+
+TRUNCATE contoh_insert_2;
+
+SELECT * FROM contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_2 SET a = 20, b = 'merah', c = 20180101;
+
+SELECT * FROM contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_2 SET a = 50, b = 'cokelat';
+
+SELECT * FROM contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_2 SET a = 300, b = DEFAULT;
+
+SELECT * FROM contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+12.3 INSERT … SELECT
+##======================================================================##
+
+
+CREATE TABLE contoh_insert_3 LIKE contoh_insert_2;
+
+SELECT * FROM contoh_insert_3;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_insert_3 SELECT * FROM contoh_insert_2;
+
+SELECT * FROM contoh_insert_3;
+
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE contoh_insert_3;
+
+INSERT INTO contoh_insert_3 (b,c) SELECT b,c FROM contoh_insert_2;
+
+SELECT * FROM contoh_insert_3;
+
+DESC contoh_insert_3;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_insert_4 (
+  x TIMESTAMP,
+  y SMALLINT,
+  z CHAR(10)
+);
+
+INSERT INTO contoh_insert_4 (x,y,z) SELECT c,a,b FROM contoh_insert_2;
+
+SELECT * FROM contoh_insert_4;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_insert_5 (
+  x TIMESTAMP,
+  y TINYINT,
+  z CHAR(10)
+);
+
+INSERT INTO contoh_insert_5 (x,y,z) SELECT c,a,b FROM contoh_insert_2;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+12.4 ON DUPLICATE KEY UPDATE
+##======================================================================##
+
+
+CREATE TABLE contoh_insert_6 (
+  a INT PRIMARY KEY,
+  b VARCHAR(10),
+  c DATE
+);
+
+INSERT contoh_insert_6 VALUES
+  (2, 'merah', 20180101),
+  (11, 'biru', 20190101),
+  (20, 'putih', 19900817)
+;
+
+INSERT contoh_insert_6 VALUES (2, 'jingga', 20190201);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT contoh_insert_6 VALUES (2, 'jingga', 20190201)
+ON DUPLICATE KEY UPDATE b = 'jingga';
+
+SELECT * FROM contoh_insert_6;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT contoh_insert_6 VALUES (11, 'kuning', 20190201)
+ON DUPLICATE KEY UPDATE a = 12, b = 'kuning', c = 20190201;
+
+SELECT * FROM contoh_insert_6;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+12.5 Latihan Menginput Data Tabel
+##======================================================================##
+
+
+CREATE TABLE populasi (
+  kota VARCHAR(50),
+  kec TINYINT UNSIGNED,
+  kel SMALLINT UNSIGNED,
+  luas DECIMAL(6,2),
+  penduduk INTEGER UNSIGNED
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO populasi VALUES
+  ('Jakarta', 44, 267, 664.01, 9988495),
+  ('Surabaya', 31, 154, 350.54, 2805906),
+  ('Medan', 21, 151, 265.00, 2465469),
+  ('Bekasi', 12, 56, 206.61, 2381053),
+  ('Bandung', 30, 151, 167.67, 2339463),
+  ('Makassar', 14, 143, 199.26, 1651146),
+  ('Depok', 11, 63, 200.29, 1631951),
+  ('Semarang', 16, 177, 373.78, 1621384)
+;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO populasi SET
+kota = 'Tangerang', kec = 13, kel = 104, luas = 153.93, penduduk = 1566190;
+
+INSERT INTO populasi SET
+kota = 'Palembang', kec = 14, kel = 107, luas = 369.22, penduduk = 1548064;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE populasi_saja LIKE populasi;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE populasi_saja DROP kec, DROP kel, DROP luas;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO populasi_saja SELECT kota, penduduk FROM populasi;
+
+
+--------------------------------------------------------------------------

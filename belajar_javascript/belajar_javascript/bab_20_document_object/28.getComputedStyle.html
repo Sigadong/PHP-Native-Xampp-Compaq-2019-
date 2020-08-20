@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    h1 {  color:green;
+          background-color: #cac8c3; }
+  </style>
+</head>
+<body>
+  <h1 id="judul">Belajar JavaScript</h1>
+  <script>
+    var h1Node = document.getElementById("judul");
+    var hasilStyle = getComputedStyle(h1Node, null);
+    
+    console.log (hasilStyle);                  // CSS2Properties...
+    console.log (hasilStyle.length);           // 249...
+    console.log (hasilStyle[0]);               // align-content
+    console.log (hasilStyle[1]);               // align-items
+                 
+    console.log (hasilStyle.color);            // rgb(0, 128, 0)
+    console.log (hasilStyle.backgroundColor);  // rgb(202, 200, 195)
+    console.log (hasilStyle.height);           // 37.6px
+  </script>
+</body>
+</html>

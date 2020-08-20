@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = new Date(0);
+    console.log( foo.toLocaleString() );  // 1/1/1970 07.00.00
+    
+    foo.setFullYear(2017);
+    console.log( foo.toLocaleString() );  // 1/1/2017 07.00.00
+
+    foo.setMonth(10);
+    console.log( foo.toLocaleString() );  // 1/11/2017 07.00.00
+    
+    foo.setDate(20);
+    console.log( foo.toLocaleString() );  // 20/11/2017 07.00.00
+    
+    foo.setHours(10);
+    console.log( foo.toLocaleString() );  // 20/11/2017 10.00.00
+    
+    foo.setMinutes(30);
+    console.log( foo.toLocaleString() );  // 20/11/2017 10.30.00
+    
+    foo.setSeconds(45);
+    console.log( foo.toLocaleString() );  // 20/11/2017 10.30.45
+    
+    foo.setMilliseconds(125);
+    console.log( foo.toISOString() );     // 2017-11-20T03:30:45.125Z
+  </script>
+</body>
+</html>

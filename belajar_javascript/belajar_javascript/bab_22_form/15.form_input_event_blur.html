@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Username: <input type="text" id="username"></p>
+  <p>Email: <input type="text" id="email"></p>
+  <script>
+    var usernameNode = document.getElementById("username");
+    var emailNode = document.getElementById("email");
+    
+    function diFocus(e){
+      e.target.style.border = "2px solid aqua";
+    }
+    
+    function diBlur(e){
+      e.target.style.border = "2px solid red";
+    }
+    
+    usernameNode.addEventListener("focus",diFocus);
+    emailNode.addEventListener("focus",diFocus);
+    usernameNode.addEventListener("blur",diBlur);
+    emailNode.addEventListener("blur",diBlur);
+  </script>
+</body>
+</html>

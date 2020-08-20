@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    var foo = document.childNodes[1].childNodes[2].childNodes[3].childNodes[1];
+    
+    console.log(foo.nodeName);          // EM
+    console.log(foo.nodeType);          // 1
+    console.log(foo.childNodes);        // NodeList [ #text "JavaScript" ]
+    console.log(foo.childNodes.length); // 1
+  </script>
+</body>
+</html>

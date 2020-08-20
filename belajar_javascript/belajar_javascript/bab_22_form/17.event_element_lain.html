@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <button id="tombol1">Tampilkan pesan</button>
+  <button id="tombol2">Tampilkan pesan juga</button>
+  <script>
+    var tombol1Node = document.getElementById("tombol1");
+    var tombol2Node = document.getElementById("tombol2");
+    
+    function tampilkanPesan(e){
+      alert(e.target.id);
+    }
+    tombol1Node.addEventListener("click",tampilkanPesan);
+    
+    function tampilkanPesanjuga(){
+      tombol1Node.click();
+    }
+    tombol2Node.addEventListener("click",tampilkanPesanjuga);
+  </script>
+</body>
+</html>

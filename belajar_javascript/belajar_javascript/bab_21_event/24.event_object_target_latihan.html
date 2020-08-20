@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    h1,h2,div { border: 2px solid black;
+         width: 280px;
+         padding: 10px;
+         text-align: center;
+         color: red;
+         background-color: pink; }
+  </style>
+</head>
+<body>
+  <h1 id="judul">Belajar HTML</h1>
+  <h2 id="judul2">Belajar CSS</h2>
+  <div id="tagDiv">Belajar JavaScript</div>
+  <p id="placeholder"></p>
+  <script>
+    var h1Node = document.getElementById("judul");
+    var h2Node = document.getElementById("judul2");
+    var divNode = document.getElementById("tagDiv");
+    var pNode = document.getElementById("placeholder");
+    
+    function tampilkan(e){
+      var pesan = "Sedang serius "+ e.target.innerHTML;
+      pNode.innerHTML = pesan;
+    }
+    
+    h1Node.addEventListener("click",tampilkan);
+    h2Node.addEventListener("click",tampilkan);
+    divNode.addEventListener("click",tampilkan);
+  </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    div {
+      margin: 10px auto;
+      width: 800px;
+      height: 400px;
+      display: block;
+      border: 5px solid white;
+      box-shadow: 0px 0px 10px black;
+    }
+    p{
+      text-align: center;
+      width: 800px;
+      margin: 10px auto;
+    }
+    #prev{
+      float: left;
+    }
+    #next{
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <div>
+  <a id="linkshow" href="http://www.google.com">
+    <img id="slideshow" width="800" height="400" src="gambar0.jpg">
+  </a>
+  </div>
+  <p>
+    <button id="start">Start slideshow</button>
+    <button id="stop">Stop slideshow</button>
+    <button id="prev"><< Prev</button>
+    <button id="next">Next >></button>
+  </p>
+  <script>
+    var slideshowNode = document.getElementById("slideshow");
+    var linkshowNode = document.getElementById("linkshow");
+    var startNode = document.getElementById("start");
+    var stopNode = document.getElementById("stop");
+    var prevNode = document.getElementById("prev");
+    var nextNode = document.getElementById("next");
+  
+    var arrayGambar = ["gambar0.jpg","gambar1.jpg",
+                       "gambar2.jpg","gambar3.jpg","gambar4.jpg"];
+    var arrayLink = ["http://www.google.com",
+                     "http://www.twitter.com",
+                     "http://www.facebook.com",
+                     "http://www.bing.com",
+                     "http://www.duniailkom.com"];
+        
+    var counter = 0;
+    
+    function nextSlideshow(){
+      counter++;
+      if (counter === 5) {
+        counter = 0;
+      }
+      slideshowNode.setAttribute("src",arrayGambar[counter]);
+      linkshowNode.setAttribute("href",arrayLink[counter]);
+    }
+    
+    function prevSlideshow(){
+      counter--;
+      if (counter === -1) {
+        counter = 4;
+      }
+      slideshowNode.setAttribute("src",arrayGambar[counter]);
+      linkshowNode.setAttribute("href",arrayLink[counter]);
+    }
+    
+    prevNode.addEventListener("click", prevSlideshow);
+    nextNode.addEventListener("click", nextSlideshow);
+  </script>
+</body>
+</html>

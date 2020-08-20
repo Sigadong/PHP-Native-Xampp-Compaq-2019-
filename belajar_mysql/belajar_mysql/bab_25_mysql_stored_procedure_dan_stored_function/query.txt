@@ -1,0 +1,733 @@
+##======================================================================##
+25. MySQL Stored Procedure dan Stored Function
+##======================================================================##
+
+
+##======================================================================##
+Mempersiapkan tabel nilai_mahasiswa
+##======================================================================##
+
+
+DROP TABLE IF EXISTS nilai_mahasiswa;
+
+CREATE TABLE nilai_mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  semester_1 DECIMAL(4,2),
+  semester_2 DECIMAL(4,2),
+  semester_3 DECIMAL(4,2)
+) ENGINE = InnoDB;
+
+INSERT INTO nilai_mahasiswa VALUES
+  ('17090113', 'Riana Putria', 3.12, 2.98, 3.45),
+  ('17140143', 'Rudi Permana', 2.56, 3.14, 3.22),
+  ('17080305', 'Rina Kumala Sari', 3.45, 2.56, 3.67),
+  ('17140119', 'Sandri Fatmala', 2.12, 2.78, 2.56),
+  ('17090308', 'Christine Wijaya', 3.78, 3.23, 3.11);
+  
+SELECT * FROM nilai_mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.3 MySQL Variable
+##======================================================================##
+
+
+SET @nama = 'andi';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT @nama;
+
+
+--------------------------------------------------------------------------
+
+
+SET @nilai = 3.14;
+SET @tanggal := '18-08-17';
+
+SELECT @nilai, @tanggal;
+
+
+--------------------------------------------------------------------------
+
+
+SET @hasil = CEIL(@nilai) + 10;
+SET @tanggal_format = DATE_FORMAT(@tanggal, '%W %M %Y');
+
+SELECT @hasil, @tanggal_format;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT @nilai:= 1500;
+
+
+--------------------------------------------------------------------------
+
+
+SET @nilai_ip = 3.20;
+
+SELECT * FROM nilai_mahasiswa WHERE semester_1 <= @nilai_ip;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(nama) FROM nilai_mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT COUNT(nama) INTO @jml_mhs FROM nilai_mahasiswa;
+
+SELECT @jml_mhs;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.5 Perintah DELIMETER
+##======================================================================##
+
+
+DELIMITER //
+
+SELECT 5+1;
+;
+//
+
+SELECT 5+1 //
+
+SELECT * FROM nilai_mahasiswa //
+
+DELIMITER ;
+
+SELECT 5+1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.6 Membuat Stored Procedure
+##======================================================================##
+
+
+DELIMITER //
+CREATE PROCEDURE salam()
+BEGIN
+  SELECT 'Selamat pagi Indonesia';
+END//
+DELIMITER ;
+
+
+--------------------------------------------------------------------------
+
+
+CALL salam();
+
+
+--------------------------------------------------------------------------
+
+
+SHOW PROCEDURE STATUS WHERE db = 'belajar' \G
+
+
+--------------------------------------------------------------------------
+
+
+SHOW CREATE PROCEDURE salam \G
+
+
+--------------------------------------------------------------------------
+
+
+DELIMITER $$
+CREATE PROCEDURE tampil_mhs()
+BEGIN
+  SELECT * FROM nilai_mahasiswa;
+END$$
+DELIMITER ;
+
+CALL tampil_mhs();
+
+
+--------------------------------------------------------------------------
+
+
+DELIMITER $$
+CREATE PROCEDURE hitung_ipk()
+BEGIN
+  SELECT
+    nim,
+    nama,
+    ROUND(((semester_1 + semester_2 + semester_3)/3),2) AS 'IPK'
+  FROM nilai_mahasiswa;
+END$$
+DELIMITER ;
+
+CALL hitung_ipk();
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.7 Menghapus Stored Procedure
+##======================================================================##
+
+
+DROP PROCEDURE salam;
+DROP PROCEDURE tampil_mhs;
+DROP PROCEDURE hitung_ipk;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.8 Stored Procedure Variable
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS salam;
+
+DELIMITER //
+CREATE PROCEDURE salam()
+BEGIN
+  DECLARE selamat_pagi VARCHAR(30) DEFAULT 'Selamat Pagi Indonesia';
+  SELECT selamat_pagi;
+END//
+DELIMITER ;
+
+CALL salam();
+
+
+--------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS salam;
+
+DELIMITER //
+CREATE PROCEDURE salam()
+BEGIN
+  DECLARE selamat_pagi VARCHAR(30) DEFAULT 'Selamat Pagi Indonesia';
+  SET selamat_pagi = 'Selamat Pagi Dunia';
+  SELECT selamat_pagi;
+END//
+DELIMITER ;
+
+CALL salam();
+
+
+--------------------------------------------------------------------------
+
+
+DELIMITER $$
+
+CREATE PROCEDURE cari_ip()
+BEGIN
+  DECLARE minimum_ip DECIMAL(4,2) DEFAULT 0.00;
+  SET minimum_ip = 3.00;
+  
+  SELECT nama, semester_1
+  FROM nilai_mahasiswa
+  WHERE semester_1 >= minimum_ip;
+END$$
+DELIMITER ;
+
+CALL cari_ip();
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.9 Stored Procedure Parameter
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS salam;
+
+DELIMITER //
+CREATE PROCEDURE salam(siapa VARCHAR(30))
+BEGIN
+  SELECT CONCAT('Selamat Pagi ', siapa);
+END//
+
+DELIMITER ;
+
+CALL salam('Bandung');
+
+CALL salam('Medan');
+
+CALL salam('Menado');
+
+
+--------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS salam;
+
+DELIMITER //
+CREATE PROCEDURE salam(IN siapa VARCHAR(30), OUT hasil VARCHAR(30))
+BEGIN
+  SELECT CONCAT('Selamat Pagi ',siapa) INTO hasil;
+END//
+DELIMITER ;
+
+CALL salam('Jakarta',@hasil_salam);
+
+SELECT @hasil_salam;
+
+
+--------------------------------------------------------------------------
+
+
+DELIMITER //
+CREATE PROCEDURE tambah_satu(INOUT hasil INT)
+BEGIN
+  SET hasil = hasil + 1;
+END//
+DELIMITER ;
+
+SET @angka= 1;
+
+CALL tambah_satu(@angka);
+CALL tambah_satu(@angka);
+CALL tambah_satu(@angka);
+
+SELECT @angka;
+
+
+--------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS cari_ip;
+
+DELIMITER $$
+CREATE PROCEDURE cari_ip(minimum_ip DECIMAL(4,2))
+BEGIN
+  SELECT nama, semester_1
+  FROM nilai_mahasiswa
+  WHERE semester_1 >= minimum_ip;
+END$$
+DELIMITER ;
+
+CALL cari_ip(3.5);
+
+CALL cari_ip(2.5);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.10 Stored Procedure IF Statement
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS salam;
+
+DELIMITER //
+CREATE PROCEDURE salam(waktu TIME)
+BEGIN
+  IF waktu < '10:00:00' THEN
+    SELECT 'Selamat Pagi';
+  END IF;
+END//
+DELIMITER ;
+
+CALL salam('08:30:00');
+
+CALL salam('00:00:01');
+
+CALL salam('10:30:00');
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.11 Stored Procedure IF ELSE Statement
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS salam;
+
+DELIMITER //
+CREATE PROCEDURE salam(waktu TIME)
+BEGIN
+  IF waktu < '10:00:00' THEN
+    SELECT 'Selamat Pagi';
+  ELSE
+    SELECT 'Selamat Beraktifitas';
+  END IF;
+END//
+DELIMITER ;
+
+CALL salam('08:30:00');
+
+CALL salam('10:30:00');
+
+CALL salam('23:59:59');
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.12 Stored Procedure IF ELSEIF ELSE Statement
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS salam;
+
+DELIMITER //
+CREATE PROCEDURE salam(waktu TIME)
+BEGIN
+  IF waktu < '10:00:00' THEN
+    SELECT 'Selamat Pagi';
+  ELSEIF waktu < '15:00:00' THEN
+    SELECT 'Selamat Siang';
+  ELSEIF waktu < '18:00:00' THEN
+    SELECT 'Selamat Sore';
+  ELSEIF waktu < '24:00:00' THEN
+    SELECT 'Selamat Malam';
+  ELSE
+    SELECT 'Selamat Beraktifitas';
+  END IF;
+END//
+DELIMITER ;
+
+CALL salam('08:30:00');
+
+CALL salam('10:30:00');
+
+CALL salam('20:49:30');
+
+CALL salam('25:00:30');
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.13 Stored Procedure Simple CASE Statement
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS penilaian;
+
+DELIMITER //
+CREATE PROCEDURE penilaian(nilai_ip INT)
+BEGIN
+  CASE nilai_ip
+  WHEN 1 THEN
+    SELECT 'Serius kuliah g sih?';
+  WHEN 2 THEN
+    SELECT 'Kebanyakan main';
+  WHEN 3 THEN
+    SELECT 'Berusaha lagi';
+  WHEN 4 THEN
+    SELECT 'Mantap, pertahankan!';
+  ELSE
+    SELECT 'Nilai tidak sesuai';
+  END CASE;
+END//
+DELIMITER ;
+
+CALL penilaian (1);
+
+CALL penilaian (2);
+
+CALL penilaian (4);
+
+CALL penilaian (5);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.14 Stored Procedure Complex CASE Statement
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS penilaian;
+
+DELIMITER //
+CREATE PROCEDURE penilaian(nilai_ip DECIMAL(4,2))
+BEGIN
+  CASE
+  WHEN (nilai_ip <= 1.00) THEN
+    SELECT 'Serius kuliah g sih?';
+  WHEN (nilai_ip <= 2.00) THEN
+    SELECT 'Kebanyakan main';
+  WHEN (nilai_ip <= 3.00) THEN
+    SELECT 'Berusaha lagi';
+  WHEN (nilai_ip <= 4.00) THEN
+    SELECT 'Mantap, pertahankan!';
+  ELSE
+    SELECT 'Nilai tidak sesuai';
+  END CASE;
+END//
+DELIMITER ;
+
+CALL penilaian (1.01);
+
+CALL penilaian (3.56);
+
+CALL penilaian (4.00);
+
+CALL penilaian (4.01);
+
+CALL penilaian (-1.00);
+
+
+--------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS penilaian;
+
+DELIMITER //
+CREATE PROCEDURE penilaian(nilai_ip DECIMAL(4,2))
+BEGIN
+  CASE
+  WHEN ((nilai_ip >= 0.00) AND (nilai_ip <= 1.00)) THEN
+    SELECT 'Serius kuliah g sih?';
+  WHEN ((nilai_ip > 1.00) AND (nilai_ip <= 2.00)) THEN
+    SELECT 'Kebanyakan main';
+  WHEN ((nilai_ip > 2.00) AND (nilai_ip <= 3.00)) THEN
+    SELECT 'Berusaha lagi';
+  WHEN ((nilai_ip > 3.00) AND (nilai_ip <= 4.00)) THEN
+    SELECT 'Mantap, pertahankan!';
+  ELSE
+    SELECT 'Nilai tidak sesuai';
+  END CASE;
+END//
+DELIMITER ;
+
+CALL penilaian (-1.00);
+
+CALL penilaian (7.00);
+
+CALL penilaian (0.00);
+
+CALL penilaian (4.00);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.14 Stored Procedure Complex CASE Statement
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS faktorial;
+
+DELIMITER //
+CREATE PROCEDURE faktorial(nilai SMALLINT)
+BEGIN
+  DECLARE i SMALLINT DEFAULT 1;
+  DECLARE hasil INT DEFAULT 1;
+  WHILE i <= nilai DO
+    SET hasil = hasil * i;
+    SET i = i + 1;
+  END WHILE;
+  SELECT hasil;
+END//
+DELIMITER ;
+
+CALL faktorial(3);
+
+CALL faktorial(5);
+
+CALL faktorial(8);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.14 Stored Procedure Complex CASE Statement
+##======================================================================##
+
+
+DROP PROCEDURE IF EXISTS faktorial;
+
+DELIMITER //
+CREATE PROCEDURE faktorial(nilai SMALLINT)
+BEGIN
+  DECLARE i SMALLINT DEFAULT 1;
+  DECLARE hasil INT DEFAULT 1;
+  REPEAT
+    SET hasil = hasil * i;
+    SET i = i + 1;
+    UNTIL i > nilai
+  END REPEAT;
+  SELECT hasil;
+END//
+DELIMITER ;
+
+CALL faktorial(3);
+
+CALL faktorial(5);
+
+CALL faktorial(8);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.17 Stored Function
+##======================================================================##
+
+
+DROP FUNCTION IF EXISTS tambah;
+
+DELIMITER //
+CREATE FUNCTION tambah(nilai_1 INT, nilai_2 INT) RETURNS INT
+BEGIN
+  RETURN nilai_1 + nilai_2;
+END//
+DELIMITER ;
+
+SELECT tambah(10,5);
+
+SELECT tambah(20,100);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM nilai_mahasiswa WHERE semester_2 < tambah(1,2);
+
+
+--------------------------------------------------------------------------
+
+
+SET @hasil_tambah = tambah(1234, 456);
+
+SELECT @hasil_tambah;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+25.19 Jawaban Latihan Stored Procedure
+##======================================================================##
+
+
+SELECT * FROM nilai_mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SET @nim_mhs = '17080305';
+SET @nilai_ip = 0.00;
+
+SELECT semester_1 INTO @nilai_ip FROM nilai_mahasiswa WHERE nim = @nim_mhs;
+-- error
+
+--------------------------------------------------------------------------
+
+
+SHOW VARIABLES LIKE 'collation%';
+
+
+--------------------------------------------------------------------------
+
+
+SET collation_connection = 'latin1_swedish_ci';
+  
+  
+--------------------------------------------------------------------------
+
+
+SET @nim_mhs = '17080305';
+SET @nilai_ip = 0.00;
+SELECT semester_1 INTO @nilai_ip FROM nilai_mahasiswa WHERE nim = @nim_mhs;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT @nilai_ip;
+
+
+--------------------------------------------------------------------------
+
+
+SET @nim_mhs = '17140119';
+SET @nilai_ip = 0.00;
+SELECT semester_1 INTO @nilai_ip FROM nilai_mahasiswa WHERE nim = @nim_mhs;
+
+SELECT @nilai_ip;
+
+
+--------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS penilaian;
+
+DELIMITER //
+CREATE PROCEDURE penilaian(nim_mhs CHAR(8))
+BEGIN
+  DECLARE nilai_ip DECIMAL(4,2) DEFAULT 0.00;
+  SELECT semester_1 INTO nilai_ip FROM nilai_mahasiswa WHERE nim = nim_mhs;
+  SELECT nilai_ip;
+END//
+DELIMITER ;
+
+CALL penilaian('17080305');
+
+CALL penilaian('17140143');
+
+
+--------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS penilaian;
+
+DELIMITER //
+CREATE PROCEDURE penilaian(nim_mhs CHAR(8))
+BEGIN
+  DECLARE nilai_ip DECIMAL(4,2) DEFAULT 0.00;
+  SELECT semester_1 INTO nilai_ip FROM nilai_mahasiswa WHERE nim = nim_mhs;
+  
+  CASE
+  WHEN ((nilai_ip >= 0.00) AND (nilai_ip <= 1.00)) THEN
+    SELECT 'Serius kuliah g sih?';
+  WHEN ((nilai_ip > 1.00) AND (nilai_ip <= 2.00)) THEN
+    SELECT 'Kebanyakan main';
+  WHEN ((nilai_ip > 2.00) AND (nilai_ip <= 3.00)) THEN
+    SELECT 'Berusaha lagi';
+  WHEN ((nilai_ip > 3.00) AND (nilai_ip <= 4.00)) THEN
+    SELECT 'Mantap, pertahankan!';
+  ELSE
+    SELECT 'Nilai tidak sesuai';
+  END CASE;
+  
+END//
+DELIMITER ;
+
+CALL penilaian('17080305');
+
+CALL penilaian('17140143');
+
+--------------------------------------------------------------------------
+

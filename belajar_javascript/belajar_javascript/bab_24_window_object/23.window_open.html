@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <button id="tombol">Buat jendela baru</button>
+  <script>
+    var tombolNode = document.getElementById("tombol");
+
+    function jendelaBaru(){
+       window.open();
+    }
+    
+    tombolNode.addEventListener("click",jendelaBaru);
+  </script>
+</body>
+</html>

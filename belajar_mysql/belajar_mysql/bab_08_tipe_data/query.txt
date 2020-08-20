@@ -1,0 +1,661 @@
+##======================================================================##
+8.1 Tipe Data Numeric
+##======================================================================##
+
+
+SELECT 123;
+
+SELECT 456.77;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 3e4;
+
+SELECT 9.8E-4;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 3 e4;
+
+SELECT 3e 4;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.2 Tipe Data Integer
+##======================================================================##
+
+
+CREATE DATABASE belajar;
+
+USE belajar;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_int_1 (
+  a TINYINT,
+  b SMALLINT,
+  c MEDIUMINT,
+  d INT,
+  e BIGINT
+);
+
+INSERT INTO contoh_int_1 VALUES ((100), (100), (100), (100), (100));
+
+SELECT * FROM contoh_int_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_int_1
+VALUES ((200), (35000), (18000000), (2500000000), (10000000000000000000));
+
+SHOW WARNINGS;
+
+SELECT * FROM contoh_int_1;
+
+
+--------------------------------------------------------------------------
+
+INSERT INTO contoh_int_1
+VALUES ((10.34), (400.499),(12345.50), (143.655), (999.9999));
+
+SELECT * FROM contoh_int_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_int_2 (
+a SMALLINT,
+b SMALLINT UNSIGNED
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_int_2 VALUES (50000,50000), (-123,-123);
+
+SELECT * FROM contoh_int_2;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_int_3 (
+  a INT(5)
+);
+
+INSERT INTO contoh_int_3 VALUES (1), (13), (589), (9876);
+
+SELECT * FROM contoh_int_3;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_int_4 (
+  a INT(7) ZEROFILL
+);
+
+INSERT INTO contoh_int_4 VALUES (1), (13), (589), (9876);
+
+SELECT * FROM contoh_int_4;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_int_4 VALUES (123456789);
+
+SELECT * FROM contoh_int_4;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_int_4 VALUES (-123), (4e9);
+
+SELECT * FROM contoh_int_4;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_int_5 (
+  a INT1,
+  b INT2,
+  c INT3,
+  d INT4,
+  e INT8,
+  f BOOLEAN,
+  g INTEGER
+);
+
+DESC contoh_int_5;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.3 Tipe Data Decimal
+##======================================================================##
+
+
+CREATE TABLE contoh_dec_1 (
+  a DECIMAL,
+  b DECIMAL(5,2),
+  c DECIMAL(6,3),
+  d DECIMAL(9,4)
+);
+
+INSERT INTO contoh_dec_1 VALUES
+  (10, 10, 10, 10),
+  (13.4, 13.4, 13.4, 13.4),
+  (98123.45, 98123.45, 98123.45, 98123.45),
+  (0.0065, 0.0065, 0.0065, 0.0065),
+  (1e1, 2.3489e2, 7.11e-1, 9.87e-2);
+  
+SELECT * FROM contoh_dec_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_dec_2 (
+  a DECIMAL(5,2) UNSIGNED,
+  b DECIMAL(5,2) ZEROFILL
+);
+
+INSERT INTO contoh_dec_2 VALUES (100000, 100000),(-1.23, -1.23),(1.23, 1.23);
+ 
+SELECT * FROM contoh_dec_2;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_dec_3 (
+  a DEC(5,2),
+  b NUMERIC(5,2),
+  c FIXED(5,2)
+);
+
+DESC contoh_dec_3;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.4 Tipe Data Float dan Double
+##======================================================================##
+
+
+CREATE TABLE contoh_float_1 (
+  a FLOAT(3,2),
+  b FLOAT(4,2),
+  c FLOAT(5,2),
+  d DOUBLE ZEROFILL UNSIGNED,
+  e DOUBLE(8,2) ZEROFILL
+);
+
+INSERT INTO contoh_float_1 VALUES
+((1.3), (55.32), (523.77), (7832.3), (150000.45));
+
+SELECT * FROM contoh_float_1;
+
+
+--------------------------------------------------------------------------
+
+CREATE TABLE contoh_float_2 (
+  a FLOAT(200,10),
+  b DOUBLE(220,20)
+);
+
+INSERT INTO contoh_float_2 VALUES ((123.456), (123.456));
+SELECT * FROM contoh_float_2;
+
+
+--------------------------------------------------------------------------
+
+CREATE TABLE contoh_float_3 (
+  a FLOAT(5,2),
+  b DECIMAL(5,2)
+);
+
+INSERT INTO contoh_float_3 VALUES ((5.33), (5.33));
+SELECT * FROM contoh_float_3;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT a*100000, b*100000 FROM contoh_float_3;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT a*1000000000, b*1000000000 FROM contoh_float_3;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_float_4 (
+  a FLOAT4,
+  b REAL(6,2),
+  c DOUBLE PRECISION(6,2),
+  d FLOAT8
+);
+
+DESC contoh_float_4;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.5 Tipe Data Bit
+##======================================================================##
+
+
+CREATE TABLE contoh_bit_1 (a BIT(3));
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_bit_1 VALUES (0),(3),(7);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_bit_1 VALUES (b'011'),(b'110');
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_bit_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT BIN(a) FROM contoh_bit_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT CAST(a as UNSIGNED) FROM contoh_bit_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT BIN(a), OCT(a), HEX(a) FROM contoh_bit_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.6 Tipe Data String
+##======================================================================##
+
+
+SELECT 'sedang belajar MySQL';
+
+SELECT "sedang belajar MySQL";
+
+
+--------------------------------------------------------------------------
+
+
+SELECT 'sedang belajar MySQL di hari jum\'at';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT "sedang belajar MySQL di hari jum'at";
+
+SELECT 'I"ll be back';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT '9';
+
+SELECT 9;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.7 Tipe Data Char dan Varchar
+##======================================================================##
+
+
+CREATE TABLE contoh_char_1 (
+  a CHAR(5),
+  b VARCHAR(5)
+);
+
+INSERT INTO contoh_char_1 VALUES ('dunia','dunia');
+
+SELECT * FROM contoh_char_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_char_1 VALUES ('a    ','a    ');
+
+SELECT a,b FROM contoh_char_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT CHAR_LENGTH(a), CHAR_LENGTH(b) FROM contoh_char_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_char_1 VALUES ('do\'a','do\'a');
+
+SELECT * FROM contoh_char_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_char_1 VALUES ('duniailkom', 'duniailkom');
+
+SHOW WARNINGS;
+
+SELECT * FROM contoh_char_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.8 Tipe Data Binary dan Varbinary
+##======================================================================##
+
+
+CREATE TABLE contoh_binary_1 (
+  a BINARY(5),
+  b VARBINARY(5)
+);
+
+INSERT INTO contoh_binary_1 VALUES ('dunia','dunia');
+
+SELECT * FROM contoh_binary_1;
+
+SELECT * FROM contoh_binary_1 where a = 'dunia';
+
+SELECT * FROM contoh_binary_1 where a = 'DUNIA';
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.9 Tipe Data Text
+##======================================================================##
+
+
+CREATE TABLE contoh_text_1 (
+  a TINYTEXT,
+  b TEXT,
+  c LONGTEXT
+);
+
+DESC contoh_text_1;
+
+INSERT INTO contoh_text_1 VALUES ('duniailkom','duniailkom','duniailkom.com');
+
+SELECT * FROM contoh_text_1;
+
+
+##======================================================================##
+8.10 Tipe Data Blob
+##======================================================================##
+
+
+CREATE TABLE contoh_blob_1 (
+  a TINYBLOB,
+  b BLOB,
+  c LONGBLOB
+);
+
+DESCRIBE contoh_blob_1;
+
+INSERT INTO contoh_blob_1 VALUES ('duniailkom','duniailkom','duniailkom.com');
+
+SELECT * FROM contoh_blob_1;
+
+
+##======================================================================##
+8.11 Tipe Data Date
+##======================================================================##
+
+
+CREATE TABLE contoh_date_1 (
+  a DATE,
+  b TIME,
+  c DATETIME,
+  d TIMESTAMP,
+  e YEAR
+);
+
+DESC contoh_date_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_date_1 VALUES (
+  '2017-07-22',
+  '18:45:23',
+  '2017-07-22 18:45:23',
+  '2017-07-22 18:45:23',
+  '2017'
+);
+
+INSERT INTO contoh_date_1 VALUES (
+  20170722,
+  184523,
+  20170722184523,
+  20170722184523,
+  2017
+);
+
+SELECT * FROM contoh_date_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_date_1 VALUES (NOW(), NOW(), NOW(), NOW(),NOW());
+
+SHOW WARNINGS;
+
+SELECT * FROM contoh_date_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_date_2 (
+  a TIME(3),
+  b DATETIME(4),
+  c DATETIME(6)
+);
+
+INSERT INTO contoh_date_2 VALUES (
+  '11:02:36.123',
+  '2017-07-23 11:02:36.2334',
+  '2017-07-23 11:02:36.999999'
+);
+
+SELECT * FROM contoh_date_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_date_2 VALUES (CURTIME(3),CURTIME(4),CURTIME(6));
+
+SELECT * FROM contoh_date_2;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.12 Tipe Data Enum
+##======================================================================##
+
+
+CREATE TABLE contoh_enum_1 (
+  jur ENUM('Ilmu Komputer','Ekonomi','MIPA','Kedokteran')
+);
+
+DESC contoh_enum_1;
+
+INSERT INTO contoh_enum_1 VALUES ('Ilmu Komputer');
+
+INSERT INTO contoh_enum_1 VALUES ('Kedokteran');
+
+SELECT * FROM contoh_enum_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_enum_1 VALUES (1);
+INSERT INTO contoh_enum_1 VALUES (3);
+
+SELECT * FROM contoh_enum_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_enum_1 WHERE jur = 3;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_enum_1 VALUES ('Hukum');
+
+SHOW WARNINGS;
+
+SELECT * FROM contoh_enum_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.13 Tipe Data Set
+##======================================================================##
+
+
+CREATE TABLE contoh_set_1 (
+  hob SET('Membaca','Menulis','Menggambar','Main Musik')
+);
+
+DESC contoh_set_1;
+
+INSERT INTO contoh_set_1 VALUES ('Membaca');
+INSERT INTO contoh_set_1 VALUES ('Membaca,Main Musik');
+INSERT INTO contoh_set_1 VALUES ('Menggambar,Main Musik');
+
+SELECT * FROM contoh_set_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_set_1 VALUES (2);
+INSERT INTO contoh_set_1 VALUES (3);
+INSERT INTO contoh_set_1 VALUES (9);
+
+SELECT * FROM contoh_set_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.14 Latihan Tipe Data
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+8.15 Jawaban Latihan Tipe Data
+##======================================================================##
+
+
+CREATE TABLE film (
+  no TINYINT, judul VARCHAR(50),
+  pendapatan BIGINT,
+  tahun_produksi YEAR(4)
+);
+
+INSERT INTO film VALUES (1,'Avatar',2787965087,2009);
+INSERT INTO film VALUES (2,'Titanic',2186772302,1997);
+INSERT INTO film VALUES (3,'Star Wars: The Force Awakens',2068223624,2015);
+INSERT INTO film VALUES (4,'Jurassic World',1671713208,2015);
+INSERT INTO film VALUES (5,'The Avengers',1518812988,2012);
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE luas_negara (
+  no TINYINT(3) ZEROFILL,
+  negara VARCHAR(50),
+  luas_total INT,
+  luas_daratan INT,
+  luas_lautan INT,
+  persentase_luas_lautan DECIMAL(4,2)
+);
+
+
+INSERT INTO luas_negara VALUES
+  (1,'Rusia',17098246,16377742,720500,4.21),
+  (2,'Kanada',9984670,9093507,891163,8.93),
+  (3,'Tiongkok (RRC)',9596961,9326410,270550,2.82),
+  (4,'Amerika Serikat',9525067,9147593,377424,3.96),
+  (5,'Brazil',8515767,8460415,55352,0.65);
+
+
+--------------------------------------------------------------------------
+

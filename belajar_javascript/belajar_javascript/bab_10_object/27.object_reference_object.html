@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+  var mahasiswa = { nama: "Andi",
+                    jurusan: "Teknik Informatika"
+                  };
+  
+  var mahasiswaBaru = mahasiswa;
+  
+  console.log( mahasiswa.nama );          // Andi
+  console.log( mahasiswaBaru.nama );      // Andi
+  
+  mahasiswa.nama = "Joko";
+  console.log( mahasiswa.nama );          // Joko
+  console.log( mahasiswaBaru.nama );      // Joko
+  
+  mahasiswaBaru.jurusan = "Ekonomi Manajemen";
+  console.log( mahasiswa.jurusan );       // Ekonomi Manajemen
+  console.log( mahasiswaBaru.jurusan );   // Ekonomi Manajemen
+  </script>
+</body>
+</html>

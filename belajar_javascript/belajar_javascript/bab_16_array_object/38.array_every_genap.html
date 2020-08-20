@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    function genap(element) {
+      if (element % 2 === 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    
+    var foo = [6,8,10,12,16];
+    console.log ( foo.every(genap) );         // true
+    
+    var bar = [3,8,10,12,16];
+    console.log ( bar.every(genap) );         // false    
+  </script>
+</body>
+</html>

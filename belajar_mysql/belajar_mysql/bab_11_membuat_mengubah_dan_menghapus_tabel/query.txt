@@ -1,0 +1,871 @@
+##======================================================================##
+11.1 Format Dasar CREATE TABLE
+##======================================================================##
+
+
+CREATE TABLE contoh_tabel_1 (
+  a INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  b VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_t9bl3 (
+  123a INT,
+  $aku13a VARCHAR(5)
+);
+
+DESC contoh_t9bl3;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE `contoh_tabel_2` (
+`kolom_1` INT UNSIGNED,
+`kolom_2` VARCHAR(10)
+);
+
+
+--------------------------------------------------------------------------
+
+
+SHOW CREATE TABLE contoh_tabel_2 \G
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE `contoh dengan spasi`(
+  `Nama Lengkap` VARCHAR(50),
+  `tangg#l l@hir` DATE,
+  `12345` VARCHAR(150),
+  `select` INT
+);
+
+DESC `contoh dengan spasi`;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO `contoh dengan spasi` (`tangg#l l@hir`, `12345`)
+VALUES (19960629, 'Jl. Perintis kemerdekaan no.8');
+
+SELECT * FROM `contoh dengan spasi`;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE
+nama_tabel_yang_amat_sangat_panjang_dan_melebihi_batasan_64_karakter (
+  a INT
+);
+
+
+CREATE TABLE contoh_tabel_3 (
+  nama_kolom_yang_amat_sangat_panjang_dan_melebihi_batasan_64_karakter INT
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_tabel_4 (
+a VARCHAR(30000),
+b VARCHAR(20000),
+c VARCHAR(20000)
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_tabel_5 (
+  a INT,
+  b VARCHAR(10)
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE belajar.contoh_tabel_5 (
+  a INT,
+  b VARCHAR(10)
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO belajar.contoh_tabel_5 VALUES (1,'putih');
+
+SELECT * FROM belajar.contoh_tabel_5;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT belajar.contoh_tabel_5.b FROM belajar.contoh_tabel_5;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT b FROM belajar.contoh_tabel_5;
+
+
+--------------------------------------------------------------------------
+
+
+SHOW TABLES FROM indonesia;
+
+SELECT * FROM indonesia.provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT `belajar`.`contoh_tabel_5`.`b` FROM `belajar`.`contoh_tabel_5`;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.2 CREATE TABLE … IF NOT EXIST
+##======================================================================##
+
+
+CREATE TABLE contoh_exist_1 (
+  a INT,
+  b VARCHAR(10)
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE IF NOT EXISTS contoh_exist_1 (
+  a INT,
+  b VARCHAR(10)
+);
+
+SHOW WARNINGS;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.3 CREATE TEMPORARY TABLE
+##======================================================================##
+
+
+CREATE TEMPORARY TABLE contoh_temp_table_1 (
+  a INT,
+  b VARCHAR(10)
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_temp_table_1 VALUES (1,"biru");
+
+SELECT * FROM contoh_temp_table_1;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE contoh_temp_table_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.4 CREATE TABLE … LIKE
+##======================================================================##
+
+
+CREATE TABLE contoh_tabel_asal (
+  a INT AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10),
+  c DATE
+);
+
+DESC contoh_tabel_asal;
+
+INSERT INTO contoh_tabel_asal VALUES
+  (null,'merah',20170101),
+  (null,'biru',20170201),
+  (null,'kuning',20170301)
+;
+
+SELECT * FROM contoh_tabel_asal;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_copy_1 LIKE contoh_tabel_asal;
+
+DESC contoh_copy_1;
+
+SELECT * FROM contoh_copy_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.5 CREATE TABLE … SELECT
+##======================================================================##
+
+
+CREATE TABLE contoh_copy_2 SELECT * FROM contoh_tabel_asal;
+
+DESC contoh_copy_2;
+
+SELECT * FROM contoh_copy_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_copy_2 VALUES (0,'ungu',20170401);
+
+SELECT * FROM contoh_copy_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_tabel_baru VALUES (null,'hijau',20170501);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_copy_3 SELECT a, c FROM contoh_tabel_asal;
+
+SELECT * FROM contoh_copy_3;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.6 Table Cloning
+##======================================================================##
+
+
+CREATE TABLE contoh_copy_4 LIKE contoh_tabel_asal;
+
+DESC contoh_copy_4;
+
+INSERT INTO contoh_copy_4 SELECT * FROM contoh_tabel_asal;
+
+SELECT * FROM contoh_copy_4;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_copy_4 VALUES (0,'ungu',20170401);
+
+SELECT * FROM contoh_copy_4;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.7 Table Character Set dan Collation
+##======================================================================##
+
+
+CREATE TABLE contoh_charset_3 (
+  a INT,
+  b VARCHAR(10)
+) CHARACTER SET utf8 COLLATE utf8_german2_ci;
+
+SHOW CREATE TABLE contoh_charset_3 \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.8 Storage Engine
+##======================================================================##
+
+
+SHOW ENGINES\G
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_innodb_1 (
+  a INT,
+  b VARCHAR(10)
+) ENGINE = InnoDB;
+
+SHOW CREATE TABLE contoh_innodb_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_myisam_1 (
+  a INT,
+  b VARCHAR(10)
+) ENGINE = MyISAM;
+SHOW CREATE TABLE contoh_myisam_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_memory_1 (
+  a INT,
+  b VARCHAR(10)
+) ENGINE = MEMORY;
+SHOW CREATE TABLE contoh_memory_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_memory_1 VALUES (1,'merah'),(10,'biru'),(100,'kuning');
+
+SELECT * FROM contoh_memory_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM contoh_memory_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_memory_2 (
+a INT,
+b TEXT
+) ENGINE=MEMORY;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_csv_1 (
+a INT,
+b VARCHAR(10)
+) ENGINE = CSV;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_csv_1 (
+  a INT NOT NULL,
+  b VARCHAR(10) NOT NULL
+) ENGINE = CSV;
+
+SHOW CREATE TABLE contoh_csv_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_csv_1 VALUES (1,'merah'),(10,'biru'),(100,'kuning');
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_aria_1 (
+  a INT,
+  b VARCHAR(10)
+) ENGINE = Aria;
+SHOW CREATE TABLE contoh_aria_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.9 TABLE OPTION … AUTO_INCREMENT
+##======================================================================##
+
+
+CREATE TABLE contoh_auto_increment_3 (
+  a INT AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10)
+) AUTO_INCREMENT = 500;
+
+INSERT INTO contoh_auto_increment_3 (b) VALUES ('merah'),('biru'),('kuning');
+
+SELECT * FROM contoh_auto_increment_3;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.10 TABLE OPTION … COMMENT
+##======================================================================##
+
+
+CREATE TABLE contoh_comment_1 (
+  a INT AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10)
+) COMMENT = 'Ini adalah tabel untuk belajar membuat komentar';
+
+SHOW CREATE TABLE contoh_comment_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.11 Format Dasar ALTER TABLE
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.12 ALTER TABLE … RENAME
+##======================================================================##
+
+
+CREATE TABLE contoh_alter_1 (
+  a INT AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10)
+);
+
+ALTER TABLE contoh_alter_1 RENAME TO contoh_alter_99;
+
+DESC contoh_alter_99;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE belajar.contoh_alter_99 RENAME TO indonesia.contoh_alter_10;
+
+
+--------------------------------------------------------------------------
+
+
+USE indonesia;
+
+SHOW TABLES;
+
+DESC contoh_alter_10;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE indonesia.contoh_alter_10 RENAME TO belajar.contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1 RENAME TO contoh_comment_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.13 RENAME TABLE … TO
+##======================================================================##
+
+
+CREATE TABLE IF NOT EXISTS contoh_alter_1 (
+  a INT AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10)
+);
+
+RENAME TABLE contoh_alter_1 TO contoh_alter_20;
+
+DESC contoh_alter_20;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_alter_21 LIKE contoh_alter_20;
+
+RENAME TABLE
+  contoh_alter_20 TO contoh_alter_1,
+  contoh_alter_21 TO contoh_alter_2
+;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.14 ALTER TABLE … TABLE OPTION
+##======================================================================##
+
+
+SHOW CREATE TABLE contoh_alter_1 \G
+
+ALTER TABLE contoh_alter_1 CHARSET = utf8;
+
+SHOW CREATE TABLE contoh_alter_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1 ENGINE = MyISAM;
+
+SHOW CREATE TABLE contoh_alter_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_alter_1 (b) VALUES ('putih'),('hitam');
+
+SELECT * FROM contoh_alter_1;
+
+ALTER TABLE contoh_alter_1 AUTO_INCREMENT = 50;
+
+INSERT INTO contoh_alter_1 (b) VALUES ('biru'),('merah');
+
+SELECT * FROM contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.15 ALTER TABLE … MODIFY
+##======================================================================##
+
+
+ALTER TABLE contoh_alter_1 MODIFY a TINYINT UNSIGNED;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1 MODIFY a TINYINT UNSIGNED AUTO_INCREMENT;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1
+  MODIFY a MEDIUMINT(3) ZEROFILL,
+  MODIFY b CHAR(20)
+;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.16 ALTER TABLE … CHANGE
+##======================================================================##
+
+
+ALTER TABLE contoh_alter_1 CHANGE a c TINYINT;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+SHOW CREATE TABLE contoh_alter_1 \G
+
+ALTER TABLE contoh_alter_1 CHANGE b d char(20) DEFAULT NULL;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1 CHANGE d d VARCHAR(20) CHARSET utf8;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1
+  CHANGE c a INT AUTO_INCREMENT,
+  CHANGE d b VARCHAR(10)
+;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE contoh_alter_1;
+
+CREATE TABLE contoh_alter_1 (
+  a INT,
+  b VARCHAR(10)
+);
+
+INSERT INTO contoh_alter_1 VALUES (500,'putih');
+
+SELECT * FROM contoh_alter_1;
+
+ALTER TABLE contoh_alter_1 MODIFY a TINYINT;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1 MODIFY b CHAR(5);
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT @@SESSION.sql_mode;
+
+SET sql_mode = '';
+
+SELECT @@SESSION.sql_mode;
+
+ALTER TABLE contoh_alter_1 MODIFY a TINYINT;
+
+SELECT * FROM contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.17 ALTER TABLE … ADD COLUMN
+##======================================================================##
+
+
+ALTER TABLE contoh_alter_1 ADD c DECIMAL(4,2) NOT NULL;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1 ADD d BINARY FIRST;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1 ADD e BIGINT UNSIGNED AFTER b;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1
+  ADD COLUMN f CHAR(2) FIRST,
+  ADD COLUMN g TIME(4) AFTER c
+;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.18 ALTER TABLE … DROP COLUMNS
+##======================================================================##
+
+
+ALTER TABLE contoh_alter_1 DROP COLUMN g;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1 DROP g;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_alter_1
+  DROP COLUMN c,
+  DROP COLUMN d,
+  DROP COLUMN e,
+  DROP COLUMN f
+;
+
+DESC contoh_alter_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.19 Format Dasar DROP TABLE
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.20 DROP TABLE
+##======================================================================##
+
+
+CREATE TABLE contoh_drop_1 (
+  a INT
+);
+
+DROP TABLE contoh_drop_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_drop_1 (
+  a INT
+);
+
+CREATE TABLE contoh_drop_2 LIKE contoh_drop_1;
+
+DROP TABLE contoh_drop_1, contoh_drop_2;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TEMPORARY TABLE contoh_temporary_1 (
+  a INT AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10)
+);
+
+DROP TEMPORARY TABLE contoh_temporary_1;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE tidak_ada;
+
+DROP TABLE IF EXISTS tidak_ada;
+
+SHOW WARNINGS;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.21 Latihan Pembuatan Tabel
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+11.22 Jawaban Latihan Pembuatan Tabel
+##======================================================================##
+
+
+CREATE TABLE latihan_1 (
+  a INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10) DEFAULT 'merdeka' NOT NULL
+) ENGINE = MyISAM CHARSET=ascii AUTO_INCREMENT = 100;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE latihan_1 ENGINE = InnoDB;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE latihan_1 CHANGE b c VARCHAR(10) DEFAULT 'merdeka' NOT NULL;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE latihan_1 ADD b DATE DEFAULT 20180101 AFTER a;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE latihan_2 LIKE latihan_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE latihan_2 ENGINE = MEMORY;
+
+
+--------------------------------------------------------------------------
+
+
+RENAME TABLE latihan_2 TO latihan_3;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TEMPORARY TABLE latihan_4 (
+  a TIMESTAMP
+);
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE latihan_1, latihan_3, latihan_4;
+
+
+--------------------------------------------------------------------------
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    h1 { color:green; }
+    p  { background-color: #cac8c3; }
+  </style>
+</head>
+<body>
+  <h1 id="judul">Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    var h1Node = document.getElementById("judul");
+    console.log (h1Node.style.color);           // (kosong)
+    
+    var pNode = document.querySelector("p");
+    console.log (pNode.style.backgroundColor);  // (kosong)
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    class Mobil {
+      constructor(merkArg, tipeArg, hargaArg) {
+        this.merk = merkArg;
+        this.tipe = tipeArg;
+        this.harga = hargaArg;
+      }
+    }
+    
+    var mobilAndi = new Mobil("Daihatsu Xenia","MPV",150000000);
+    console.log ( mobilAndi.merk );    // Daihatsu Xenia
+    console.log ( mobilAndi.tipe );    // MPV
+      
+    var mobilJoko = new Mobil("Toyota Camry","Sedan",350000000);
+    console.log ( mobilJoko.merk );    // Toyota Camry
+    console.log ( mobilJoko.tipe );    // Sedan
+  </script>
+</body>
+</html>

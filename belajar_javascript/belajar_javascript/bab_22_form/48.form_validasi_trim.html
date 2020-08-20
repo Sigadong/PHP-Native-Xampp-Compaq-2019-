@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    .error {
+      background-color: pink;
+      border: 1px solid red;
+      width: 300px;
+      text-align: center;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <p id="pesan"></p>
+  <form id="formKu" name="formKu" method="get" action="proses.php">
+    <p>Username: <input type="text" name="username" id="username"></p>
+    <p><input type="submit" name="submit" id="submit" value="Kirim Data"></p>
+  </form>
+  <script>
+   var formKuNode = document.getElementById("formKu");
+   var usernameNode = document.getElementById("username");
+   var pesanNode = document.getElementById("pesan");
+   
+   function diProses(e){
+      if (usernameNode.value.trim() === ""){
+        pesanNode.innerHTML = "Username harus diisi";
+        pesanNode.className = "error";
+        e.preventDefault();
+      }
+   }
+   formKuNode.addEventListener("submit",diProses);
+  
+  </script>
+</body>
+</html>

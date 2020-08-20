@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    var pNode = document.childNodes[1].childNodes[2].childNodes[3];
+    var bodyNode = pNode.parentNode;
+		var headNode = bodyNode.previousSibling.previousSibling;
+		var titleNode = headNode.lastChild.previousSibling;
+    console.log( titleNode.childNodes  );
+    // NodeList [ #text " Belajar JavaScript " ]
+    
+    console.log( titleNode.firstChild );      // #text " Belajar JavaScript "
+    console.log( titleNode.lastChild );       // #text " Belajar JavaScript "
+    console.log( titleNode.nextSibling );     // #text " "
+    console.log( titleNode.nodeName );        // TITLE
+    console.log( titleNode.nodeType );        // 1
+    console.log( titleNode.parentNode  );     // <head>
+    console.log( titleNode.previousSibling ); // #text "  "
+    console.log( titleNode.textContent );     //  Belajar JavaScript 
+  </script>
+</body>
+</html>

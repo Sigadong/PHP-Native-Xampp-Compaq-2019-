@@ -1,0 +1,29 @@
+body{
+  background-image: url('image/bg.jpg');
+  /*background-color: #ded;*/
+  background-size: cover;
+}
+.alert-dismissable{
+	color: red;
+}
+.form-control{
+  background-color: #eee;
+}
+.user{
+  margin-right: 10px;
+}
+.pass{
+  margin-left: 10px;
+}
+.login>.btn-info{
+	font-size: 21px;
+	margin-left: 5px;
+	padding: 0px 8px;
+	background-color: #00f;
+	font-family: Cambria, "Times New Roman", serif
+}
+.login>.btn-info:hover{
+	color: #ddb;
+	font-size: 22px;
+	background-color: #06f;
+}

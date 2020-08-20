@@ -1,0 +1,425 @@
+##======================================================================##
+18. Import dan Export Data
+##======================================================================##
+
+
+##======================================================================##
+18.1 Import Data dengan LOAD DATA INFILE
+##======================================================================##
+
+
+DROP TABLE IF EXISTS provinsi;
+
+CREATE TABLE provinsi (
+  nama_prov VARCHAR(50),
+  kode_iso CHAR(2),
+  ibukota VARCHAR (50),
+  populasi INT,
+  luas DEC(8,2),
+  apbd DEC(8,2)
+);
+
+--------------------------------------------------------------------------
+
+
+LOAD DATA INFILE 'nama_provinsi_a.txt' INTO TABLE provinsi;
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+LOAD DATA INFILE 'D:\\data_untuk_mysql\\nama_provinsi_b.txt' INTO TABLE provinsi;
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+LOAD DATA LOCAL INFILE 'nama_provinsi_c.txt' INTO TABLE provinsi;
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_d.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY ',';
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_e.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY '|';
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_f.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY '\t';
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE provinsi;
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_g.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY '-'
+LINES TERMINATED BY '|';
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE provinsi;
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_h.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n';
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE provinsi;
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_i.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n';
+
+SELECT * FROM provinsi;
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE provinsi;
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_j.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+SELECT * FROM provinsi;
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE provinsi;
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_k.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY ','
+LINES STARTING BY '##' TERMINATED BY '\r\n'
+IGNORE 2 LINES;
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS provinsi;
+
+CREATE TABLE provinsi (
+  nama_prov VARCHAR(50),
+  kode_iso CHAR(2) PRIMARY KEY,
+  ibukota VARCHAR (50),
+  populasi INT,
+  luas DEC(8,2),
+  apbd DEC(8,2)
+);
+
+DESC provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO provinsi VALUES ('Sulawesi Tengah','ST','Palu',NULL,NULL,NULL);
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_l.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n';
+
+-- ERROR 1062 (23000): Duplicate entry 'ST' for key 'PRIMARY'
+
+
+--------------------------------------------------------------------------
+
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_l.txt'
+REPLACE INTO TABLE provinsi
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n';
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE provinsi;
+
+INSERT INTO provinsi VALUES ('Sulawesi Tengah','ST','Palu',NULL,NULL,NULL);
+
+SELECT * FROM provinsi;
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_l.txt'
+IGNORE INTO TABLE provinsi
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n';
+
+SELECT * FROM provinsi;
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE provinsi;
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\nama_provinsi_m.txt'
+INTO TABLE provinsi
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n'
+IGNORE 2 LINES (nama_prov, kode_iso, ibukota, apbd);
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+18.2 Import Data dari File CSV
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS provinsi;
+
+CREATE TABLE provinsi (
+  nama_prov VARCHAR(50),
+  kode_iso CHAR(2),
+  ibukota VARCHAR (50),
+  populasi INT,
+  luas DEC(8,2),
+  apbd DEC(8,2)
+);
+
+LOAD DATA INFILE 'C:\\xampp\\mysql\\file_belajar\\tabel_provinsi_final.csv'
+INTO TABLE provinsi
+FIELDS TERMINATED BY ';'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+18.3 Export Data dengan SELECT … INTO OUTFILE
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * INTO OUTFILE 'C:\\xampp\\mysql\\file_belajar\\hasil_provinsi_a.txt'
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT nama_prov, kode_iso, populasi
+INTO OUTFILE 'C:\\xampp\\mysql\\file_belajar\\hasil_provinsi_b.txt'
+FIELDS TERMINATED BY '##'
+LINES TERMINATED BY '\t'
+FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * INTO OUTFILE 'C:\\xampp\\mysql\\file_belajar\\hasil_provinsi_c.csv'
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * INTO OUTFILE 'C:\\xampp\\mysql\\file_belajar\\hasil_provinsi_d.csv'
+FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+18.4 Export Data dengan Mysqldump
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+mysqldump -u root belajar provinsi > backup_provinsi_a.sql
+
+
+--------------------------------------------------------------------------
+
+
+mysqldump -u root belajar provinsi > backup_provinsi_b.txt
+
+
+--------------------------------------------------------------------------
+
+
+mysqldump -u root belajar provinsi > C:\xampp\mysql\file_belajar\backup_provinsi_c.sql
+
+
+--------------------------------------------------------------------------
+
+
+mysqldump -u root belajar provinsi mahasiswa universitas > C:\xampp\mysql\file_belajar\backup_3_tabel.sql
+
+
+--------------------------------------------------------------------------
+
+
+mysqldump -u root belajar > C:\xampp\mysql\file_belajar\backup_database_belajar.sql
+
+
+--------------------------------------------------------------------------
+
+
+mysqldump -u root --databases belajar > C:\xampp\mysql\file_belajar\backup_database_belajar.sql
+
+
+--------------------------------------------------------------------------
+
+
+mysqldump -u root --all-databases >
+C:\xampp\mysql\file_belajar\backup_all_database.sql
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+18.5 Import Data dengan Mysqldump
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE provinsi;
+
+SELECT * FROM provinsi;
+-- ERROR 1146 (42S02): Table 'belajar.provinsi' doesn't exist
+
+
+--------------------------------------------------------------------------
+
+
+source C:\xampp\mysql\file_belajar\backup_provinsi_c.sql
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM provinsi;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE provinsi, mahasiswa, universitas;
+
+SELECT * FROM provinsi;
+-- ERROR 1146 (42S02): Table 'belajar.provinsi' doesn't exist
+
+SELECT * FROM mahasiswa;
+-- ERROR 1146 (42S02): Table 'belajar.mahasiswa' doesn't exist
+
+SELECT * FROM universitas;
+--- ERROR 1146 (42S02): Table 'belajar.universitas' doesn't exist
+
+source C:\xampp\mysql\file_belajar\backup_3_tabel.sql
+
+SELECT * FROM provinsi;
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM universitas;
+
+
+--------------------------------------------------------------------------
+
+
+DROP DATABASE belajar;
+
+
+--------------------------------------------------------------------------
+
+
+source C:\xampp\mysql\file_belajar\backup_database_belajar.sql
+
+
+--------------------------------------------------------------------------
+
+
+DROP DATABASE belajar;
+
+SHOW DATABASES;
+
+EXIT
+
+--------------------------------------------------------------------------
+
+
+mysql -u root < C:\xampp\mysql\file_belajar\backup_database_belajar.sql
+  
+  
+--------------------------------------------------------------------------
+

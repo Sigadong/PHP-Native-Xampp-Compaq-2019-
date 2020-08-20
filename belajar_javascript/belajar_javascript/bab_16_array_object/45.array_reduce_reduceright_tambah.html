@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    function tambah(total,angka) {
+      return total + angka;
+    }
+    
+    var foo = [5,7,14,12,16];
+    console.log ( foo.reduce(tambah) );           // 54
+    console.log ( foo.reduce(tambah,10) );        // 64
+    
+    console.log ( foo.reduceRight(tambah) );      // 54
+    console.log ( foo.reduceRight(tambah,10) );   // 64
+  </script>
+</body>
+</html>

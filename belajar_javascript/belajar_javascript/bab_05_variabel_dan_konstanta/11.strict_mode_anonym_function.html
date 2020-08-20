@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    (function () {
+     "use strict";  // seluruh kode program dijalankan dalam strict mode
+      
+      var hargaBarang = 12000;
+      var ongkosKirim = 5000;
+      var totalBiaya = hargaBarang + ongkosKirim;
+      
+      var pajak = 10/100 * totalBiaya;
+      
+      totalBiaya = totalBiaya + pajak;
+      console.log(totalBiaya);
+    }());
+    
+    // diluar ini dijalankan tanpa strict mode (sloppy mode)
+    a = 15000;
+    console.log(a);
+  </script>
+</body>
+</html>

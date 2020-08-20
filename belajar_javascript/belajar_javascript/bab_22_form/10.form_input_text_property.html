@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <form id="formKu" name="formKu" method="get" action="proses.php">
+    <p>Username: <input type="text" name="username" id="username"></p>
+    <p><input type="submit" name="submit" id="submit" value="Submit Form"></p>
+  </form>
+  <script>
+    var formNode = document.getElementById("formKu");
+    var usernameNode = document.getElementById("username");
+    
+    function diProses(e){
+      e.preventDefault();
+      console.log(usernameNode.form);
+      // <form id="formKu" name="formKu" method="get" action="proses.php">
+      console.log(usernameNode.name);           // username
+      console.log(usernameNode.type);           // text
+      console.log(usernameNode.autofocus);      // false
+      console.log(usernameNode.value);          // Andi
+      console.log(usernameNode.maxLength);      // -1
+      console.log(usernameNode.size);           // 20
+      console.log(usernameNode.readOnly);       // false
+      console.log(usernameNode.placeholder);    // (kosong)
+    }
+    formNode.addEventListener("submit",diProses);
+  </script>
+</body>
+</html>

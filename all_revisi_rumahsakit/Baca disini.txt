@@ -1,0 +1,45 @@
+1.ini adalah projek tutorial dari video ke-1 sampai ke-6.
+dimana didalamnya memuat tampilan, login dan keamanan
+
+2.ni adalah projek tutorial dari video ke-7 sampai ke-13.
+dimana didalamnya memuat tampilan, crud obat dan crud poli serta multiple select
+
+
+
+
+
+Progres pengerjaan tutorial rumah sakit:
+rumah sakit 1 :
+	pembuatan dn pengamanan form login
+
+
+rumah sakit 2 : video 7 + 13
+	memuat tampilan, crud obat dan crud poli serta multiple select
+
+
+rumah sakit 3 : video 13 + 14
+	 crud obat dan bulk pada data dokter serta multiple select
+
+	
+
+rumah sakit 4 : video 17
+	integrasi clientside datatables
+
+
+
+rumah sakit 5 : video 18 + 19
+
+	integrasi serverside datatables + download pdf,excel,csv,copy.print
+
+
+rumah sakit 6 : video 20+21+22+23
+
+	-relasi antar tabel dgn 2 cara
+	-membuat combobox select multiple dari data base
+	-menginputdata dari select multiple ke tabel berelasi
+	-menampilkan data dari beberapa berelasi tabel dgn JOIN sql
+
+
+rumah sakit 5 : video 24
+
+	membuat inputan dgn library CKEDITOR

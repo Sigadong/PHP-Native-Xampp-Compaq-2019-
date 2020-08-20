@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = "1 jam sama dengan 60 menit, juga sama dengan 3600 detik";
+    var pola = /\d+/g;
+    
+    var hasil1 = pola.exec(foo);      
+    console.log ( hasil1.index );    // 0
+    console.log ( hasil1[0] );       // 1
+    
+    var hasil2 = pola.exec(foo);     
+    console.log ( hasil2.index );    // 18
+    console.log ( hasil2[0] );       // 60
+    
+    var hasil3 = pola.exec(foo);      
+    console.log ( hasil3.index );    // 45
+    console.log ( hasil3[0] );       // 3600
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    var h1Node = document.querySelector("p");
+    document.write(h1Node);    // [object HTMLParagraphElement]
+    console.log(h1Node);       // <p>
+    
+    var h1Child = h1Node.childNodes;
+    document.write(h1Child);    // [object NodeList] 
+    console.log(h1Child);
+    // NodeList [ #text "Sedang belajar ", <em>, <b> ]
+  </script>
+</body>
+</html>

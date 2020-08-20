@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Username: <input type="text" id="username"></p>
+  <p>Email: <input type="text" id="email"></p>
+  <p>Jalankan: <button id="focusU">Fokus ke Username</button>
+  <button id="focusE">Fokus ke Email</button></p>
+  <script>
+    var usernameNode = document.getElementById("username");
+    var emailNode = document.getElementById("email");
+    
+    function diFocus(e){
+      e.target.style.border = "2px solid aqua";
+    }
+    
+    function diBlur(e){
+      e.target.style.border = "2px solid red";
+    }
+    
+    usernameNode.addEventListener("focus",diFocus);
+    emailNode.addEventListener("focus",diFocus);
+    usernameNode.addEventListener("blur",diBlur);
+    emailNode.addEventListener("blur",diBlur);
+    
+    var focusUNode = document.getElementById("focusU");
+    var focusENode = document.getElementById("focusE");
+    
+    focusUNode.addEventListener("click",function(){ usernameNode.focus(); });
+    focusENode.addEventListener("click",function(){ emailNode.focus(); }); 
+  </script>
+</body>
+</html>

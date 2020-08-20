@@ -1,0 +1,5 @@
+Provinsi,Singkatan ISO,Ibukota,Populasi,Luas Total,APBD2014
+Maluku,MA,Ambon,1657409,49350,2013.83
+Maluku Utara,MU,Sofifi,1138667,42960,1599.66
+Nusa Tenggara Barat,NB,Mataram,4773795,19950,2884.89
+Nusa Tenggara Timur,NT,Kupang,5036897,47676,2916.88

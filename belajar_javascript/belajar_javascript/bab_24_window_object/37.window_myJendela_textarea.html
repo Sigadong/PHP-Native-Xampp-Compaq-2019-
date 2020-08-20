@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <button id="tombolBuka">Buat jendela</button>
+  <button id="tombolTutup">Tutup jendela</button>
+  <p>
+    <textarea id="kodeEdit"></textarea>
+    <button id="tombolKirim">Kirim kode</button>
+  </p>
+  <script>
+    var tombolBukaNode = document.getElementById("tombolBuka");
+    var tombolTutupNode = document.getElementById("tombolTutup");
+    var kodeEditNode = document.getElementById("kodeEdit");   
+    var tombolKirimNode = document.getElementById("tombolKirim");    
+    var myJendela;
+    
+    function jendelaBaru(){
+      var setting = "width=800,height=300";
+      myJendela = window.open("","jendelaBaru",setting);
+    }
+    
+    function kirimkanKode(){
+      myJendela.document.write(kodeEditNode.value);
+    }
+    
+    function tutupJendela(){
+      myJendela.close();
+    }
+    
+    tombolBukaNode.addEventListener("click",jendelaBaru);
+    tombolKirimNode.addEventListener("click",kirimkanKode);
+    tombolTutupNode.addEventListener("click",tutupJendela);
+  </script>
+</body>
+</html>

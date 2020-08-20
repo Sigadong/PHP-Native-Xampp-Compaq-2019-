@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <a href="belajar_js.html">Belajar JavaScript </a>
+  <script>
+    function tampilkan(e){
+      alert("Link di klik");
+      e.preventDefault();
+    }
+    
+    var aNode = document.querySelector("a");
+    aNode.addEventListener("click",tampilkan);
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var tanggalAwal = new Date("06/05/2016");
+    var tanggalAkhir = new Date("12/20/2016");
+    
+    var timeAwal = tanggalAwal.getTime();
+    var timeAkhir = tanggalAkhir.getTime();   
+  
+    console.log( timeAwal );    // 1465059600000
+    console.log( timeAkhir );   // 1482166800000  
+  
+    var selisihTanggal = timeAkhir - timeAwal;
+    console.log( selisihTanggal );   // 17107200000
+  </script>
+</body>
+</html>

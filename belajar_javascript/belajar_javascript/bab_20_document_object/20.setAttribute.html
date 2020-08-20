@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1 id="judul" title="Sedang Belajar">Belajar JavaScript</h1>
+  <script>
+    var sebuahNode = document.getElementById("judul");
+    
+    console.log (sebuahNode.getAttribute("id"));      // judul
+    console.log (sebuahNode.getAttribute("title"));   // Sedang Belajar
+    
+    sebuahNode.setAttribute("id","judulArtikel");
+    sebuahNode.setAttribute("title","Jangan di ganggu");
+    sebuahNode.setAttribute("class","header");    
+
+    console.log (sebuahNode.getAttribute("id"));      // judulArtikel
+    console.log (sebuahNode.getAttribute("title"));   // Jangan di ganggu
+    console.log (sebuahNode.getAttribute("class"));   // header
+  </script>
+</body>
+</html>

@@ -1,0 +1,632 @@
+##======================================================================##
+17. Primary Key dan Referential
+Integrity
+##======================================================================##
+
+
+##======================================================================##
+17.2 Membuat Primary Key
+##======================================================================##
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20)
+);
+
+DESC mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+SHOW INDEX FROM mahasiswa \G
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8),
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  PRIMARY KEY (nim)
+);
+
+DESC mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8),
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  PRIMARY KEY nim_mhs (nim)
+);
+
+SHOW INDEX FROM mahasiswa \G
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8),
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20)
+);
+
+ALTER TABLE mahasiswa ADD PRIMARY KEY (nim);
+
+
+##======================================================================##
+17.3 Menghapus Primary Key
+##======================================================================##
+
+
+ALTER TABLE mahasiswa DROP PRIMARY KEY;
+
+DESC mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.4 Sifat Primary Key
+##======================================================================##
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20)
+);
+
+INSERT INTO mahasiswa VALUES
+  ('17090113', 'Riana Putria', 'Padang', 'Kimia'),
+  ('17140143', 'Rudi Permana', 'Bandung', 'Ilmu Komputer');
+
+INSERT INTO mahasiswa VALUES
+('17140143', 'Sari Citra Lestari', 'Jakarta', 'Manajemen');
+
+
+INSERT INTO mahasiswa VALUES
+(NULL, 'Sari Citra Lestari', 'Jakarta', 'Manajemen');
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.5 Composite Primary Key
+##======================================================================##
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  PRIMARY KEY (nama, asal)
+);
+
+DESC mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES ('Riana Putria', 'Padang', 'Kimia');
+
+INSERT INTO mahasiswa VALUES ('Riana Putria', 'Bandung', 'Kimia');
+
+INSERT INTO mahasiswa VALUES ('Rudi Permana', 'Bandung', 'Akuntansi');
+
+INSERT INTO mahasiswa VALUES ('Rudi Permana', 'Bandung', 'Ilmu Komputer');
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.6 Primary Key dengan Index Prefix
+##======================================================================##
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  PRIMARY KEY (nama(3))
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES ('Riana Putria', 'Padang', 'Kimia');
+
+INSERT INTO mahasiswa VALUES ('Rianti Kusuma', 'Bogor', 'Akuntansi');
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.7 Primary Key dengan Auto Increment
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  no INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20)
+);
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES (0, 'Riana Putria', 'Padang', 'Kimia');
+
+INSERT INTO mahasiswa VALUES
+(NULL, 'Rudi Permana', 'Bandung', 'Ilmu Komputer');
+
+INSERT INTO mahasiswa (nama, asal, jurusan) VALUES
+('Sari Citra Lestari', 'Jakarta', 'Manajemen');
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.8 Pengertian Referential Integrity dan Foreign
+Key
+##======================================================================##
+
+
+SELECT * FROM universitas;
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.9 Cara Membuat Referential Integrity
+##======================================================================##
+
+CREATE TABLE universitas (
+  jurusan VARCHAR(20) PRIMARY KEY,
+  tgl_berdiri DATE,
+  nama_dekan VARCHAR(50)
+) ENGINE = InnoDB;
+
+INSERT INTO universitas VALUES
+  ('Kimia', '1987-07-12', 'Prof. Mulyono, M.Sc.'),
+  ('Ilmu Komputer', '2003-02-23', 'Dr. Syahrial, M.Kom.'),
+  ('Akuntansi', '1985-03-19', 'Maya Fitrianti, M.M.'),
+  ('Farmasi', '1997-05-30', 'Prof. Silvia Nst, M.Farm.');
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  FOREIGN KEY (jurusan) REFERENCES universitas (jurusan)
+) ENGINE = InnoDB;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES ('17090113', 'Riana Putria', 'Padang', 'Kimia');
+
+SELECT * FROM mahasiswa;
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES
+('17140143', 'Rudi Permana', 'Bandung', 'Fisika');
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO universitas VALUES
+('Fisika', '1989-12-10', 'Dr. Umar Agustinus');
+
+SELECT * FROM universitas;
+
+INSERT INTO mahasiswa VALUES
+('17140143', 'Rudi Permana', 'Bandung', 'Fisika');
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE mahasiswa SET jurusan = 'Hukum' WHERE nim = '17140143';
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM universitas WHERE jurusan = 'Kimia';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM mahasiswa WHERE nama = 'Riana Putria';
+
+DELETE FROM universitas WHERE jurusan = 'Kimia';
+
+
+--------------------------------------------------------------------------
+
+UPDATE universitas SET jurusan = 'Teknik Fisika'
+WHERE nama_dekan = 'Dr. Umar Agustinus';
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.10 Penggunaan aturan ON UPDATE dan ON
+DELETE
+##======================================================================##
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  FOREIGN KEY (jurusan) REFERENCES universitas(jurusan)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM universitas;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES
+  ('17140143', 'Rudi Permana', 'Bandung', 'Ilmu Komputer'),
+  ('17080305', 'Rina Kumala Sari', 'Jakarta', 'Akuntansi'),
+  ('17140119', 'Sandri Fatmala', 'Bandung', 'Ilmu Komputer'),
+  ('17080225', 'Husli Khairan', 'Jakarta', 'Akuntansi'),
+  ('17140133', 'Ikhsan Prayoga', 'Jakarta', 'Fisika');
+  
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE universitas SET jurusan = 'Teknik Informatika'
+WHERE nama_dekan = 'Dr. Syahrial, M.Kom.';
+
+SELECT * FROM universitas;
+
+SELECT * FROM mahasiswa;
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM universitas WHERE jurusan = 'Akuntansi';
+
+SELECT * FROM universitas;
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  FOREIGN KEY (jurusan) REFERENCES universitas(jurusan)
+  ON UPDATE SET NULL
+  ON DELETE SET NULL
+) ENGINE = InnoDB;
+
+INSERT INTO mahasiswa VALUES
+  ('17140143', 'Rudi Permana', 'Bandung', 'Teknik Informatika'),
+  ('17140119', 'Sandri Fatmala', 'Bandung', 'Teknik Informatika'),
+  ('17140133', 'Ikhsan Prayoga', 'Jakarta', 'Fisika');
+  
+SELECT * FROM mahasiswa;
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM universitas;
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE universitas SET jurusan = 'Sistem Informasi'
+WHERE nama_dekan = 'Dr. Syahrial, M.Kom.';
+
+SELECT * FROM universitas;
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM universitas WHERE jurusan = 'Fisika';
+
+SELECT * FROM universitas;
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  FOREIGN KEY (jurusan) REFERENCES universitas(jurusan)
+  ON UPDATE CASCADE
+  ON DELETE RESTRICT
+) ENGINE = InnoDB;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.11 Membuat Referential Integrity dengan ALTER
+TABLE
+##======================================================================##
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20)
+) ENGINE = InnoDB;
+
+ALTER TABLE mahasiswa
+  ADD FOREIGN KEY (jurusan) REFERENCES universitas(jurusan)
+  ON UPDATE CASCADE
+  ON DELETE SET NULL;
+
+
+--------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20)
+) ENGINE = InnoDB;
+
+INSERT INTO mahasiswa VALUES
+  ('17090113', 'Riana Putria', 'Padang', 'Kimia'),
+  ('17140143', 'Rudi Permana', 'Bandung', 'Ilmu Komputer'),
+  ('17090222', 'Sari Citra Lestari', 'Jakarta', 'Manajemen'),
+  ('17080305', 'Rina Kumala Sari', 'Jakarta', 'Akuntansi');
+  
+SELECT * FROM mahasiswa;
+
+DROP TABLE IF EXISTS universitas;
+
+CREATE TABLE universitas (
+  jurusan VARCHAR(20) PRIMARY KEY,
+  tgl_berdiri DATE,
+  nama_dekan VARCHAR(50)
+) ENGINE = InnoDB;
+
+INSERT INTO universitas VALUES
+  ('Kimia', '1987-07-12', 'Prof. Mulyono, M.Sc.'),
+  ('Ilmu Komputer', '2003-02-23', 'Dr. Syahrial, M.Kom.'),
+  ('Akuntansi', '1985-03-19', 'Maya Fitrianti, M.M.'),
+  ('Farmasi', '1997-05-30', 'Prof. Silvia Nst, M.Farm.');
+  
+SELECT * FROM universitas; 
+  
+  
+--------------------------------------------------------------------------
+
+
+ALTER TABLE mahasiswa
+  ADD FOREIGN KEY (jurusan) REFERENCES universitas(jurusan)
+  ON UPDATE CASCADE
+  ON DELETE SET NULL;
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM mahasiswa WHERE jurusan = 'Manajemen';
+
+ALTER TABLE mahasiswa
+  ADD FOREIGN KEY (jurusan) REFERENCES universitas(jurusan)
+  ON UPDATE CASCADE
+  ON DELETE SET NULL;
+
+
+--------------------------------------------------------------------------
+
+
+
+##======================================================================##
+17.12 Menghapus Referential Integrity
+##======================================================================##
+
+
+SHOW CREATE TABLE mahasiswa \G
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE mahasiswa DROP FOREIGN KEY mahasiswa_ibfk_1;
+
+
+--------------------------------------------------------------------------
+
+
+SHOW CREATE TABLE mahasiswa \G
+
+
+--------------------------------------------------------------------------
+
+
+
+##======================================================================##
+17.13 Membuat nama Referential Integrity
+##======================================================================##
+
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  FOREIGN KEY jurusan_fk (jurusan) REFERENCES universitas(jurusan)
+  ON UPDATE RESTRICT
+  ON DELETE RESTRICT
+) ENGINE = InnoDB;
+
+
+--------------------------------------------------------------------------
+
+
+SHOW CREATE TABLE mahasiswa \G
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE mahasiswa DROP FOREIGN KEY jurusan_fk;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+17.14 Index di Parent Table
+##======================================================================##
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+DROP TABLE IF EXISTS universitas;
+
+CREATE TABLE universitas (
+  jurusan VARCHAR(20),
+  tgl_berdiri DATE,
+  nama_dekan VARCHAR(50)
+) ENGINE = InnoDB;
+
+INSERT INTO universitas VALUES
+  ('Kimia', '1987-07-12', 'Prof. Mulyono, M.Sc.'),
+  ('Ilmu Komputer', '2003-02-23', 'Dr. Syahrial, M.Kom.'),
+  ('Akuntansi', '1985-03-19', 'Maya Fitrianti, M.M.'),
+  ('Farmasi', '1997-05-30', 'Prof. Silvia Nst, M.Farm.');
+  
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  FOREIGN KEY (jurusan) REFERENCES universitas(jurusan)
+) ENGINE = InnoDB;
+
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE universitas ADD INDEX (jurusan);
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR(20),
+  FOREIGN KEY (jurusan) REFERENCES universitas(jurusan)
+) ENGINE = InnoDB;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES ('17090113', 'Riana Putria', 'Padang', 'Kimia');
+
+INSERT INTO mahasiswa
+VALUES ('17140143', 'Rudi Permana', 'Bandung', 'Fisika');
+
+
+--------------------------------------------------------------------------
+

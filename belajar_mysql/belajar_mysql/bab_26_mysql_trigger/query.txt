@@ -1,0 +1,277 @@
+##======================================================================##
+26. MySQL Trigger
+##======================================================================##
+
+
+##======================================================================##
+26.3 Membuat Trigger
+##======================================================================##
+
+
+DROP TABLE IF EXISTS mahasiswa;
+
+CREATE TABLE mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR (20),
+  nilai_uan DEC(5,2)
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE mahasiswa_log (
+  no INT AUTO_INCREMENT PRIMARY KEY,
+  nama VARCHAR(50),
+  waktu TIMESTAMP,
+  keterangan TEXT
+);
+
+
+--------------------------------------------------------------------------
+
+
+DELIMITER $$
+CREATE TRIGGER before_mahasiswa_insert
+BEFORE INSERT ON mahasiswa
+FOR EACH ROW
+BEGIN
+  INSERT INTO mahasiswa_log VALUES
+  (0, NEW.nama, NOW(), 'Ada penambahan mahasiswa baru');
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa_log VALUES
+(0, NEW.nama, NOW(), 'Ada penambahan mahasiswa baru');
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa VALUES ('17090113', 'Riana Putria', 'Padang', 'Kimia', \
+339.20);
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM mahasiswa_log;
+
+
+--------------------------------------------------------------------------
+
+
+DELIMITER $$
+CREATE TRIGGER after_mahasiswa_delete
+AFTER DELETE ON mahasiswa
+FOR EACH ROW
+BEGIN
+  INSERT INTO mahasiswa_log VALUES (0, OLD.nama, NOW(), 'Ada penghapusan maha\
+siswa');
+END$$
+DELIMITER ;
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM mahasiswa WHERE nama = 'Riana Putria';
+
+SELECT * FROM mahasiswa;
+ 
+SELECT * FROM mahasiswa_log;
+
+
+--------------------------------------------------------------------------
+
+
+DELIMITER $$
+CREATE TRIGGER after_mahasiswa_update
+AFTER UPDATE ON mahasiswa
+FOR EACH ROW
+BEGIN
+  DECLARE keterangan TEXT;
+  SET keterangan = CONCAT(OLD.nama, ' -> ', NEW.nama);
+  INSERT INTO mahasiswa_log VALUES (0, NEW.nama, NOW(), keterangan);
+END$$
+DELIMITER ;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa
+VALUES ('17080225', 'Husli Khairan', 'Jakarta', 'Akuntansi', 288.55);
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM mahasiswa_log;
+
+--------------------------------------------------------------------------
+
+
+UPDATE mahasiswa SET nama = 'Rudi Permana' WHERE nim = '17080225';
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM mahasiswa_log;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+26.4 Implisit Event Trigger
+##======================================================================##
+
+
+REPLACE INTO mahasiswa
+VALUES ('17140119', 'Sandri Fatmala', 'Bandung', 'Ilmu Komputer', 322.91);
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM mahasiswa_log;
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM mahasiswa;
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM mahasiswa_log;
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+26.4 Implisit Event Trigger
+##======================================================================##
+
+
+SHOW TRIGGERS FROM belajar WHERE `table` = 'mahasiswa' \G
+
+
+--------------------------------------------------------------------------
+
+
+SHOW TRIGGERS FROM belajar \G
+
+
+--------------------------------------------------------------------------
+
+
+SHOW TRIGGERS \G
+
+
+--------------------------------------------------------------------------
+
+
+DROP TRIGGER before_mahasiswa_insert;
+
+DROP TRIGGER after_mahasiswa_delete;
+
+DROP TRIGGER after_mahasiswa_update;
+
+SHOW TRIGGERS FROM belajar WHERE `table` = 'mahasiswa' \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+26.6 BEFORE atau AFTER?
+##======================================================================##
+
+
+DELIMITER $$
+CREATE TRIGGER before_mahasiswa_insert
+BEFORE INSERT ON mahasiswa
+FOR EACH ROW
+BEGIN
+  IF (NEW.nilai_uan < 250) THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Nilai UAN dibawah minimum!';
+  END IF;
+END$$
+DELIMITER ;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO mahasiswa
+VALUES ('17140133', 'Ikhsan Prayoga', 'Jakarta', 'Ilmu Komputer', 200.99);
+-- error
+
+INSERT INTO mahasiswa
+VALUES ('17080305', 'Rina Kumala Sari', 'Jakarta', 'Akuntansi', 249.99);
+-- error
+
+INSERT INTO mahasiswa
+VALUES ('17080225', 'Husli Khairan', 'Jakarta', 'Akuntansi', 288.55);
+
+SELECT * FROM mahasiswa;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+26.7 Latihan Trigger
+##======================================================================##
+
+
+DROP TABLE IF EXISTS nilai_mahasiswa;
+
+CREATE TABLE nilai_mahasiswa (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  semester_1 DECIMAL(4,2),
+  semester_2 DECIMAL(4,2),
+  semester_3 DECIMAL(4,2)
+);
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+26.8 Jawaban Latihan Trigger
+##======================================================================##
+
+
+DROP TABLE IF EXISTS ipk_mahasiswa;
+
+CREATE TABLE ipk_mahasiswa (
+  nama_dan_nip VARCHAR(70) PRIMARY KEY,
+  nilai_ipk DECIMAL(4,2)
+);
+
+
+--------------------------------------------------------------------------
+
+
+DELIMITER $$
+CREATE TRIGGER after_nilai_mahasiswa_insert
+AFTER INSERT ON nilai_mahasiswa
+FOR EACH ROW
+BEGIN
+  DECLARE nama_nim_mahasiswa VARCHAR(50);
+  DECLARE nilai_ipk DECIMAL(4,2);
+  
+  SET nama_nim_mahasiswa = CONCAT(UPPER(NEW.nama)," (",NEW.nim,")");
+  SET nilai_ipk = ROUND(((NEW.semester_1+NEW.semester_2+NEW.semester_3)/3),2);
+  INSERT INTO ipk_mahasiswa VALUES (nama_nim_mahasiswa, nilai_ipk);
+END$$
+DELIMITER ;
+
+
+--------------------------------------------------------------------------
+

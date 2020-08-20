@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Pesan sekarang juga, senin harga naik!!</h1>
+  <script>
+    h1Node = document.querySelector("h1");
+  
+    function buatEfek(){
+      if (h1Node.style.color === "red"){
+        h1Node.style.color = "blue";
+      }
+      else {
+        h1Node.style.color = "red";
+      }
+    }
+    
+    setInterval(buatEfek,200);
+  </script>
+</body>
+</html>

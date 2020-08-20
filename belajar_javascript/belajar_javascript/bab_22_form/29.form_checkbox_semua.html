@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+    <p>Belajar:
+    <input type="checkbox" id="belajarHTML" value="HTML"> HTML
+    <input type="checkbox" id="belajarCSS" value="CSS"> CSS
+    <input type="checkbox" id="belajarJS" value="JavaScript"> JavaScript
+    </p>
+    <p>
+      <button id="periksa">Periksa</button>
+      <button id="checklistSemua">Checklist semua</button>
+      <button id="kosongkanSemua">Kosongkan semua</button>
+    </p>
+    <p>Hasil: <span id="hasil"></span></p>
+  <script>
+    var belajarHTMLNode = document.getElementById("belajarHTML");
+    var belajarCSSNode = document.getElementById("belajarCSS");
+    var belajarJSNode = document.getElementById("belajarJS");
+    var periksaNode = document.getElementById("periksa");
+    var hasilNode = document.getElementById("hasil");
+    var checklistSemuaNode = document.getElementById("checklistSemua");
+    var kosongkanSemuaNode = document.getElementById("kosongkanSemua");
+    
+    function diPeriksa(){
+      hasilNode.innerHTML = "";
+      
+      if(belajarHTMLNode.checked) {
+        hasilNode.innerHTML += belajarHTMLNode.value + " ";
+      }
+      if(belajarCSSNode.checked) {
+        hasilNode.innerHTML += belajarCSSNode.value + " ";
+      }
+      if(belajarJSNode.checked) {
+        hasilNode.innerHTML += belajarJSNode.value + " ";
+      }      
+    }
+    
+    function diCheklist(){
+      belajarHTMLNode.checked = true;
+      belajarCSSNode.checked = true;
+      belajarJSNode.checked = true;
+    }
+
+    function diKosongkan(){
+      belajarHTMLNode.checked = false;
+      belajarCSSNode.checked = false;
+      belajarJSNode.checked = false;
+    }
+    
+    periksaNode.addEventListener("click",diPeriksa);
+    checklistSemuaNode.addEventListener("click",diCheklist);
+    kosongkanSemuaNode.addEventListener("click",diKosongkan);
+  </script>
+</body>
+</html>

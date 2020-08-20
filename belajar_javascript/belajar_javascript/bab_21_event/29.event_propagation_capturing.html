@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <div>
+    <h1>Belajar<em>JavaScript</em></h1>
+  </div>
+  <script>
+    var emNode = document.querySelector("em");
+    var h1Node = document.querySelector("h1");
+    var divNode = document.querySelector("div");
+    
+    function tampilkanEm (){
+      console.log("Tag em di-klik");
+    }
+    function tampilkanH1 (){
+      console.log("Tag h1 di-klik");
+    }
+    function tampilkanDiv (){
+      console.log("Tag div di-klik");
+    }
+    
+    divNode.addEventListener("click",tampilkanDiv,true);
+    emNode.addEventListener("click",tampilkanEm,true);
+    h1Node.addEventListener("click",tampilkanH1,true);
+  </script>
+</body>
+</html>

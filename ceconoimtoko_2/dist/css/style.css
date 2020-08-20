@@ -1,0 +1,90 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+nav.navbar-default {
+    overflow: hidden;
+    background-color: #def;
+}
+.navbar-header{
+    margin: 3px 10px 3px 10px;
+}
+ul li a.menus,ul li a.active{
+    font-size: 16px;
+    font-weight: bold;
+}
+ul li a.menus:hover,ul li a.active:hover {
+    font-size: 17px;
+    font-weight: bolder;
+}
+ul li a .fa{
+    margin-right: 5px;
+    font-size: 19px;
+    color: #4CAF8A;
+}
+li a.menus:hover{
+    background-color: #81c784;
+}
+a.active {
+    background-color: #bfd;
+    border-radius: 3px;
+}
+i.fa{
+    font-size: 20px;
+    color: #b0bec5;
+}
+a.btn:not(span.del), button.btn{
+    font-weight: bold;
+    font-size: 15px;
+}
+h1,h2{
+    color: #999;
+}
+h3.panel-title{
+    text-align: center;
+    font-weight: bolder;
+}
+
+div.panel-body {
+    background-color: #eee;
+ }
+ div.panel-heading{
+    background: #def;
+ }
+
+ button.btn:hover{
+    background-color: #44FF;
+     font-size: 15px;
+ }
+ a#beli:hover{
+     font-size: 16px;
+ }
+ div.thumbnail:hover{
+    background-color: #dde;
+ }
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.table td, .table th {
+    border: 1px solid #009;
+    text-align: center;
+    padding: 8px;
+    font-size: 17px;
+}
+
+.table tr:nth-child(even){
+    background-color: #dfd;
+}
+
+.table tr:hover
+{
+    background-color: #dec;
+}
+
+.table th {
+    padding: 12px 0 12px 0;
+    background-color: #ded;
+    color: black;
+}

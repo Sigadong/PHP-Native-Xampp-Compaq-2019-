@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+  function angka(){
+    var totalArg = arguments.length;
+    return totalArg;
+  }
+
+  var a = angka(1, 9);
+  console.log(a);  // 2
+  
+  var b = angka(4, 8, 3, 7);
+  console.log(b);  // 4
+  
+  var c = angka(3, 9, 1, 4, 6, 9, 0);
+  console.log(c);  // 7
+  </script>
+</body>
+</html>

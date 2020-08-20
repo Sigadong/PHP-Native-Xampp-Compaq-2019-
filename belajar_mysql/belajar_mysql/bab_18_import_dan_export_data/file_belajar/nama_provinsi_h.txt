@@ -1,0 +1,3 @@
+Jawa Barat,JB,Bandung,46029668,35245,23067.20
+Jawa Tengah,JT,Semarang,33522663,33987,14336.87
+Jawa Timur,JI,Surabaya,38610202,47921,18786.51

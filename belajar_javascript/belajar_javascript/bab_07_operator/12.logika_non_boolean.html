@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo;
+    
+    foo = "Duniailkom" || "JavaScript";
+    console.log(foo);       // Duniailkom
+
+    foo = "Duniailkom" && "JavaScript";
+    console.log(foo);       // JavaScript
+
+    foo = true || "JavaScript";
+    console.log(foo);       // true
+    
+    foo = false || "JavaScript";
+    console.log(foo);       // JavaScript
+    
+    foo = "JavaScript" && false;
+    console.log(foo);       // false
+    
+    foo = false && "JavaScript";
+    console.log(foo);       // false
+    
+    foo = false || false && true || "JavaScript";
+    console.log(foo);       // JavaScript
+    
+    foo = true || false && true || "JavaScript";
+    console.log(foo);       // true
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    h1 { border: 2px solid black;
+         width: 280px;
+         padding: 10px;
+         text-align: center;
+         color: red;
+         background-color: pink; }
+  </style>
+</head>
+<body>
+  <h1 id="judul">Belajar JavaScript</h1>
+  <script>
+    var h1Node = document.getElementById("judul");
+    
+    h1Node.addEventListener("click",function (event) {
+      console.log(event.target);             // <h1 id="judul">
+      console.log(event.type);               // click
+      console.log(event.bubbles);            // true
+      console.log(event.cancelable);         // true
+      console.log(event.defaultPrevented);   // false
+      console.log(event.detail );            // 1
+      console.log(event.currentTarget);      // <h1 id="judul">
+      console.log(event.relatedTarget);      // null
+      console.log(event.screenX);            // 236
+      console.log(event.screenY);            // 165
+      console.log(event.clientX);            // 209
+      console.log(event.clientY);            // 65
+      console.log(event.button);             // 0
+      console.log(event.ctrlKey);            // false
+      console.log(event.shiftKey);           // false
+      console.log(event.altKey);             // false
+    });
+  </script>
+</body>
+</html>

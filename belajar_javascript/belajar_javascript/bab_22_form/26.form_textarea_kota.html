@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Nama Kota: <input type="text" id="namaKota"></p>
+  <p><button id="tambahKota">Tambah Kota</button></p>
+  <p><textarea id="daftarKota" rows="5" cols="20"></textarea></p>   
+  <script>
+    var namaKotaNode = document.getElementById("namaKota");
+    var tambahKotaNode = document.getElementById("tambahKota");
+    var daftarKotaNode = document.getElementById("daftarKota");
+    
+    function diTambahKota(){
+      var namaKotaSekarang = namaKotaNode.value + "\n";
+      var daftarKotaSekarang = daftarKotaNode.value;
+      daftarKotaNode.value = daftarKotaSekarang + namaKotaSekarang;
+      namaKotaNode.value = "";
+      namaKotaNode.focus();
+    }
+    
+    tambahKotaNode.addEventListener("click",diTambahKota);
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Ketik disini: <input type="text" id="ketik" size="50"></p>
+  <p>Jumlah huruf 'a': <span id="hasilA"></span></p>
+  <p>Jumlah huruf 'e': <span id="hasilE"></span></p>
+  <script>
+    var ketikNode = document.getElementById("ketik");
+    var hasilNodeA = document.getElementById("hasilA");
+    var hasilNodeE = document.getElementById("hasilE");
+    
+    var jumlahA = 0;
+    var jumlahE = 0;
+    
+    function diProses(e){
+      if (e.key == "a"){
+        jumlahA++;
+        hasilNodeA.innerHTML = jumlahA;
+      }
+      if (e.key == "e"){
+        jumlahE++;
+        hasilNodeE.innerHTML = jumlahE;
+      }
+    }
+
+    ketikNode.addEventListener("keypress", diProses);
+  </script>
+</body>
+</html>

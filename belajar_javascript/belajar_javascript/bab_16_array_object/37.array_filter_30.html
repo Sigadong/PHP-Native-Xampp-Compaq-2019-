@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    function besar30(element) {
+      if (element >= 30 ) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+      
+    var foo = [23,60,44,12,34];
+    var bar = foo.filter(besar30);
+    console.log ( bar );  // Array [ 60, 44, 34 ]
+  </script>
+</body>
+</html>

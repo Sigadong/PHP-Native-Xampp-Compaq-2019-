@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    .hijau { color: green; }
+  </style>
+</head>
+<body>
+  <h1 class="hijau">Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em>
+  <b class="hijau"> dari Duniailkom</b></p>
+  <script>
+    var classNode = document.getElementsByClassName("hijau");
+    
+    console.log(classNode);  // HTMLCollection [ <h1.hijau>, <b.hijau> ]
+    
+    console.log(classNode[0].nodeName);        // H1
+    console.log(classNode[0].nodeType);        // 1
+    console.log(classNode[0].childNodes);
+    // NodeList [ #text "Belajar HTML" ]
+    console.log(classNode[0].textContent);     // Belajar HTML
+                                               
+    console.log(classNode[1].nodeName);        // B
+    console.log(classNode[1].nodeType);        // 1
+    console.log(classNode[1].childNodes);
+    // NodeList [ #text " dari Duniailkom" ]
+    console.log(classNode[1].textContent);     //  dari Duniailkom
+  </script>
+</body>
+</html>

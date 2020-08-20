@@ -1,0 +1,315 @@
+##======================================================================##
+16. Transaction dan Table Lock
+##======================================================================##
+
+
+##======================================================================##
+16.3 Cara Menjalankan Transaction
+##======================================================================##
+
+
+CREATE TABLE tabungan (
+  no TINYINT PRIMARY KEY AUTO_INCREMENT,
+  nama VARCHAR(50),
+  proses ENUM('D','K'),
+  jumlah DEC(10,2)
+) ENGINE = InnoDB;
+
+INSERT INTO tabungan VALUES
+  (NULL, 'Rudi Permana', 'K', 100000),
+  (NULL, 'Sandri Fatmala', 'D', 50000);
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+START TRANSACTION;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO tabungan VALUES (NULL, 'Rudi Permana', 'D', 50000);
+
+UPDATE tabungan SET jumlah = '125000' WHERE nama = 'Sandri Fatmala';
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+ROLLBACK;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+START TRANSACTION;
+
+INSERT INTO tabungan VALUES (NULL, 'Rudi Permana', 'D', 50000);
+
+UPDATE tabungan SET jumlah = '125000' WHERE nama = 'Sandri Fatmala';
+
+COMMIT;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT CONNECTION_ID();
+
+
+--------------------------------------------------------------------------
+
+
+START TRANSACTION;
+
+INSERT INTO tabungan VALUES (NULL, 'Rina Kumala Sari', 'K', 150000);
+
+UPDATE tabungan SET jumlah = '275000' WHERE no = 1;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+COMMIT;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM tabungan;
+
+SET autocommit = 0;
+
+INSERT INTO tabungan VALUES (NULL, 'Ikhsan Prayoga', 'K', 750000);
+
+DELETE FROM tabungan WHERE nama = 'Rudi Permana';
+
+SELECT * FROM tabungan;
+
+ROLLBACK;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE tabungan SET jumlah = '1550000' WHERE no = 1;
+
+SELECT * FROM tabungan;
+
+ROLLBACK;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+SET autocommit = 1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM tabungan;
+
+BEGIN;
+
+INSERT INTO tabungan VALUES (NULL, 'Husli Khairan', 'K', 180000);
+
+SAVEPOINT pertama;
+
+SELECT * FROM tabungan;
+
+INSERT INTO tabungan VALUES (NULL, 'Ikhsan Prayoga', 'D', 52000);
+
+SAVEPOINT kedua;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+ROLLBACK TO SAVEPOINT pertama;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+COMMIT;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+BEGIN;
+
+INSERT INTO tabungan VALUES (NULL, 'Bobby Permana', 'D', 180000);
+
+SELECT * FROM tabungan;
+
+SAVEPOINT pertama;
+
+UPDATE tabungan SET nama = 'Ikhsan Prayoga' WHERE no = 2;
+
+SELECT * FROM tabungan;
+
+RELEASE SAVEPOINT pertama;
+
+RELEASE SAVEPOINT pertama;
+
+ROLLBACK TO SAVEPOINT pertama;
+
+COMMIT;
+
+SELECT * FROM tabungan;
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM tabungan;
+
+BEGIN;
+
+DELETE FROM tabungan;
+
+
+SELECT * FROM tabungan;
+
+CREATE TABLE tabungan2 (
+  a INT,
+  b VARCHAR(5)
+);
+
+ROLLBACK;
+
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+16.4 Table Lock
+##======================================================================##
+
+TRUNCATE TABLE tabungan;
+
+INSERT INTO tabungan (nama, proses, jumlah) VALUES
+  ('Rudi Permana', 'K', 100000),
+  ('Sandri Fatmala', 'D', 50000),
+  ('Rina Kumala Sari', 'K', 25000);
+  
+SELECT * FROM tabungan;
+
+
+--------------------------------------------------------------------------
+
+
+LOCK TABLE tabungan READ;
+
+SELECT * FROM tabungan;
+
+INSERT INTO tabungan VALUES (NULL, 'Sari Citra Lestari', 'D', 180000);
+
+UPDATE tabungan SET jumlah = '1550000' WHERE no = 2;
+
+
+--------------------------------------------------------------------------
+
+
+UNLOCK TABLES;
+
+
+--------------------------------------------------------------------------
+
+
+LOCK TABLE tabungan WRITE;
+
+SELECT * FROM tabungan;
+
+INSERT INTO tabungan VALUES (NULL, 'James Situmorang', 'K', 325000);
+
+SELECT * FROM tabungan;
+
+--------------------------------------------------------------------------
+
+
+UNLOCK TABLES;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+16.5 Multiple Table Lock
+##======================================================================##
+
+
+LOCK TABLE tabungan READ;
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM universitas;
+
+UNLOCK TABLES;
+
+
+--------------------------------------------------------------------------
+
+
+LOCK TABLE tabungan READ;
+
+LOCK TABLE mahasiswa READ;
+
+LOCK TABLE universitas READ;
+
+SELECT * FROM tabungan;
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM universitas;
+
+UNLOCK TABLES;
+
+
+--------------------------------------------------------------------------
+
+
+LOCK TABLE tabungan READ, mahasiswa READ, universitas WRITE;
+
+SELECT * FROM tabungan;
+
+SELECT * FROM mahasiswa;
+
+SELECT * FROM universitas;
+
+UNLOCK TABLES;
+
+
+--------------------------------------------------------------------------
+
+

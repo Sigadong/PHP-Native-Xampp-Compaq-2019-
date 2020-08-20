@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <form id="formKu" name="formKu" method="get" action="proses.php">
+    <p>Username: <input type="text" name="username" id="username"></p>
+    
+    <p><input type="checkbox" name="js" id="js"
+    value="Belajar JavaScript">Belajar JavaScript</p>
+
+    <p><input type="submit" name="submit" id="submit" value="Kirim Data"></p>
+  </form>
+  <script>
+    var formNode = document.forms.formKu;
+    var usernameNode = document.forms.formKu.username;
+    var jsNode = document.forms.formKu.js;
+    var submitNode = document.forms.formKu.submit;
+    
+    console.log(formNode);
+    console.log(usernameNode);
+    console.log(jsNode);
+    console.log(submitNode);
+  </script>
+</body>
+</html>

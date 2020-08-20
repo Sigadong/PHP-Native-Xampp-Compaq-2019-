@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    var pNode = document.childNodes[1].childNodes[2].childNodes[3];
+    
+    console.log( pNode.baseURI );
+    // file:///D:/belajar_javascript/bab_19_dom/17.node_properties.html
+    
+    console.log( pNode.childNodes  );
+    // NodeList [ #text "Sedang belajar ", <em>, <b> ]
+    
+    console.log( pNode.firstChild );          //#text "Sedang belajar "
+    console.log( pNode.lastChild );           // <b>
+    console.log( pNode.nextSibling );         // #text " "
+    console.log( pNode.nodeName );            // P
+    console.log( pNode.nodeType );            // 1
+    console.log( pNode.nodeValue );           // null
+    console.log( pNode.ownerDocument  );
+    // HTMLDocument ->
+    // file:///D:/belajar_javascript/bab_19_dom/17.node_properties.html
+    
+    console.log( pNode.parentNode  );         // <body>
+    console.log( pNode.parentElement );       // <body>
+    console.log( pNode.previousSibling );     // #text "  "
+    console.log( pNode.textContent );
+    // Sedang belajar JavaScript dari Duniailkom
+  </script>
+</body>
+</html>

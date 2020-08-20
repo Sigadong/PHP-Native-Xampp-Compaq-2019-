@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = "Sedang belajar JavaScript dari buku JavaScript Uncover";
+    console.log ( foo.startsWith('Sedang') );     // true
+    console.log ( foo.endsWith('Uncover') );      // true
+    
+    console.log ( foo.startsWith('sedang') );     // false
+    console.log ( foo.endsWith('uncover') );      // false
+    
+    console.log ( foo.startsWith('belajar',7) );  // true
+    console.log ( foo.endsWith('belajar',14) );   // true 
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <button id="tombol">Buat jendela baru</button>
+  <script>
+    var tombolNode = document.getElementById("tombol");
+
+    function jendelaBaru(){
+       var setting = "width=800,height=300,top=300,left=300";
+       window.open("http://www.google.com","jendelaBaru",setting);
+    }
+    
+    tombolNode.addEventListener("click",jendelaBaru);
+  </script>
+</body>
+</html>

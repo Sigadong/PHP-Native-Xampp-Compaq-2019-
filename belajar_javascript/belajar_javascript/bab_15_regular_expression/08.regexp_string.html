@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = "Belajar JavaScript";
+    
+    console.log ( /JavaScript/.test(foo) );   // true
+    console.log ( /Javascript/.test(foo) );   // false
+    console.log ( /Belajar/.test(foo) );      // true
+    console.log ( /belajar/.test(foo) );      // false
+    console.log ( /Java/.test(foo) );         // true
+    console.log ( /ajar/.test(foo) );         // true
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    h1Node = document.querySelector("h1");
+    
+    function ubahWarna(){
+      h1Node.style.color = "red";
+    }
+    
+    var timeoutID = setTimeout(ubahWarna,4000);
+    console.log(timeoutID);
+    clearTimeout(timeoutID);
+  </script>
+</body>
+</html>

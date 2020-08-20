@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    h1 { border: 2px solid black;
+         width: 280px;
+         padding: 10px;
+         text-align: center;
+         color: red;
+         background-color: pink; }
+  </style>
+</head>
+<body>
+  <h1 id="judul">Belajar JavaScript</h1>
+  <p></p>
+  <h3></h3>
+  <script>
+    function tampilkanClickP(){
+      document.querySelector("p").innerHTML="Judul di klik";
+    }
+    function tampilkanClickH3(){
+      document.querySelector("h3").innerHTML="Judul di klik";
+    }
+    
+    var h1Node = document.getElementById("judul");
+    h1Node.addEventListener("click",tampilkanClickP);
+    h1Node.addEventListener("click",tampilkanClickH3);
+  </script>
+</body>
+</html>

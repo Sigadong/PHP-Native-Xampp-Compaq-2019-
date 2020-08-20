@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <button id="tombolBuka">Buat jendela</button>
+  <button id="tombolEdit">Edit jendela</button>
+  <button id="tombolTutup">Tutup jendela</button>
+  <script>
+    var tombolBukaNode = document.getElementById("tombolBuka");
+    var tombolEditNode = document.getElementById("tombolEdit");   
+    var tombolTutupNode = document.getElementById("tombolTutup");    
+    var myJendela;
+    
+    function jendelaBaru(){
+      var setting = "width=900,height=300,toolbar=yes";
+      myJendela = window.open("http://www.google.com","jendelaBaru",setting);
+    }
+    
+    function editJendela(){
+      myJendela.location = "http://developer.mozilla.org";
+    }
+    
+    function tutupJendela(){
+      myJendela.close();
+    }
+    
+    tombolBukaNode.addEventListener("click",jendelaBaru);
+    tombolEditNode.addEventListener("click",editJendela);
+    tombolTutupNode.addEventListener("click",tutupJendela);
+  </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+##======================================================================##
+14. Mengupdate dan Menghapus
+Data Tabel
+##======================================================================##
+
+
+CREATE TABLE mahasiswa_baru (
+  nim CHAR(8) PRIMARY KEY,
+  nama VARCHAR(50),
+  asal VARCHAR(50),
+  jurusan VARCHAR (20),
+  nilai_uan DEC(5,2)
+);
+
+INSERT INTO mahasiswa_baru VALUES
+  ('17090113', 'Riana Putria', 'Padang', 'Kimia', 339.20),
+  ('17140143', 'Rudi Permana', 'Bandung', 'Ilmu Komputer', 290.44),
+  ('17090222', 'Sari Citra Lestari', 'Jakarta', 'Manajemen', 310.60),
+  ('17080305', 'Rina Kumala Sari', 'Jakarta', 'Akuntansi', 337.99),
+  ('17020217', 'James Situmorang', 'Medan', 'Kedokteran Gigi', 341.10),
+  ('17140119', 'Sandri Fatmala', 'Bandung', 'Ilmu Komputer', 322.91),
+  ('17080225', 'Husli Khairan', 'Jakarta', 'Akuntansi', 288.55),
+  ('17090308', 'Christine Wijaya','Medan','Manajemen',321.74),
+  ('17140133', 'Ikhsan Prayoga', 'Jakarta', 'Ilmu Komputer', 300.16),
+  ('17140120', 'Bobby Permana', 'Medan', 'Ilmu Komputer', 280.82);
+  
+SELECT * FROM mahasiswa_baru;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+14.1 UPDATE
+##======================================================================##
+
+
+SELECT * FROM mahasiswa_baru WHERE nim = '17020217';
+
+UPDATE mahasiswa_baru SET nama = 'Jerry Fernando' WHERE nim = '17020217';
+
+SELECT * FROM mahasiswa_baru WHERE nim = '17020217';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa_baru WHERE nim = '17080305';
+
+UPDATE mahasiswa_baru
+SET
+  nama = 'Lidya Fitriana',
+  asal = 'Makassar',
+  nilai_uan = 329.67
+WHERE nim = '17080305';
+
+SELECT * FROM mahasiswa_baru WHERE nim = '17080305';
+
+--------------------------------------------------------------------------
+
+
+UPDATE mahasiswa_baru SET asal = 'Semarang' WHERE asal = 'Jakarta';
+
+SELECT * FROM mahasiswa_baru;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa_baru WHERE jurusan = 'Ilmu Komputer'
+ORDER BY nama ASC;
+
+
+SELECT * FROM mahasiswa_baru WHERE jurusan = 'Ilmu Komputer'
+ORDER BY nama ASC LIMIT 2;
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE mahasiswa_baru SET jurusan = 'Teknik Informatika' 
+WHERE jurusan = 'Ilmu Komputer' ORDER BY nama ASC LIMIT 2;
+
+SELECT * FROM mahasiswa_baru;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa_baru WHERE nilai_uan <= 300;
+
+UPDATE mahasiswa_baru SET nilai_uan = 200 WHERE nilai_uan <= 300;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM universitas;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa_baru.nama, mahasiswa_baru.jurusan, universitas.nama_dekan
+FROM mahasiswa_baru JOIN universitas
+WHERE mahasiswa_baru.jurusan = universitas.jurusan
+AND universitas.nama_dekan = 'Prof. Mulyono, M.Sc.';
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE mahasiswa_baru JOIN universitas SET asal = 'Pekanbaru'
+WHERE mahasiswa_baru.jurusan = universitas.jurusan
+AND universitas.nama_dekan = 'Prof. Mulyono, M.Sc.';
+
+SELECT * FROM mahasiswa_baru;
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE mahasiswa_baru SET asal = 'Yogyakarta';
+
+SELECT * FROM mahasiswa_baru;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+14.2 UPDATE IGNORE
+##======================================================================##
+
+
+UPDATE mahasiswa_baru SET nilai_uan = '4000' WHERE nama = 'Bobby Permana';
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE IGNORE mahasiswa_baru SET nilai_uan = '4000'
+WHERE nama = 'Bobby Permana';
+
+SELECT * FROM mahasiswa_baru WHERE nama = 'Bobby Permana';
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+14.3 REPLACE
+##======================================================================##
+
+
+TRUNCATE mahasiswa_baru;
+
+INSERT INTO mahasiswa_baru VALUES
+  ('17090113', 'Riana Putria', 'Padang', 'Kimia', 339.20),
+  ('17140143', 'Rudi Permana', 'Bandung', 'Ilmu Komputer', 290.44),
+  ('17090222', 'Sari Citra Lestari', 'Jakarta', 'Manajemen', 310.60),
+  ('17080305', 'Rina Kumala Sari', 'Jakarta', 'Akuntansi', 337.99),
+  ('17020217', 'James Situmorang', 'Medan', 'Kedokteran Gigi', 341.10),
+  ('17140119', 'Sandri Fatmala', 'Bandung', 'Ilmu Komputer', 322.91),
+  ('17080225', 'Husli Khairan', 'Jakarta', 'Akuntansi', 288.55),
+  ('17090308', 'Christine Wijaya','Medan','Manajemen',321.74),
+  ('17140133', 'Ikhsan Prayoga', 'Jakarta', 'Ilmu Komputer', 300.16),
+  ('17140120', 'Bobby Permana', 'Medan', 'Ilmu Komputer', 280.82);
+
+
+--------------------------------------------------------------------------
+
+
+REPLACE INTO mahasiswa_baru
+VALUES ('17090141', 'Lidya Fitriana', 'Surabaya', 'Kimia', 290.54);
+
+SELECT * FROM mahasiswa_baru;
+
+
+--------------------------------------------------------------------------
+
+
+REPLACE INTO mahasiswa_baru
+VALUES ('17090141', 'Jerry Fernando', 'Pekanbaru', 'Kimia', 290.54);
+
+SELECT * FROM mahasiswa_baru;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT * FROM mahasiswa_baru WHERE nim = 17090141;
+
+REPLACE INTO mahasiswa_baru (nim, asal) VALUES ('17090141','Yogyakarta');
+
+SELECT * FROM mahasiswa_baru WHERE nim = 17090141;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+14.4 DELETE
+##======================================================================##
+
+
+TRUNCATE mahasiswa_baru;
+
+INSERT INTO mahasiswa_baru VALUES
+  ('17090113', 'Riana Putria', 'Padang', 'Kimia', 339.20),
+  ('17140143', 'Rudi Permana', 'Bandung', 'Ilmu Komputer', 290.44),
+  ('17090222', 'Sari Citra Lestari', 'Jakarta', 'Manajemen', 310.60),
+  ('17080305', 'Rina Kumala Sari', 'Jakarta', 'Akuntansi', 337.99),
+  ('17020217', 'James Situmorang', 'Medan', 'Kedokteran Gigi', 341.10),
+  ('17140119', 'Sandri Fatmala', 'Bandung', 'Ilmu Komputer', 322.91),
+  ('17080225', 'Husli Khairan', 'Jakarta', 'Akuntansi', 288.55),
+  ('17090308', 'Christine Wijaya','Medan','Manajemen',321.74),
+  ('17140133', 'Ikhsan Prayoga', 'Jakarta', 'Ilmu Komputer', 300.16),
+  ('17140120', 'Bobby Permana', 'Medan', 'Ilmu Komputer', 280.82);
+  
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM mahasiswa_baru WHERE nim = '17090113';
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM mahasiswa_baru WHERE jurusan = 'Ilmu Komputer'
+ORDER BY nama ASC LIMIT 2;
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM mahasiswa_baru WHERE asal = 'Medan' OR jurusan = 'Manajemen';
+
+
+--------------------------------------------------------------------------
+
+
+SELECT mahasiswa_baru.nama, mahasiswa_baru.jurusan, universitas.nama_dekan
+FROM mahasiswa_baru JOIN universitas
+WHERE mahasiswa_baru.jurusan = universitas.jurusan
+AND universitas.nama_dekan = 'Maya Fitrianti, M.M.';
+
+
+--------------------------------------------------------------------------
+
+
+DELETE mahasiswa_baru FROM mahasiswa_baru JOIN universitas
+WHERE mahasiswa_baru.jurusan = universitas.jurusan
+AND universitas.nama_dekan = 'Maya Fitrianti, M.M.';
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM mahasiswa_baru;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+14.5 TRUNCATE
+##======================================================================##
+
+
+CREATE TABLE contoh_truncate (
+  a TINYINT PRIMARY KEY AUTO_INCREMENT,
+  b VARCHAR(10)
+);
+
+INSERT INTO contoh_truncate (b) 
+VALUES ('merah'),('biru'),('kuning'),('putih');
+
+SELECT * FROM contoh_truncate;
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM contoh_truncate;
+
+INSERT INTO contoh_truncate (b)
+VALUES ('merah'),('biru'),('kuning'),('putih');
+
+SELECT * FROM contoh_truncate;
+
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE contoh_truncate;
+
+INSERT INTO contoh_truncate (b)
+VALUES ('merah'),('biru'),('kuning'),('putih');
+
+SELECT * FROM contoh_truncate;
+
+
+--------------------------------------------------------------------------
+

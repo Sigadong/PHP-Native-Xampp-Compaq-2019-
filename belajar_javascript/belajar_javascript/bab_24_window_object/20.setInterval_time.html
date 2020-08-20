@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1></h1>
+  <script>
+    h1Node = document.querySelector("h1");
+  
+    function cekTanggal(){
+      var myDate = new Date();
+      
+      var jam = myDate.getHours();
+      var menit = myDate.getMinutes();
+      var detik = myDate.getSeconds();
+      
+      h1Node.innerHTML = "Waktu saat ini = "+jam+":"+menit+":"+detik;
+    }
+    
+    cekTanggal();
+    setInterval(cekTanggal,1000);
+  </script>
+</body>
+</html>

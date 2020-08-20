@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = "Belajar JavaScript";
+    
+    console.log ( foo.charCodeAt(1) );           // 101
+    console.log ( foo.charCodeAt(8) );           // 74
+    console.log ( 'Duniailkom'.charCodeAt(4) );  // 97
+
+    console.log ( foo.codePointAt(1) );           // 101
+    console.log ( foo.codePointAt(8) );           // 74
+    console.log ( 'Duniailkom'.codePointAt(4) );  // 97
+    
+    var bar = String.fromCodePoint(128656, 128663, 128690);  
+    
+    console.log ( bar );                          // emoji
+    console.log ( bar.charCodeAt(0) );            // 55357
+    console.log ( bar.codePointAt(0) );           // 128656
+  </script>
+</body>
+</html>

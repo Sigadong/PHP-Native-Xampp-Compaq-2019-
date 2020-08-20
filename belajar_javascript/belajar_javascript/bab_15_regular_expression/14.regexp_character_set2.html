@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var pola = /^[a-e][1-9][R-Z]./;
+    
+    console.log ( pola.test("a9R") );        // false
+    console.log ( pola.test("a9Ra") );       // true
+    console.log ( pola.test("fa9Ra") );      // false
+    console.log ( pola.test("e9ZA") );       // true
+    console.log ( pola.test("e9ZAAAAA") );   // true
+  </script>
+</body>
+</html>

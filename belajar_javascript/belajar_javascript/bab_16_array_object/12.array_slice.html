@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = ["a","b","c","d","e","f","g"];
+    
+    console.log ( foo.slice() );
+    // Array [ "a", "b", "c", "d", "e", "f", "g" ]
+    
+    console.log ( foo.slice(3) );
+    // Array [ "d", "e", "f", "g" ]
+    
+    console.log ( foo.slice(3,5) );
+    // Array [ "d", "e" ] 
+
+    console.log ( foo.slice(-5) );
+    // Array [ "c", "d", "e", "f", "g" ]
+
+    console.log ( foo.slice(-5,-2) );
+    // Array [ "c", "d", "e" ]
+    
+    console.log ( foo );
+    // Array [ "a", "b", "c", "d", "e", "f", "g" ]
+  </script>
+</body>
+</html>

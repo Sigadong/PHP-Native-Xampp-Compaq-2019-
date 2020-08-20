@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = ["a","b","c","d"];
+    var bar = [1,2,3,4];
+    
+    var fooBar = foo.concat(bar);
+    console.log( fooBar );
+    // Array [ "a", "b", "c", "d", 1, 2, 3, 4 ]
+
+    var barFoo = bar.concat(foo);
+    console.log( barFoo );
+    //  Array [ 1, 2, 3, 4, "a", "b", "c", "d" ]
+
+    console.log( foo );  // Array [ "a", "b", "c", "d" ]
+    console.log( bar );  // Array [ 1, 2, 3, 4 ]
+  </script>
+</body>
+</html>

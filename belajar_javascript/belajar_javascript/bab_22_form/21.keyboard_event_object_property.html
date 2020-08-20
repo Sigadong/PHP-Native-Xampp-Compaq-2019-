@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <p>Ketik disini: <input type="text" id="ketik"></p>
+  <script>
+    var ketikNode = document.getElementById("ketik");
+
+    function diProses(e){
+      console.log(e.key);         // a
+      console.log(e.charCode);    // 97
+      console.log(e.keyCode);     // 0
+      console.log(e.which);       // 97
+      console.log(e.altKey);      // false
+      console.log(e.ctrlKey);     // false
+      console.log(e.shiftKey);    // false
+    }
+
+    ketikNode.addEventListener("keypress", diProses);
+  </script>
+</body>
+</html>

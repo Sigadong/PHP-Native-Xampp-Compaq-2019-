@@ -1,0 +1,5 @@
+Provinsi;Singkatan ISO;Ibukota;APBD 2014 (miliar rupiah) 
+#############################################
+Sumatera Barat,SB,Padang,3887.84
+Sumatera Selatan,SS,Palembang,7697.99
+Sumatera Utara,SU,Medan,8565.53

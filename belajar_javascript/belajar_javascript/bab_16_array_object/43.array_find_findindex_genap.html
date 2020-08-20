@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    function genap(element) {
+      return (element % 2 === 0);
+    }
+    
+    var foo = [5,7,14,12,16];
+    console.log ( foo.find(genap) );         // 14
+    console.log ( foo.findIndex(genap) );    // 2
+    
+    var bar = [99,75,17,29,88];
+    console.log ( bar.find(genap) );         // 88
+    console.log ( bar.findIndex(genap) );    // 4
+  </script>
+</body>
+</html>

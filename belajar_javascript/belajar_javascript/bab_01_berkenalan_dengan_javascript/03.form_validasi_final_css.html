@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    .error {
+      color: red;
+      background-color: #FFECEC;
+      text-align: center;
+      margin-left: 15px;
+      padding: 5px 15px;
+      border: 1px solid red;
+      box-shadow: 1px 0px 3px red ;
+    }
+    
+    body {
+      background-color: #F8F8F8;
+    }
+    div.container {
+      width: 600px;
+      padding: 10px 40px 30px;
+      background-color: white;
+      margin: 20px auto;
+      box-shadow: 1px 0px 10px, -1px 0px 10px ;
+    }
+    h1 {
+      text-align: center;
+      font-family: Cambria, "Times New Roman", serif;
+    }
+    p {
+      margin:0;
+    }
+    input, select, textarea {
+      margin-bottom:20px;
+    }
+    label {
+      width:120px;
+      float:left;
+      margin-right:10px;
+    }
+
+    label[for="syarat"] {
+      float: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Form Pendaftaran</h1>
+  <form id="formKu" name="formKu" method="get" action="proses.php">
+    <p><label for="username">Username: </label><input type="text" name="username" id="username">
+    <span id="usernameSpan"></span></p>
+    <p><label for="pass">Password: </label><input type="password" name="pass" id="pass">
+    <span id="passSpan"></span></p>
+    <p><label for="konfPass">Ulangi Password:</label> <input type="password" name="konfPass" id="konfPass">
+    <span id="konfPassSpan"></span></p>
+    <p><label for="email">Email: </label><input type="text" name="email" id="email">
+    <span id="emailSpan"></span></p>    
+    <p><input type="checkbox" name="syarat" id="syarat">
+    <label for="syarat">Saya menyetujui syarat dan ketentuan</label><span id="syaratSpan"></span></p>
+    <p><input type="submit" name="submit" id="submit" value="Kirim Data"></p>
+  </form>
+</div>
+  <script>
+   var formKuNode = document.getElementById("formKu");
+   
+   var usernameNode = document.getElementById("username");
+   var usernameSpanNode = document.getElementById("usernameSpan");
+   
+   var passNode = document.getElementById("pass");
+   var passSpanNode = document.getElementById("passSpan");
+   
+   var konfPassNode = document.getElementById("konfPass");
+   var konfPassSpanNode = document.getElementById("konfPassSpan");
+   
+   var syaratNode = document.getElementById("syarat");
+   var syaratSpanNode = document.getElementById("syaratSpan");
+   
+   var emailNode = document.getElementById("email");
+   var emailSpanNode = document.getElementById("emailSpan");
+   
+   function diProses(e){
+    
+      //===== Untuk Validasi username ==== //
+      var usernameError="";
+      
+      if (usernameNode.value.trim() === ""){
+        usernameError = "Username harus diisi";
+      }
+      else if (/\W/.test(usernameNode.value.trim()) ){
+        usernameError = "Hanya bisa diisi karakter alfanumerik";
+      }
+      else if (usernameNode.value.trim().length < 6 ){
+        usernameError = "Username minimal 6 karakter";
+      }
+      
+      if (usernameError !== ""){
+        usernameSpanNode.innerHTML = usernameError;
+        usernameSpanNode.className = "error";
+        usernameNode.style.border = "2px solid red";
+        e.preventDefault();
+      } else {
+        usernameNode.style.border = "2px solid green";
+      }
+      
+      //===== Untuk Validasi Password ==== //
+      var passError="";
+      if (passNode.value.trim() === ""){
+        passError = "Password harus diisi";
+      }
+      else if (passNode.value.trim().length < 6 ){
+        passError = "Password minimal 6 karakter";
+      }
+      
+      if (passError !== ""){
+        passSpanNode.innerHTML = passError;
+        passSpanNode.className = "error";
+        passNode.style.border = "2px solid red";
+        e.preventDefault();
+      } else {
+        passNode.style.border = "2px solid green";
+      }
+      
+      //===== Untuk Validasi Konfirmasi Password ==== //
+      var konfPassError="";
+      if (konfPassNode.value.trim() === ""){
+        konfPassError = "Ulangi Password harus diisi";
+      }
+      else if (konfPassNode.value !== passNode.value){
+        konfPassError = "Password tidak sama";
+      }
+      
+      if (konfPassError !== ""){
+        konfPassSpanNode.innerHTML = konfPassError;
+        konfPassSpanNode.className = "error";
+        konfPassNode.style.border = "2px solid red";
+        e.preventDefault();
+      } else {
+        konfPassNode.style.border = "2px solid green";
+      }
+      
+      //===== Untuk Validasi Email ==== //
+      var emailError="";
+      if (emailNode.value.trim() === ""){
+        emailError = "Email harus diisi";
+      }
+      else if (!(/.+@.+\..+/.test(emailNode.value.trim()) )){
+        emailError = "Format email harus sesuai";
+      }
+      
+      if (emailError !== ""){
+        emailSpanNode.innerHTML = emailError;
+        emailSpanNode.className = "error";
+        emailNode.style.border = "2px solid red";
+        e.preventDefault();
+      } else {
+        emailNode.style.border = "2px solid green";
+      }
+      
+       //===== Untuk Validasi Checkbox Syarat ==== //
+      var syaratError="";
+      if (syaratNode.checked !== true){
+        syaratError = "Syarat dan ketentuan harus di setujui";
+      }
+      
+      if (syaratError !== ""){
+        syaratSpanNode.innerHTML = syaratError;
+        syaratSpanNode.className = "error";
+        e.preventDefault();
+      }
+   }
+   
+   function hapusError(e){
+        e.target.parentElement.lastChild.innerHTML = "";
+        e.target.parentElement.lastChild.className = "";
+        e.target.style.border = "";
+   }
+   
+   formKuNode.addEventListener("submit",diProses);
+   usernameNode.addEventListener("focus",hapusError);
+   passNode.addEventListener("focus",hapusError);
+   konfPassNode.addEventListener("focus",hapusError);
+   emailNode.addEventListener("focus",hapusError);
+   syaratNode.addEventListener("focus",hapusError);
+  </script>
+</body>
+</html>

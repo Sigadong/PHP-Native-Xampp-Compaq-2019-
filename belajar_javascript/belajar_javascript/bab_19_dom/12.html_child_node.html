@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    var foo = document.childNodes[1].childNodes[0];
+    
+    console.log(foo.nodeName);           // HEAD
+    console.log(foo.nodeType);           // 1
+    console.log(foo.childNodes);
+    // NodeList [ #text " ", <meta>, #text " ", <title>, #text " " ]
+    console.log(foo.childNodes.length);  // 5
+    
+    console.log("==========================");
+    
+    var bar = document.childNodes[1].childNodes[1];
+    
+    console.log(bar.nodeName);           // #text
+    console.log(bar.nodeType);           // 3
+    console.log(bar.childNodes);         // NodeList [  ]
+    console.log(bar.childNodes.length);  // 0
+    
+    console.log("==========================");
+    
+    var baz = document.childNodes[1].childNodes[2];
+    
+    console.log(baz.nodeName);           // BODY
+    console.log(baz.nodeType);           // 1
+    console.log(baz.childNodes);
+    // NodeList [ #text " ", <h1>, #text "  ", <p>, #text "	", <script> ]
+    console.log(baz.childNodes.length);  // 6
+  </script>
+</body>
+</html>

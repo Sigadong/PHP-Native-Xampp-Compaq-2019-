@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = new Date();
+    
+    var tahun = foo.getFullYear();
+    var bulan = foo.getMonth();
+    var tanggal = foo.getDate();   
+    var hari = foo.getDay();
+    var jam = foo.getHours();
+    var menit = foo.getMinutes();
+    var detik = foo.getSeconds();
+    
+    var namaHari;
+    var namaBulan;
+    
+    switch (hari) {
+      case 0 : var namaHari = "Minggu";   break;
+      case 1 : var namaHari = "Senin";    break;
+      case 2 : var namaHari = "Selasa";   break;
+      case 3 : var namaHari = "Rabu";     break;
+      case 4 : var namaHari = "Kamis";    break;
+      case 5 : var namaHari = "Jumat";    break;
+      case 6 : var namaHari = "Sabtu";    break;
+    } 
+
+    switch (bulan) {
+      case 0  : var namaBulan = "Januari";   break;
+      case 1  : var namaBulan = "Februari";  break;
+      case 2  : var namaBulan = "Maret";     break;
+      case 3  : var namaBulan = "April";     break;
+      case 4  : var namaBulan = "Mei";       break;
+      case 5  : var namaBulan = "Juni";      break;
+      case 6  : var namaBulan = "Juli";      break;
+      case 7  : var namaBulan = "Agustus";   break;
+      case 8  : var namaBulan = "September"; break;
+      case 9  : var namaBulan = "Oktober";   break;
+      case 10 : var namaBulan = "November";  break;
+      case 11 : var namaBulan = "Desember";  break;
+    }     
+    
+    var tampilanTanggal = namaHari+", "+tanggal+" "+namaBulan+" "+tahun;
+        tampilanTanggal += " " + jam + ":" + menit+ ":" + detik;
+    
+    console.log(tampilanTanggal);     // Selasa, 6 Desember 2016 16:50:15
+  </script>
+</body>
+</html>

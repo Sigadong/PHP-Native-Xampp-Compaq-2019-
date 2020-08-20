@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+    // Siapkan beberapa variabel shortcut untuk Node
+    var bodyNode = document.childNodes[1].childNodes[2];
+    var h1Node = bodyNode.childNodes[1];
+    var pNode = bodyNode.childNodes[3];
+    var emNode = pNode.childNodes[1];
+    var bNode = pNode.childNodes[2];
+    
+    // Buat node element OL, yakni tag <ol>
+    var olNode = document.createElement("ol");
+    
+    // Buat 3 node element LI, yakni 3 buah tag <li>,
+    var liNode1 = document.createElement("li");
+    var liNode2 = document.createElement("li");
+    var liNode3 = document.createElement("li");
+    
+    // buat text node dan langsung input ke tiap LI
+    liNode1.appendChild(document.createTextNode("HTML"));
+    liNode2.appendChild(document.createTextNode("CSS"));   
+    liNode3.appendChild(document.createTextNode("JavaScript"));
+    
+    // tambahkan semua tag <li> kedalam tag <ol>
+    olNode.appendChild(liNode1);
+    olNode.appendChild(liNode2);
+    olNode.appendChild(liNode3);
+    
+    // masukkan tag <ol> kedalam DOM tree, sebelum tag <p>
+    bodyNode.insertBefore(olNode,pNode);
+  </script>
+</body>
+</html>

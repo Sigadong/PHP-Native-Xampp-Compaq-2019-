@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo;
+    
+    foo = 6 ;
+    console.log( isFinite(foo) ); // true
+    
+    foo = 3.21456 ;
+    console.log( isFinite(foo) ); // true
+    
+    foo = 'a';
+    console.log( isFinite(foo) ); // false
+    
+    foo = 1/0 ;
+    console.log( isFinite(foo) ); // false
+    
+    foo = Number.NEGATIVE_INFINITY ;
+    console.log( isFinite(foo) ); // false
+    
+    foo = NaN;
+    console.log( isFinite(foo) ); // false
+  </script>
+</body>
+</html>

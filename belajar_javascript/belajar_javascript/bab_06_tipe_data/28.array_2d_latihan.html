@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = [
+                ["sedang","belajar","javascript"],
+                ["selamat","pagi","dunia"],
+                ["a","b","c","d","e"]
+              ];
+    
+    console.log(foo[1][2]);  // "dunia"
+    console.log(foo[2][2]);  // "c"
+    
+    foo[1][1] = "malam";
+    console.log(foo[1]);  // Array [ "selamat", "malam", "dunia" ]
+    
+    foo[2][5] = "f";
+    foo[2][6] = "g";
+    console.log(foo[2]);  // Array [ "a", "b", "c", "d", "e", "f", "g" ]
+  </script>
+</body>
+</html>

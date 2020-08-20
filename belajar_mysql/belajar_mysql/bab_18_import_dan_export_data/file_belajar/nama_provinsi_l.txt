@@ -1,0 +1,5 @@
+Sulawesi Barat,SR,Mamuju,1258090,16787,1388.27
+Sulawesi Selatan,SN,Makassar,8432163,46116,6186.39
+Sulawesi Tengah,ST,Palu,2831283,68090,2514.84
+Sulawesi Tenggara,SG,Kendari,2448081,36757,2416.99
+Sulawesi Utara,SA,Manado,2386604,13931,2625.93

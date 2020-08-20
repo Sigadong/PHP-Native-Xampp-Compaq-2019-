@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+  function rata2(a = 10, b = 10, c = 10, d = 10){
+    var hasil = (a + b + c + d)/4;
+    return hasil;
+  }
+
+  var nilai1 = rata2();
+  console.log(nilai1);    // 10
+  
+  var nilai2 = rata2(20);
+  console.log(nilai2);    // 12.5
+  
+  var nilai3 = rata2(20, 5, 30);
+  console.log(nilai3);    // 16.25
+  </script>
+</body>
+</html>

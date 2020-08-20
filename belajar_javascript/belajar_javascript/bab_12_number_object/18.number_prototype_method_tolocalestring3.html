@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+   var foo = 1234500.346;
+   
+   console.log( foo.toLocaleString('en-US', { style: 'decimal' } ));
+   //1,234,500.346
+   
+   console.log( foo.toLocaleString('en-US', { style: 'percent' } ));
+   // 123,450,035%
+   
+   console.log( foo.toLocaleString('en-US',
+   { style: 'currency', currency: 'USD' } ));   // $1,234,500.35
+   
+   console.log( foo.toLocaleString('de-DE',
+   { style: 'currency', currency: 'EUR' } ));   // 1.234.500,35 €
+   
+   console.log( foo.toLocaleString('ja-JP',
+   { style: 'currency', currency: 'JPY' } ));   // ￥1,234,500
+   
+   console.log( foo.toLocaleString('id-ID',
+   { style: 'currency', currency: 'IDR' } ));   // Rp1.234.500,35
+  </script>
+</body>
+</html>

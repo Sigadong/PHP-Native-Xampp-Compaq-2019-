@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    var foo = "1234";
+    console.log( typeof foo );    // string
+    
+    foo = Number.parseInt(foo) ;
+    console.log( foo );           // 1234
+    console.log( typeof foo );    // number    
+    
+    var bar = "-1234.5678";
+    console.log( typeof bar );    // string
+    
+    bar = Number.parseInt(bar) ;
+    console.log( bar );           // -1234
+    console.log( typeof bar );    // number
+    
+    console.log( Number.parseInt("12.045 potong ayam") );      // 12
+    console.log( Number.parseInt("Ada 12.045 potong ayam") );  // NaN
+  </script>
+</body>
+</html>

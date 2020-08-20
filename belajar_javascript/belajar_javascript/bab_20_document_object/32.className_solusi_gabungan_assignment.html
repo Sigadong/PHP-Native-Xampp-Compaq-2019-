@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    .penting { border: 2px solid black; width: 300px; text-align: center}
+    .merah { color: red; padding: 20px;}
+    .warning { background-color: pink}
+  </style>
+</head>
+<body>
+  <h1 id="judul" class="merah warning">Belajar JavaScript</h1>
+  <script>
+    var h1Node = document.getElementById("judul");
+    h1Node.className += " penting";
+    console.log (h1Node.className);   // merah warning penting
+  </script>
+</body>
+</html>

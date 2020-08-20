@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <p>Jumlah alamat di history: <span id="hasil"></span></p>
+  <button id="back">Back</button>
+  <button id="forward">Forward</button>
+  <button id="back2">Back 2 kali</button>
+  <script>
+    var hasilNode = document.getElementById("hasil");
+    var backNode = document.getElementById("back");
+    var back2Node = document.getElementById("back2");
+    var forwardNode = document.getElementById("forward");
+    
+    hasilNode.innerHTML = history.length;
+
+    backNode.addEventListener("click", function () {
+      history.back();
+    });
+    
+    forwardNode.addEventListener("click",function () {
+      history.forward();
+    });
+        
+    back2Node.addEventListener("click",function () {
+      history.go(-2);
+    });
+  </script>
+</body>
+</html>

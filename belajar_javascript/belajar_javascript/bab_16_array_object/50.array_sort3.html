@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    function bandingkan(a, b) {
+      if (a < b) {
+        return -1;  // a lebih kecil
+      }
+      if (a > b ) {
+        return 1;   // b lebih kecil
+      }
+        return 0;   // sama besar
+    }
+
+    var foo = [3,5,2,8,1,31,22,44,33,11];
+    foo.sort(bandingkan);
+    console.log ( foo );
+    //  Array [ 1, 2, 3, 5, 8, 11, 22, 31, 33, 44 ]
+  </script>
+</body>
+</html>

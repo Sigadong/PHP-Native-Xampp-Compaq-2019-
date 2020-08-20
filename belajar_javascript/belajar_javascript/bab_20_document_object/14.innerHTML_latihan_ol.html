@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1 id="judul">Belajar JavaScript</h1>
+  <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+  <script>
+  var listBaru = "<ol><li>HTML</li><li>CSS</li><li>JavaScript</li></ol>";
+  var sebuahNode = document.querySelector("body");
+  var isiBody = sebuahNode.innerHTML;
+  sebuahNode.innerHTML = isiBody + listBaru; 
+  </script>
+</body>
+</html>

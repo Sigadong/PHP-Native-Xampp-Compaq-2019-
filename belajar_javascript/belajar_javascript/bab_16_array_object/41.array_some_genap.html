@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Belajar JavaScript</h1>
+  <script>
+    function genap(element) {
+      return (element % 2 === 0);
+    }
+    
+    var foo = [6,8,10,12,16];
+    console.log ( foo.some(genap) );         // true
+    
+    var bar = [3,7,9,99,42];
+    console.log ( bar.some(genap) );         // true
+    
+    var baz = [3,7,9,99,41];
+    console.log ( baz.some(genap) );         // false    
+  </script>
+</body>
+</html>

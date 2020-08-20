@@ -1,0 +1,605 @@
+##======================================================================##
+9.1 Atribut NULL
+##======================================================================##
+
+
+CREATE TABLE contoh_null_1 (
+  a INT NULL,
+  b VARCHAR(5) NULL,
+  c DATE
+);
+
+INSERT INTO contoh_null_1 VALUES (100,'kamu',NULL );
+INSERT INTO contoh_null_1 VALUES (NULL,'saya',20170817);
+INSERT INTO contoh_null_1 VALUES (NULL,NULL,NULL);
+
+SELECT * FROM contoh_null_1;
+
+
+--------------------------------------------------------------------------
+
+
+DESCRIBE contoh_null_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.2 Atribut NOT NULL
+##======================================================================##
+
+
+CREATE TABLE contoh_not_null_1 (
+  a INT NOT NULL,
+  b VARCHAR(5) NOT NULL,
+  c DATE NULL
+);
+
+INSERT INTO contoh_not_null_1 VALUES (NULL, 'saya', 20170817);
+
+INSERT INTO contoh_not_null_1 VALUES (100, NULL, 20170817);
+
+INSERT INTO contoh_not_null_1 VALUES (100,'kamu',NULL);
+
+SELECT * FROM contoh_not_null_1;
+
+
+--------------------------------------------------------------------------
+
+
+DESCRIBE contoh_not_null_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.3 Atribut DEFAULT
+##======================================================================##
+
+
+CREATE TABLE contoh_default_1 (a INT, b VARCHAR(5));
+
+INSERT INTO contoh_default_1 VALUES (25,'hello');
+
+SELECT * FROM contoh_default_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_default_1 (a) VALUES (99);
+
+SELECT * FROM contoh_default_1;
+
+
+--------------------------------------------------------------------------
+
+INSERT INTO contoh_default_1 (b) VALUES ('hey');
+
+SELECT * FROM contoh_default_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_default_2 (
+  a INT DEFAULT 10,
+  b VARCHAR(5) DEFAULT 'siang'
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_default_2 (a) VALUES (99);
+
+SELECT * FROM contoh_default_2;
+
+INSERT INTO contoh_default_2 (b) VALUES ('hey');
+
+SELECT * FROM contoh_default_2;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_default_2 VALUES (25,'hello');
+
+SELECT * FROM contoh_default_2;
+
+
+--------------------------------------------------------------------------
+
+
+DESC contoh_default_2;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_default_3 (
+  a INT NOT NULL DEFAULT 10,
+  b VARCHAR(5) NULL DEFAULT 'siang'
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_default_4 (
+  a INT NULL DEFAULT NULL,
+  b VARCHAR(5) NULL DEFAULT NULL
+);
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_default_5 (a INT);
+
+SHOW CREATE TABLE contoh_default_5 \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.4 Atribut SIGNED
+##======================================================================##
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.5 Atribut UNSIGNED
+##======================================================================##
+
+CREATE TABLE contoh_unsigned_1 (
+  a INT UNSIGNED,
+  b DECIMAL(5,2) SIGNED
+);
+ 
+DESC contoh_unsigned_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.6 Atribut ZEROFILL
+##======================================================================##
+
+
+CREATE TABLE contoh_zerofill_1 (a INT(8) ZEROFILL);
+
+DESC contoh_zerofill_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.7 Atribut CHARACTER SET dan COLLATION
+##======================================================================##
+
+
+CREATE TABLE contoh_charset_1 (
+  a VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_persian_ci,
+  b TINYTEXT CHARSET ascii,
+  c ENUM('siang','malam')
+);
+
+SHOW CREATE table contoh_charset_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_charset_2 (
+  a VARCHAR(10) CHARACTER SET ascii ,
+  b VARCHAR(10) CHARACTER SET latin1,
+  c VARCHAR(10) CHARACTER SET utf8
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_charset_2 (a) VALUES ('Café');
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_charset_2 (b) VALUES ('Café');
+INSERT INTO contoh_charset_2 (c) VALUES ('Café');
+
+SELECT * FROM contoh_charset_2;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_collation_1 (
+  a VARCHAR(10) CHARSET latin1 COLLATE latin1_swedish_ci,
+  b VARCHAR(10) CHARSET latin1 COLLATE latin1_german1_ci,
+  c VARCHAR(10) CHARSET latin1 COLLATE latin1_general_cs,
+  d VARCHAR(10) CHARSET latin1 COLLATE latin1_bin
+);
+
+INSERT INTO contoh_collation_1 VALUES
+  ('Andi','Andi','Andi','Andi'),
+  ('budi','budi','budi','budi'),
+  ('Züma','Züma','Züma','Züma'),
+  ('Zuma','Zuma','Zuma','Zuma')
+;
+
+SELECT * FROM contoh_collation_1;
+
+
+--------------------------------------------------------------------------
+
+SELECT a FROM contoh_collation_1 ORDER BY a ASC;
+
+SELECT b FROM contoh_collation_1 ORDER BY b ASC;
+
+SELECT c FROM contoh_collation_1 ORDER BY c ASC;
+
+SELECT d FROM contoh_collation_1 ORDER BY d ASC;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT a FROM contoh_collation_1 WHERE a = 'andi';
+
+SELECT b FROM contoh_collation_1 WHERE b = 'andi';
+
+SELECT c FROM contoh_collation_1 WHERE c = 'andi';
+
+SELECT d FROM contoh_collation_1 WHERE d = 'andi';
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_collation_2 (
+  a VARCHAR(10) CHARSET latin1 COLLATE latin2_general_ci,
+);
+
+
+--------------------------------------------------------------------------
+
+
+SHOW COLLATION;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.8 Atribut BINARY
+##======================================================================##
+
+
+CREATE TABLE contoh_attbinary_1 (
+  a VARCHAR(10) BINARY
+);
+
+INSERT INTO contoh_attbinary_1 VALUES ('Andi'), ('budi'), ('Ziko');
+
+SELECT * FROM contoh_attbinary_1 ORDER BY a ASC;
+
+SELECT * FROM contoh_attbinary_1 WHERE a='andi';
+
+
+--------------------------------------------------------------------------
+
+
+SHOW CREATE TABLE contoh_attbinary_1 \G
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.9 Atribut ON UPDATE
+##======================================================================##
+
+
+CREATE TABLE contoh_timestamp_1 (
+  a TINYINT,
+  b TIMESTAMP
+);
+
+INSERT INTO contoh_timestamp_1 (a) VALUES (1);
+
+SELECT * FROM contoh_timestamp_1;
+
+
+--------------------------------------------------------------------------
+
+INSERT INTO contoh_timestamp_1 VALUES (2,null);
+
+SELECT * FROM contoh_timestamp_1;
+
+
+--------------------------------------------------------------------------
+
+
+UPDATE contoh_timestamp_1 SET a = 9 WHERE a = 1;
+
+SELECT * FROM contoh_timestamp_1;
+
+
+--------------------------------------------------------------------------
+
+
+DESC contoh_timestamp_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT CURRENT_TIMESTAMP, NOW();
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_timestamp_2 (
+  a TINYINT,
+  b TIMESTAMP,
+  c TIMESTAMP
+);
+
+DESC contoh_timestamp_2;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.10 Atribut AUTO_INCREMENT
+##======================================================================##
+
+
+CREATE TABLE contoh_auto_increment_1 (
+  a TINYINT AUTO_INCREMENT,
+  b VARCHAR(10)
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_auto_increment_1 (
+  a TINYINT AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10)
+);
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_auto_increment_1 (b) VALUES ('merah');
+
+SELECT * FROM contoh_auto_increment_1;
+
+INSERT INTO contoh_auto_increment_1 VALUES (null,'hitam');
+
+SELECT * FROM contoh_auto_increment_1;
+
+INSERT INTO contoh_auto_increment_1 VALUES (0,'putih');
+
+SELECT * FROM contoh_auto_increment_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_auto_increment_1 VALUES (3,'kuning');
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_auto_increment_1 VALUES (10,'kuning');
+INSERT INTO contoh_auto_increment_1 VALUES (null,'biru');
+
+SELECT * FROM contoh_auto_increment_1;
+
+
+--------------------------------------------------------------------------
+
+
+ALTER TABLE contoh_auto_increment_1 AUTO_INCREMENT = 30;
+
+INSERT INTO contoh_auto_increment_1 (b) VALUES ('hijau');
+
+SELECT * FROM contoh_auto_increment_1;
+
+
+--------------------------------------------------------------------------
+
+
+SELECT LAST_INSERT_ID();
+
+
+--------------------------------------------------------------------------
+
+
+DELETE FROM contoh_auto_increment_1 WHERE a = 30;
+
+SELECT * FROM contoh_auto_increment_1;
+
+INSERT INTO contoh_auto_increment_1 (b) VALUES ('hijau');
+
+SELECT * FROM contoh_auto_increment_1;
+
+
+--------------------------------------------------------------------------
+
+
+TRUNCATE contoh_auto_increment_1;
+
+INSERT INTO contoh_auto_increment_1 (b) VALUES ('hijau');
+
+SELECT * FROM contoh_auto_increment_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_auto_increment_2 (
+  a TINYINT AUTO_INCREMENT PRIMARY KEY,
+  b VARCHAR(10),
+  c TINYINT AUTO_INCREMENT PRIMARY KEY
+);
+
+
+--------------------------------------------------------------------------
+
+
+DESC contoh_auto_increment_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.11 Atribut PRIMARY KEY
+##======================================================================##
+
+
+CREATE TABLE contoh_primary_key_1(
+  a INT PRIMARY KEY,
+  b VARCHAR(10)
+);
+
+DESC contoh_primary_key_1;
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_primary_key_1 VALUES (null, 'hijau');
+
+INSERT INTO contoh_primary_key_1 (b) VALUES ('hijau');
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_primary_key_1 VALUES (1, 'hijau');
+
+INSERT INTO contoh_primary_key_1 VALUES (1, 'merah');
+
+
+--------------------------------------------------------------------------
+
+
+INSERT INTO contoh_primary_key_1 VALUES (5, 'hijau');
+
+SELECT * FROM contoh_primary_key_1;
+
+
+--------------------------------------------------------------------------
+
+CREATE TABLE contoh_primary_key_2(
+  a INT,
+  b VARCHAR(10) PRIMARY KEY
+);
+
+DESC contoh_primary_key_2;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.12 Atribut UNIQUE
+##======================================================================##
+
+
+CREATE TABLE contoh_unique_key_1(
+  a INT UNIQUE,
+  b VARCHAR(10)
+);
+
+INSERT INTO contoh_unique_key_1 VALUES (1, 'hijau');
+
+INSERT INTO contoh_unique_key_1 VALUES (1, 'merah');
+
+
+--------------------------------------------------------------------------
+
+
+DESC contoh_unique_key_1;
+
+INSERT INTO contoh_unique_key_1 VALUES (null, 'merah');
+INSERT INTO contoh_unique_key_1 VALUES (null, 'biru');
+
+SELECT * FROM contoh_unique_key_1;
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_serial_1 (
+  a SERIAL,
+  b VARCHAR(10)
+);
+
+DESC contoh_serial_1;
+
+
+--------------------------------------------------------------------------
+
+
+##======================================================================##
+9.13 Menggabungkan Atribut
+##======================================================================##
+
+
+CREATE TABLE contoh_gabungan_atribut_1(
+  a INT(5) NOT NULL ZEROFILL
+);
+
+CREATE TABLE contoh_gabungan_atribut_1(
+  a INT(5) ZEROFILL NOT NULL
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_gabungan_atribut_2(
+  a BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT UNSIGNED,
+  b VARCHAR(5) NULL DEFAULT 'hello' CHARACTER SET utf8 COLLATE utf8_persian_ci
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_gabungan_atribut_2(
+  a BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT ,
+  b VARCHAR(5) CHARACTER SET utf8 COLLATE utf8_persian_ci NULL DEFAULT 'hello'
+);
+
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE contoh_gabungan_atribut_3(
+  a BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  b VARCHAR(5) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT 'hello',
+  c TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  d DECIMAL(5,2) ZEROFILL NULL DEFAULT NULL
+);
+
+
+--------------------------------------------------------------------------

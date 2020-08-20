@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+  <style>
+    h1 { border: 2px solid black;
+         width: 280px;
+         padding: 10px;
+         text-align: center;
+         color: red;
+         background-color: pink; }
+  </style>
+</head>
+<body>
+  <h1 id="judul">Belajar JavaScript</h1>
+  <p></p>
+  <script>
+    function tampilkanClick(){
+      document.querySelector("p").innerHTML="Judul di klik";
+    }
+    
+    function tampilkanDblclick(){
+      document.querySelector("p").innerHTML="Judul di double klik";
+    }
+
+    function tampilkanContextmenu(){
+      document.querySelector("p").innerHTML="Judul di klik kanan";
+    }
+    
+    var h1Node = document.getElementById("judul");
+    h1Node.onclick = tampilkanClick;
+    h1Node.ondblclick = tampilkanDblclick;
+    h1Node.oncontextmenu = tampilkanContextmenu;
+  </script>
+</body>
+</html>
